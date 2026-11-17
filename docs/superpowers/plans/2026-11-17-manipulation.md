@@ -42,4 +42,4 @@ Files: dist/index.html, studio.js, studio.css, vendor/, assets/; tests/test_stud
 ## Task 4: Review + release
 - [x] Run old and new tests, rerun sample episodes and check data aggregation and asset hashes.
 - [x] Fresh reviewer checks truth boundaries, grasp physics, live-vs-recorded claims, failure/reset behavior.
-- [ ] Update documentation/reproduction/licenses, publish same code/data to GitHub and existing Sites URL, verify release.
+- [x] Update documentation/reproduction/licenses, publish same code/data to GitHub and existing Sites URL, verify release.

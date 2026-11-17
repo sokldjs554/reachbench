@@ -1,0 +1,114 @@
+{
+  "url": "https://reachbench-vision-control.ykh13571.chatgpt.site",
+  "browser": "Chromium / software WebGL (SwiftShader), desktop 1440x1000 and mobile viewport 390x844",
+  "passed": true,
+  "checks": [
+    "live play, pause, reset clears time and sensor cards",
+    "all 8 live seed 100 condition/method combinations",
+    "zero-duration failed record opens with sensor and terminal failure",
+    "record play, pause, scrub middle/end, reset, terminal result",
+    "return to live and new seeded layout",
+    "390px viewport no horizontal overflow; live run and same-scene compare",
+    "blocked model: original sensor images/events/result remain accessible"
+  ],
+  "live_results": [
+    {
+      "success": false,
+      "reason": "target_missing",
+      "duration_s": 0,
+      "placement_error_mm": 267.8569519350154,
+      "observations": 1,
+      "retries": 0,
+      "wall_ms": 1410.5999999940395,
+      "seed": 100,
+      "condition": "occluded",
+      "method": "one_shot"
+    },
+    {
+      "success": true,
+      "reason": "placed",
+      "duration_s": 10.950000000000493,
+      "placement_error_mm": 2.8616841520861893,
+      "observations": 3,
+      "retries": 0,
+      "wall_ms": 2757.10000000149,
+      "seed": 100,
+      "condition": "occluded",
+      "method": "feedback"
+    },
+    {
+      "success": true,
+      "reason": "placed",
+      "duration_s": 10.200000000000243,
+      "placement_error_mm": 4.379479420818788,
+      "observations": 1,
+      "retries": 0,
+      "wall_ms": 2011,
+      "seed": 100,
+      "condition": "normal",
+      "method": "one_shot"
+    },
+    {
+      "success": true,
+      "reason": "placed",
+      "duration_s": 10.950000000000493,
+      "placement_error_mm": 2.852812646507265,
+      "observations": 2,
+      "retries": 0,
+      "wall_ms": 2565.10000000149,
+      "seed": 100,
+      "condition": "normal",
+      "method": "feedback"
+    },
+    {
+      "success": false,
+      "reason": "empty_grasp",
+      "duration_s": 5.559999999999555,
+      "placement_error_mm": 104.06766993575818,
+      "observations": 1,
+      "retries": 0,
+      "wall_ms": 1432.1999999955297,
+      "seed": 100,
+      "condition": "shifted",
+      "method": "one_shot"
+    },
+    {
+      "success": true,
+      "reason": "placed",
+      "duration_s": 11.36000000000063,
+      "placement_error_mm": 2.858777722146111,
+      "observations": 2,
+      "retries": 0,
+      "wall_ms": 2120.10000000149,
+      "seed": 100,
+      "condition": "shifted",
+      "method": "feedback"
+    },
+    {
+      "success": false,
+      "reason": "target_missing",
+      "duration_s": 0,
+      "placement_error_mm": 540.6116458217549,
+      "observations": 1,
+      "retries": 0,
+      "wall_ms": 1089.5,
+      "seed": 100,
+      "condition": "unreachable",
+      "method": "one_shot"
+    },
+    {
+      "success": false,
+      "reason": "outside_workspace",
+      "duration_s": 0,
+      "placement_error_mm": 540.6116458217549,
+      "observations": 2,
+      "retries": 0,
+      "wall_ms": 1026.7999999970198,
+      "seed": 100,
+      "condition": "unreachable",
+      "method": "feedback"
+    }
+  ],
+  "errors": [],
+  "note": "Physics assertions advance actual WASM steps in batches; not a wall-clock performance benchmark or physical mobile-device test."
+}

@@ -2,13 +2,13 @@
 import argparse,asyncio,json
 from pathlib import Path
 from playwright.async_api import async_playwright
-ap=argparse.ArgumentParser();ap.add_argument('--url',default='http://127.0.0.1:4173');ap.add_argument('--out',default='work/v3/browser');args=ap.parse_args()
+ap=argparse.ArgumentParser();ap.add_argument('--url',default='http://127.0.0.1:4173');ap.add_argument('--out',default='work/v3/browser');ap.add_argument('--ignore-https-errors',action='store_true',help='Only for a test environment with an untrusted TLS inspection proxy');args=ap.parse_args()
 out=Path(args.out);out.mkdir(parents=True,exist_ok=True)
 async def main():
  errors=[];results=[];checks=[]
  async with async_playwright() as p:
   b=await p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox','--enable-unsafe-swiftshader','--use-angle=swiftshader'])
-  page=await b.new_page(viewport={'width':1440,'height':1000})
+  page=await b.new_page(viewport={'width':1440,'height':1000},ignore_https_errors=args.ignore_https_errors,user_agent='Mozilla/5.0')
   page.on('pageerror',lambda e:errors.append(str(e)))
   await page.goto(args.url,wait_until='networkidle',timeout=90000)
   await page.wait_for_function('window.reachbench?.engine.ready',timeout=90000)
@@ -59,7 +59,7 @@ async def main():
   assert await page.evaluate('reachbench.engine.result.reason')=='target_missing'
   checks.append('390px viewport no horizontal overflow; live run and same-scene compare')
   # Resource failure must preserve engine-independent recorded evidence.
-  fallback=await b.new_page(viewport={'width':1200,'height':900})
+  fallback=await b.new_page(viewport={'width':1200,'height':900},ignore_https_errors=args.ignore_https_errors,user_agent='Mozilla/5.0')
   await fallback.route('**/assets/workcell.mjb.gz',lambda route:route.abort())
   await fallback.goto(args.url,wait_until='networkidle',timeout=90000)
   await fallback.locator('#error').wait_for(state='visible')

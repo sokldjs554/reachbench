@@ -1,0 +1,19 @@
+{
+  "version": "3.0.0",
+  "url": "https://reachbench-vision-control.ykh13571.chatgpt.site/",
+  "all_manifest_hashes_match": true,
+  "files": [
+    "index.html",
+    "studio.css",
+    "studio.mjs",
+    "studio-core.mjs",
+    "studio-engine.mjs",
+    "assets/workcell.mjb.gz",
+    "bench/config.json",
+    "bench/episodes.json",
+    "bench/summary.json",
+    "vendor/mujoco.js",
+    "vendor/mujoco.wasm"
+  ],
+  "note": "index.html follows hosting canonical redirect to /; anonymous requests, no auth bypass"
+}
