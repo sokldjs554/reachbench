@@ -1,0 +1,141 @@
+{
+  "run_id": "nominal-1011-baseline",
+  "kind": "pybullet-recorded-frames",
+  "camera_role": "observer_only_not_perception",
+  "camera": {
+    "eye": [
+      1.15,
+      -1.8,
+      1.55
+    ],
+    "target": [
+      -0.1,
+      0.03,
+      0.1
+    ],
+    "up": [
+      0,
+      0,
+      1
+    ],
+    "fov": 44
+  },
+  "width": 320,
+  "height": 240,
+  "stride": 2,
+  "trace_sha256": "e322060b1591e4de046fc55170814e6ab43f90660a775441d8accabcf5aa1f92",
+  "frames": [
+    {
+      "trace_index": 0,
+      "t": 0.0,
+      "page": 0,
+      "tile": 0,
+      "q": [
+        -1.1,
+        1.5
+      ]
+    },
+    {
+      "trace_index": 2,
+      "t": 0.1,
+      "page": 0,
+      "tile": 1,
+      "q": [
+        -1.0504488124947196,
+        1.496837970527384
+      ]
+    },
+    {
+      "trace_index": 4,
+      "t": 0.2,
+      "page": 0,
+      "tile": 2,
+      "q": [
+        -1.0008976249894388,
+        1.4936759410547678
+      ]
+    },
+    {
+      "trace_index": 6,
+      "t": 0.3,
+      "page": 0,
+      "tile": 3,
+      "q": [
+        -0.9513464374841583,
+        1.4905139115821517
+      ]
+    },
+    {
+      "trace_index": 8,
+      "t": 0.4,
+      "page": 0,
+      "tile": 4,
+      "q": [
+        -0.9017952499788777,
+        1.4873518821095355
+      ]
+    },
+    {
+      "trace_index": 10,
+      "t": 0.5,
+      "page": 0,
+      "tile": 5,
+      "q": [
+        -0.8522440624735971,
+        1.4841898526369195
+      ]
+    },
+    {
+      "trace_index": 12,
+      "t": 0.6,
+      "page": 0,
+      "tile": 6,
+      "q": [
+        -0.8026928749683164,
+        1.4810278231643035
+      ]
+    },
+    {
+      "trace_index": 13,
+      "t": 0.65,
+      "page": 0,
+      "tile": 7,
+      "q": [
+        -0.7779172812156763,
+        1.4794468084279953
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "file": "page-000.webp",
+      "columns": 8,
+      "rows": 1,
+      "sha256": "cd8e63aa756ca8d16732c9f430fc83143f5b8df8df77ed19c039c8379e5c8834"
+    }
+  ],
+  "contacts": [
+    {
+      "trace_index": 13,
+      "t": 0.65,
+      "contacts": [
+        {
+          "obstacle_index": 0,
+          "link_index": 1,
+          "point_on_robot": [
+            0.21964940581069847,
+            -0.07694440003650296,
+            0.16236453083499847
+          ],
+          "point_on_obstacle": [
+            0.21457157101039773,
+            -0.09009015943089016,
+            0.16236453094836817
+          ],
+          "distance_m": -0.014092387885460168
+        }
+      ]
+    }
+  ],
+  "execution": "resetJointState + collision queries; not motor dynamics"
+}

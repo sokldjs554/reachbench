@@ -1,0 +1,161 @@
+{
+  "run_id": "standard-100-3019-uncorrected",
+  "kind": "pybullet-recorded-frames",
+  "camera_role": "observer_only_not_perception",
+  "camera": {
+    "eye": [
+      1.15,
+      -1.8,
+      1.55
+    ],
+    "target": [
+      -0.1,
+      0.03,
+      0.1
+    ],
+    "up": [
+      0,
+      0,
+      1
+    ],
+    "fov": 44
+  },
+  "width": 320,
+  "height": 240,
+  "stride": 2,
+  "trace_sha256": "b052e4a3f9d8f958e1ae284063ca718c8670b01a2745eeebf122c72c5e449a75",
+  "frames": [
+    {
+      "trace_index": 0,
+      "t": 0.0,
+      "page": 0,
+      "tile": 0,
+      "q": [
+        -1.1,
+        1.5
+      ]
+    },
+    {
+      "trace_index": 2,
+      "t": 0.1,
+      "page": 0,
+      "tile": 1,
+      "q": [
+        -1.0514880952380954,
+        1.5017857142857143
+      ]
+    },
+    {
+      "trace_index": 4,
+      "t": 0.2,
+      "page": 0,
+      "tile": 2,
+      "q": [
+        -1.0029761904761907,
+        1.5035714285714286
+      ]
+    },
+    {
+      "trace_index": 6,
+      "t": 0.3,
+      "page": 0,
+      "tile": 3,
+      "q": [
+        -0.9544642857142858,
+        1.5053571428571428
+      ]
+    },
+    {
+      "trace_index": 8,
+      "t": 0.4,
+      "page": 0,
+      "tile": 4,
+      "q": [
+        -0.9059523809523811,
+        1.5071428571428571
+      ]
+    },
+    {
+      "trace_index": 10,
+      "t": 0.5,
+      "page": 0,
+      "tile": 5,
+      "q": [
+        -0.8574404761904764,
+        1.5089285714285714
+      ]
+    },
+    {
+      "trace_index": 12,
+      "t": 0.6,
+      "page": 0,
+      "tile": 6,
+      "q": [
+        -0.8089285714285716,
+        1.5107142857142857
+      ]
+    },
+    {
+      "trace_index": 14,
+      "t": 0.7,
+      "page": 0,
+      "tile": 7,
+      "q": [
+        -0.7604166666666667,
+        1.5125
+      ]
+    },
+    {
+      "trace_index": 16,
+      "t": 0.8,
+      "page": 0,
+      "tile": 8,
+      "q": [
+        -0.711904761904762,
+        1.5142857142857142
+      ]
+    },
+    {
+      "trace_index": 18,
+      "t": 0.9,
+      "page": 0,
+      "tile": 9,
+      "q": [
+        -0.6633928571428573,
+        1.5160714285714285
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "file": "page-000.webp",
+      "columns": 8,
+      "rows": 2,
+      "sha256": "7b4dc93dfc43e7bbf62e5865c1a82ef6b293fe9fefb590dd0f753d1a4aa8069b"
+    }
+  ],
+  "contacts": [
+    {
+      "trace_index": 18,
+      "t": 0.9,
+      "contacts": [
+        {
+          "obstacle_index": 0,
+          "link_index": 1,
+          "point_on_robot": [
+            0.2344659179197064,
+            -0.004211841570990647,
+            0.16236453201970402
+          ],
+          "point_on_obstacle": [
+            0.23348655798378243,
+            -0.0053327193740008855,
+            0.1623645320197047
+          ],
+          "distance_m": -0.0014884599199756871
+        }
+      ]
+    }
+  ],
+  "execution": "resetJointState + collision queries; not motor dynamics"
+}

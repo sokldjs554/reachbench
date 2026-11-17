@@ -1,0 +1,49 @@
+{
+  "run_id": "markers_missing-65-3008-reference",
+  "kind": "pybullet-recorded-frames",
+  "camera_role": "observer_only_not_perception",
+  "camera": {
+    "eye": [
+      1.15,
+      -1.8,
+      1.55
+    ],
+    "target": [
+      -0.1,
+      0.03,
+      0.1
+    ],
+    "up": [
+      0,
+      0,
+      1
+    ],
+    "fov": 44
+  },
+  "width": 320,
+  "height": 240,
+  "stride": 2,
+  "trace_sha256": "5bd7057da0491be079b5488f4ba12ac4e896eb61ad8802d5db4254a72ed25521",
+  "frames": [
+    {
+      "trace_index": 0,
+      "t": 0.0,
+      "page": 0,
+      "tile": 0,
+      "q": [
+        -1.1,
+        1.5
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "file": "page-000.webp",
+      "columns": 8,
+      "rows": 1,
+      "sha256": "23687603e6d9252c3f30dcfb36917431dab8cefa60931d38399d571c81172f99"
+    }
+  ],
+  "contacts": [],
+  "execution": "resetJointState + collision queries; not motor dynamics"
+}

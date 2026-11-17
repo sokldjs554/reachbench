@@ -1,1 +1,1 @@
-{"name":"reachbench","version":"1.0.0","private":true,"description":"Recorded CPU robotics experiment viewer","scripts":{"check":"node --check dist/app.js","test:ui":"node tests/test_ui.cjs"},"devDependencies":{"jsdom":"26.0.0"}}
+{"name":"reachbench","version":"2.0.0","private":true,"description":"Recorded CPU robotics experiment viewer","scripts":{"check":"node --check dist/app.js","test:ui":"node tests/test_ui.cjs"},"devDependencies":{"jsdom":"26.0.0"}}

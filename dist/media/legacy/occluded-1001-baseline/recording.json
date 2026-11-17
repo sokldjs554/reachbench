@@ -1,0 +1,49 @@
+{
+  "run_id": "occluded-1001-baseline",
+  "kind": "pybullet-recorded-frames",
+  "camera_role": "observer_only_not_perception",
+  "camera": {
+    "eye": [
+      1.15,
+      -1.8,
+      1.55
+    ],
+    "target": [
+      -0.1,
+      0.03,
+      0.1
+    ],
+    "up": [
+      0,
+      0,
+      1
+    ],
+    "fov": 44
+  },
+  "width": 320,
+  "height": 240,
+  "stride": 2,
+  "trace_sha256": "5bd7057da0491be079b5488f4ba12ac4e896eb61ad8802d5db4254a72ed25521",
+  "frames": [
+    {
+      "trace_index": 0,
+      "t": 0.0,
+      "page": 0,
+      "tile": 0,
+      "q": [
+        -1.1,
+        1.5
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "file": "page-000.webp",
+      "columns": 8,
+      "rows": 1,
+      "sha256": "fe1ede49ceb39f9c68ba9882ea3cb3ed05cc3e7eba360705e00f938a3d87c6cb"
+    }
+  ],
+  "contacts": [],
+  "execution": "resetJointState + collision queries; not motor dynamics"
+}

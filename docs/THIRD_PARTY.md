@@ -14,3 +14,11 @@
 라이브러리 바이너리·node_modules는 배포 소스 ZIP에 넣지 않았다. 설치 시 각 패키지의 라이선스와 배포 조건이 적용된다. 웹 런타임은 표준 HTML/CSS/JS이며 CDN·외부 글꼴·분석 추적기를 사용하지 않는다.
 
 공고·회사·디자인 참고 페이지는 docs/RESEARCH.md에 링크하고 필요한 사실만 요약했다. 원문 페이지와 제품 이미지를 재배포하지 않았다.
+
+## v2 추가 사용 범위
+
+- OpenCV의 WebP 인코더로 실제 TinyRenderer 프레임을 타일링했다. 브라우저 이미지는 생성형 모델의 영상이 아니다.
+- [Playwright 1.62.0 / Apache-2.0](https://github.com/microsoft/playwright/blob/main/LICENSE): 개발용 실제 Chromium 브라우저 검사. 공개 런타임·소스 ZIP에 바이너리를 넣지 않는다.
+- [Chromium / BSD 계열 및 서드파티 고지](https://chromium.googlesource.com/chromium/src/+/main/LICENSE): 현재 환경에 설치된 headless 브라우저로 실제 화면 캡처.
+- [Python-Markdown 3.7 / BSD](https://github.com/Python-Markdown/markdown/blob/3.7/LICENSE.md): 문서의 정적 HTML 생성, 런타임 의존성 아님.
+- 사용자가 지정한 로봇팔·관측 프로젝트와 RoboEval/Foxglove는 [보완 조사](v2/RESEARCH.md)에 원문과 사용 범위를 기록했다. 코드·이미지·모델·영상 자산을 복제하지 않았다.

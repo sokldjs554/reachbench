@@ -1,74 +1,84 @@
 # ReachBench · Vision to Motion
 
-[GitHub 저장소](https://github.com/sokldjs554/reachbench) · [배포 데모](https://reachbench-vision-control.ykh13571.chatgpt.site) · [실험 결과](docs/RESULTS.md) · [공고 조사](docs/RESEARCH.md)
+[공개 데모](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [새 실험 결과](docs/v2/RESULTS.md) · [전체 보고서](https://reachbench-vision-control.ykh13571.chatgpt.site/report.html) · [기여·면접 안내](docs/INTERVIEW.md)
 
-데모는 현재 Sites 소유자 전용입니다. 공개 저장소를 내려받으면 로컬에서 모든 기록을 탐색하고 새로운 장면을 실행할 수 있습니다.
+카메라 인식 → 위치 추정 → 경로 계획 → 목표 접근 → 평가를 연결하는 CPU 로봇팔 실험. 투모로로보틱스 Physical AI / Robotics R&D 인턴 업무 중 시뮬레이션·센서 인식·공간 정보와 동작 연계·데이터 검증을 보여준다.
 
-RGB 카메라로 작업물과 장애물을 찾고, 2관절 평면 로봇팔의 접근 궤적을 비교하는 **CPU 기구학 시뮬레이션 실험**. 투모로로보틱스 Physical AI / Robotics R&D 인턴 직무의 인식→공간 추정→경로→평가 연결을 보여주는 독립 프로젝트다.
+![실제 PyBullet 기록을 재생하는 데스크톱 화면](dist/screenshots/desktop-comparison.png)
 
-**실물 로봇·학습 모델·파지·보행·Whole-body Control 결과가 아니다.** Codex가 조사·설계·구현·실험·문서화를 수행했다. 지원자의 독자 개발 경험으로 기재하지 말 것. [기여와 면접 안내](docs/INTERVIEW.md)를 먼저 확인한다.
+공개 데모는 **사전 계산한 실제 PyBullet 실행의 프레임 재생기**다. 로그와 일치하는 재실행에서 렌더링한 프레임이며 2D 경로도 같은 관절 샘플을 표시한다. 새 계산은 로컬 Python에서 지원한다. 실물 로봇, 모터 동역학 제어, 파지·놓기, ROS 2, 보행/WBC, 학습 정책 결과가 아니다.
 
-## 실제 평가 결과
+**Codex가 조사·설계·구현·평가·테스트·문서화·배포를 수행했다. 사용자는 요구사항을 정하고 GitHub 저장소를 생성했다.** 본인이 직접 재현·수정한 부분만 이후 자신의 기여로 기록한다.
 
-20개 seed × 5개 조건 × 4개 방법, 총 400회 CPU 시뮬레이션을 실행했습니다. 성공 기준은 실행 중 장애물 충돌이 없고 최종 목표 XY 오차가 35 mm 이내인 경우입니다.
+## 1분 체험
 
-| 방법 | 성공 / 전체 |
-|---|---:|
-| RGB + 직접 접근 | 2 / 100 |
-| HSV + 직접 접근 | 3 / 100 |
-| RGB + A* | 39 / 100 |
-| HSV + A* | 59 / 100 |
+1. 기본 화면의 **두 실행 재생**을 눌러 RGB 직접 접근과 HSV+A*의 실제 움직임을 비교한다. **첫 충돌로 이동**에서 접촉 시점과 2D 접촉점을 본다.
+2. 환경 조건을 **목표 가림**으로 변경한다. 입력 패치 → 검출 없음 → 이동 보류를 확인한다. 표시된 거리는 이동하지 않은 시작 손끝과 실제 목표 사이 거리다.
+3. **보정 오차 +65 mm** → **이 실패를 개선한 실험 보기**로 이동한다. 실제 목표와 추정 위치를 구분하고 기준점 보정 전·후를 비교한다.
+4. 새 실험에서 기준점 결손/오배치를 선택하고, **평가와 실패 사례**에서 실패 기록을 바로 연다.
 
-개선 방법은 기본·어두운 조명에서 각각 20/20, 추가 장애물에서 19/20을 성공했습니다. 목표 가림과 보정 오차에서는 모두 실패했습니다. 이 수치는 구성한 합성 장면의 결과이며 실제 로봇의 성능이 아닙니다.
+[모바일 실제 캡처](dist/screenshots/mobile-comparison.png) · [보정 비교 화면](dist/screenshots/desktop-calibration.png)
 
-## 빠르게 체험
+## 실제 결과
 
-Python 3.11 권장. GPU·디스플레이·계정·모델 키가 필요 없다.
+원본 400회(100장면 × 4방법)를 보존했다. RGB+직접 접근 2/100, HSV+직접 접근 3/100, RGB+A* 39/100, HSV+A* 59/100. [기존 결과](docs/RESULTS.md).
+
+새 실험은 **HSV+A* 대 기준점 보정+HSV+A***를 같은 RGB·시작 자세·계획기로 비교했다. 개발 seed 2000–2002의 42회와 분리한 최종 seed 3000–3019의 280회다. 성공은 무충돌·경로 존재·최종 XY 거리 ≤35 mm.
+
+| 조건 | 성공 기존 → 보정 | 충돌 기존 → 보정 | 인식 평균 오차 기존 → 보정 |
+|---|---:|---:|---:|
+| 정상 기준점, 0/20/40/65/100 mm 편향 전체 | 40/100 → 100/100 | 39 → 0 | 46.36 → 2.29 mm |
+| 정상 기준점, +65 mm만 | 0/20 → 20/20 | 18 → 0 | 65.03 → 2.29 mm |
+| 기준점 2개, +65 mm | 0/20 → 0/20 | 18 → 0 | 보정 보류 |
+| 기준점 전체 +50 mm 오배치, +65 mm | 0/20 → 0/20 | 18 → 0 | 65.03 → 50.84 mm |
+
+기준점 위치가 알려져 있다는 가정 아래 공통 XY 편향을 영상 관측으로 추정한다. 기준점이 틀리면 잔차가 작아도 보정은 틀릴 수 있다. 정상/스트레스 전체로는 40/140 → 100/140이며 **100%는 정상 기준점 100장면에만 해당한다.** 기존 59%와 새 100%는 조건·seed가 달라 직접 개선 폭으로 비교하지 않는다. 학습·데이터 증강은 수행하지 않았다.
+
+## 설치·로컬 실행
+
+Python 3.11 권장. 실제 검증 환경은 Linux x86_64, CPython 3.11.18, PyBullet 3.2.7, OpenCV 4.11.0.86, NumPy 2.2.6. GPU·모델 키·계정·GUI 불필요.
 
 ```bash
 git clone https://github.com/sokldjs554/reachbench.git
 cd reachbench
 python3.11 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
 python -m reachbench.serve
 ```
 
-http://127.0.0.1:8000 에서 장면·조건 변경, 기준/개선 경로 동시 재생, 시간 탐색, 카메라 검출 오버레이, 기록 다운로드가 가능하다. **새로운 장면 직접 실행**을 열면 목표 X/Y를 바꾸어 같은 Python 엔진으로 새 계산을 수행한다. 로컬 서버는 localhost에만 바인딩하고 순차 처리한다. 외부 공개 API 용도로 설계하지 않았다.
+http://127.0.0.1:8000 → **로컬 Python 기능 · 새로운 목표 좌표로 실행**. 목표 X/Y를 바꾸면 원 RGB/HSV 비교를 실제 새로 계산하고 프레임을 생성한다. 로컬 결과는 평가 집계에 추가하지 않는다. 서버는 localhost 전용·순차 처리다. Windows는 `.venv\Scripts\activate`; 다른 OS는 미검증. Python 3.12에서 PyBullet 소스 빌드가 필요할 수 있다.
 
-Windows는 `.venv\Scripts\activate`로 활성화한다. Python 3.12 환경에서는 PyBullet wheel이 없어 소스 빌드가 시도될 수 있다. 이번 실행은 Python 3.11.18 + Linux x86_64에서 완료했다. 다른 OS는 검증하지 않았다.
-
-웹 배포판은 **사전에 실행한 시뮬레이션의 인터랙티브 재생기**다. 브라우저에서 PyBullet을 새로 실행하지 않는다. 새 계산은 로컬 서버에서만 지원한다. 정적 배포는 `dist/`를 게시하면 된다. Sites 배포는 기본 소유자 전용 접근이며 외부 면접관에게 전달하기 전 접근 설정을 확인해야 한다.
-
-## 재현
+## 재현·검증
 
 ```bash
 python -m pytest -q
-python -m reachbench.evaluate --start 1000 --count 20 --out dist/data
-python -m reachbench.export
-python -m reachbench.audit
-python -m pytest -q
+# 원 공개 결과를 덮어쓰지 않는 전수 재현 검사
+PYTHONPATH=. python scripts/reproduce_v2.py
+# 별도 폴더로 최종 평가와 실제 프레임 생성
+python -m reachbench.calibration --start 3000 --count 20 --split evaluation --record --out work/my-evaluation
+npm ci
+npm run check
+npm run test:ui
+# 선택: 실제 Chromium 데스크톱·모바일 흐름 검사
+python -m pip install -r requirements-browser.txt
+python -m playwright install chromium
+python scripts/browser_qa.py
 ```
 
-100개 장면(20 seed × 5 조건) × 4 방법 = 400회. 평가 설정은 실행 전에 `dist/data/config.json`에 저장된다. 기존 결과를 보존하려면 저장소 복사본에서 재실행한다. 타이밍을 제외한 결과·궤적은 고정 seed와 고정 버전으로 재현하는 것을 목표로 한다. 플랫폼 간 픽셀·부동소수점 차이는 발생할 수 있다.
+21개 Python 테스트, 최종 280회 전수 재실행 일치, 원본 기준/개선 200회 재실행 일치, 총 480개 실행의 프레임/trace/접촉 정합성을 확인했다. Chromium 1440×1000과 390×844에서 주요 흐름과 실제 렌더링을 검사했다. 실제 휴대전화·Safari·외부 사용자 테스트는 하지 않았다. [상세 프로토콜](docs/v2/EXPERIMENT.md) · [브라우저 기록](docs/v2/browser-validation.json) · [전수 재현 기록](docs/v2/reproduction.json).
 
-`export`는 중복된 RGB 입력을 장면별 하나로 합치며 재인코딩하지 않는다. `audit`는 이미지 형태·에피소드 ID·시간 순서·유한 관절값·집계를 확인하고 SHA-256 목록을 만든다. 누락/실패 에피소드를 평가에서 삭제하지 않는다. 학습/검증 분할이나 데이터 기반 임계값 학습은 수행하지 않았다. 개발용 seed 0–9 및 100은 구현 디버깅에 사용했으며 평가 seed는 1000–1019다.
+정적 배포는 `dist/`를 게시한다. 공개 데모에서 새 Python 계산은 지원하지 않는다. 보고서/ZIP 재생성: `python scripts/build_report.py`, `python scripts/package_source.py` (로컬 ZIP은 `work/`에 생성). 공개 ZIP 링크는 GitHub의 전체 소스 아카이브를 사용한다.
 
-## 구조
+## 코드·데이터
 
-- `reachbench/sim.py`: 생성 장면, PyBullet 렌더러/충돌, RGB/HSV 인식, 카메라 역투영, FK/IK, A*와 경로 실행
-- `reachbench/evaluate.py`: paired 2×2 실험, Wilson 구간, 처리 시간, 실패 집계
-- `reachbench/serve.py`: 로컬 UI와 새로운 장면 계산
-- `reachbench/export.py`, `reachbench/audit.py`: 데이터 중복 정리와 무결성 검사
-- `tests/test_core.py`: 기하·충돌·재현성·평가 산식 및 전수 기록 검증
-- `dist/`: 배포 가능한 정적 데모, 실제 입력 PNG, 실행별 JSON, CSV, 집계, 실험 보고서
-- `docs/RESEARCH.md`: 공고 원문·회사 연결·대안 비교·도구 선택
-- `docs/EXPERIMENT.md`: 수식·설정·결과·실패·한계
-- `docs/INTERVIEW.md`: 기여 구분, 직접 수행 체크포인트, 질문과 답변
-- `docs/THIRD_PARTY.md`: 라이선스·사용 범위
-
-## 데모 안내
-
-기본 조명에서 두 경로를 재생 → 어두운 조명에서 검출 차이 → 가림에서 이동 보류 → 보정 오차에서 실패 원인 확인 → 평가 결과 탭에서 네 방법과 조건별 집계 확인. 평면도는 저장된 실제 관절값을 SVG로 그린 것이며 물리 시뮬레이터의 실시간 영상이 아니다. 카메라 입력·스냅샷은 PyBullet이 실제 생성한 이미지다.
-
-설계는 Foxglove/Rerun의 기록·공간·센서 탐색 흐름을 참고했다. 전체 화면 렌더링·모바일 브라우저 검증은 현재 환경에서 지원되는 `cua_repl.js`가 없어 수행하지 못했다. DOM 인터랙션과 데이터 연결은 별도 자동 검사했다. 외부 사용자의 사용성 테스트는 수행하지 않았다.
+- `reachbench/sim.py`: 변경하지 않은 원 엔진, 카메라/인식/FK/IK/A*/기구학 실행
+- `reachbench/calibration.py`: RGB 기준점 관측, 편향 추정, paired 평가
+- `reachbench/recording.py`: 실제 PyBullet 프레임·접촉점·trace index와 해시
+- `reachbench/serve.py`: 로컬 새 좌표 계산과 프레임 생성
+- `dist/data/`: 원본 400회 불변 기록 / `dist/media/legacy/`: 기준/개선 200회 재실행 프레임
+- `dist/data-v2/`: 최종 280회 JSON/CSV/입력 RGB/집계/프레임
+- `docs/v2/development/`: 분리한 개발 42회 기록
+- `docs/v2/RESEARCH.md`: 공고·참고 사례·개선 방향 판단
+- `docs/v2/EXPERIMENT.md`: 설정·수식·재현·오차와 시간 정의
+- `docs/THIRD_PARTY.md`: 출처·라이선스. 외부 모델·로봇 자산·영상 복사 없음

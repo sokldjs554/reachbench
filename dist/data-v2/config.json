@@ -1,0 +1,79 @@
+{
+  "split": "evaluation",
+  "seeds": [
+    3000,
+    3001,
+    3002,
+    3003,
+    3004,
+    3005,
+    3006,
+    3007,
+    3008,
+    3009,
+    3010,
+    3011,
+    3012,
+    3013,
+    3014,
+    3015,
+    3016,
+    3017,
+    3018,
+    3019
+  ],
+  "offsets_mm": [
+    0,
+    20,
+    40,
+    65,
+    100
+  ],
+  "profiles": {
+    "standard": [
+      0,
+      20,
+      40,
+      65,
+      100
+    ],
+    "markers_missing": [
+      65
+    ],
+    "board_shift": [
+      65
+    ]
+  },
+  "methods": [
+    "uncorrected",
+    "reference"
+  ],
+  "success_threshold_mm": 35,
+  "min_markers": 3,
+  "max_residual_mm": 12.0,
+  "markers_nominal_xy": [
+    [
+      -0.82,
+      -0.65
+    ],
+    [
+      0.82,
+      -0.65
+    ],
+    [
+      -0.82,
+      0.65
+    ],
+    [
+      0.82,
+      0.65
+    ]
+  ],
+  "board_shift_mm": 50,
+  "legacy_engine_sha256": "5d7eb9763f2706413d42abee8252edea0d404ad42a9d3c0f75678938be4a1cb9",
+  "experiment_sha256": "b1f6dad005d6eb88084ce634c5743dcc49e25a5c5d805a31e7747d875910578b",
+  "python": "3.11.18",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "training": "none",
+  "ground_truth_policy": "Target/obstacle GT is evaluation only. Surveyed reference positions are known calibration inputs."
+}

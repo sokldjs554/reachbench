@@ -1,0 +1,14 @@
+{
+  "legacy_files_unchanged": 705,
+  "legacy_episodes": 400,
+  "new_evaluation_episodes": 280,
+  "new_development_episodes": 42,
+  "recorded_runs": 480,
+  "rendered_frames": 8644,
+  "runs_with_recorded_contacts": 150,
+  "python_tests": "21 passed in 7.15s",
+  "new_full_reproduction": "280 exact non-timing matches",
+  "legacy_reruns": "200 exact matches",
+  "baseline_source_commit": "3b6e04fce73345cf111d945f5526d9a43ee804cd",
+  "legacy_engine_sha256": "5d7eb9763f2706413d42abee8252edea0d404ad42a9d3c0f75678938be4a1cb9"
+}

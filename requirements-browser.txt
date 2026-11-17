@@ -1,0 +1,2 @@
+# Optional browser QA only; not required to run the simulator or public demo.
+playwright==1.62.0

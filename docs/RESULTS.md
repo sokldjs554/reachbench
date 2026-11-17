@@ -1,3 +1,7 @@
+# 기존 v1 평가 기록 (400회 보존)
+
+아래 검증 항목은 v1 작성 당시 범위다. 현재 보완 결과·21개 테스트·브라우저 QA는 [v2 결과](v2/RESULTS.md)를 확인한다.
+
 ## 실제 실행 결과
 
 환경: CPython 3.11.18, Linux x86_64, NumPy 2.2.6, OpenCV 4.11.0.86, PyBullet 3.2.7, CPU DIRECT/TinyRenderer. GPU 미사용. 평가 400회 벽시계 시간 230.7초. 실행일 2026-11-17 KST.
@@ -40,4 +44,4 @@
 
 ### 배포·소스 범위
 
-정적 배포판은 실제로 생성한 이미지와 궤적을 선택·비교·재생한다. 실시간 PyBullet 계산이나 임의 좌표 실행은 로컬 Python 서버에서 수행한다. Sites 배포는 소유자 전용이다. 소스와 실험 기록은 공개 GitHub 저장소 https://github.com/sokldjs554/reachbench 에서 제공한다. 외부 면접관에게 링크를 전달하기 전에 접근 설정을 확인하거나 ZIP의 dist 디렉터리를 별도 정적 호스팅에 배포한다.
+정적 배포판은 실제로 생성한 이미지와 궤적을 선택·비교·재생한다. 실시간 PyBullet 계산이나 임의 좌표 실행은 로컬 Python 서버에서 수행한다. 현재 Sites 데모는 공개다 (v2에서 재확인). 소스와 실험 기록은 공개 GitHub 저장소 https://github.com/sokldjs554/reachbench 에서 제공한다. ZIP의 dist 디렉터리도 별도 정적 호스팅에 배포할 수 있다.

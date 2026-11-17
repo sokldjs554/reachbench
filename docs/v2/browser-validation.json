@@ -1,0 +1,57 @@
+{
+  "mode": "static-files-routed-in-Chromium",
+  "base_url": null,
+  "browser": "installed Chromium via Playwright",
+  "tls_note": "Browser proxy certificate verification disabled in test context; not a TLS audit. Public HTTP response checks use system TLS separately.",
+  "screenshots": "dist/screenshots",
+  "reports": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "passed": true,
+      "horizontal_overflow": false,
+      "page_errors": [],
+      "missing_assets": [],
+      "checks": [
+        "recorded frames loaded",
+        "play/pause/reset",
+        "seek and frame/2D exact-index sync",
+        "occlusion no-motion explanation",
+        "recorded collision jump",
+        "legacy/calibration suite switch",
+        "missing references stop",
+        "shifted references failure",
+        "failure drill-down",
+        "seed switch",
+        "overlay toggle",
+        "evaluation tables",
+        "tabs"
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "passed": true,
+      "horizontal_overflow": false,
+      "page_errors": [],
+      "missing_assets": [],
+      "checks": [
+        "recorded frames loaded",
+        "play/pause/reset",
+        "seek and frame/2D exact-index sync",
+        "occlusion no-motion explanation",
+        "recorded collision jump",
+        "legacy/calibration suite switch",
+        "missing references stop",
+        "shifted references failure",
+        "failure drill-down",
+        "seed switch",
+        "overlay toggle",
+        "evaluation tables",
+        "tabs"
+      ]
+    }
+  ]
+}

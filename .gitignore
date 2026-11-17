@@ -10,3 +10,4 @@ dist/data/frames/local-*/
 .env
 .env.*
 !.env.example
+dist/media/local/

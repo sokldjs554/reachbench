@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "mode": "jsdom 26: DOM/data only",
+  "checks": [
+    "five legacy conditions and outcome values",
+    "five calibration biases and outcome values",
+    "both reference stress profiles",
+    "frame/2D sample index consistency",
+    "headline denominators",
+    "evaluation table row counts",
+    "local-only gate",
+    "reset"
+  ]
+}

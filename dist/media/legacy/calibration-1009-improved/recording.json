@@ -1,0 +1,131 @@
+{
+  "run_id": "calibration-1009-improved",
+  "kind": "pybullet-recorded-frames",
+  "camera_role": "observer_only_not_perception",
+  "camera": {
+    "eye": [
+      1.15,
+      -1.8,
+      1.55
+    ],
+    "target": [
+      -0.1,
+      0.03,
+      0.1
+    ],
+    "up": [
+      0,
+      0,
+      1
+    ],
+    "fov": 44
+  },
+  "width": 320,
+  "height": 240,
+  "stride": 2,
+  "trace_sha256": "2ec1b8aac408cdafa42a3debbc3e5593ebdafa921a8c857661ea0d9d37227063",
+  "frames": [
+    {
+      "trace_index": 0,
+      "t": 0.0,
+      "page": 0,
+      "tile": 0,
+      "q": [
+        -1.1,
+        1.5
+      ]
+    },
+    {
+      "trace_index": 2,
+      "t": 0.1,
+      "page": 0,
+      "tile": 1,
+      "q": [
+        -1.0513392857142858,
+        1.5388392857142859
+      ]
+    },
+    {
+      "trace_index": 4,
+      "t": 0.2,
+      "page": 0,
+      "tile": 2,
+      "q": [
+        -1.0026785714285715,
+        1.5776785714285715
+      ]
+    },
+    {
+      "trace_index": 6,
+      "t": 0.3,
+      "page": 0,
+      "tile": 3,
+      "q": [
+        -0.9540178571428573,
+        1.6165178571428573
+      ]
+    },
+    {
+      "trace_index": 8,
+      "t": 0.4,
+      "page": 0,
+      "tile": 4,
+      "q": [
+        -0.905357142857143,
+        1.6553571428571432
+      ]
+    },
+    {
+      "trace_index": 10,
+      "t": 0.5,
+      "page": 0,
+      "tile": 5,
+      "q": [
+        -0.8566964285714287,
+        1.694196428571429
+      ]
+    },
+    {
+      "trace_index": 12,
+      "t": 0.6,
+      "page": 0,
+      "tile": 6,
+      "q": [
+        -0.8080357142857144,
+        1.7330357142857147
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "file": "page-000.webp",
+      "columns": 8,
+      "rows": 1,
+      "sha256": "5462d333b380ef2ba169cd3bc2ea5368e594789c65d04aac4a6fb7f3c0ca0404"
+    }
+  ],
+  "contacts": [
+    {
+      "trace_index": 12,
+      "t": 0.6,
+      "contacts": [
+        {
+          "obstacle_index": 0,
+          "link_index": 1,
+          "point_on_robot": [
+            0.17004996602479028,
+            -0.05271860332563108,
+            0.16236453202102344
+          ],
+          "point_on_obstacle": [
+            0.16188363552018817,
+            -0.06217963626567258,
+            0.16236453201893628
+          ],
+          "distance_m": -0.012498003768720234
+        }
+      ]
+    }
+  ],
+  "execution": "resetJointState + collision queries; not motor dynamics"
+}

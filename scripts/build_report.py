@@ -1,20 +1,36 @@
+"""Build the current report from actual evaluation summaries; preserve v1 records."""
 from pathlib import Path
-import json,markdown,html,platform,subprocess
-s=json.loads(Path('dist/data/summary.json').read_text())
-m=s['metrics'];lines=['## 실제 실행 결과','',f"환경: CPython {platform.python_version()}, Linux x86_64, NumPy 2.2.6, OpenCV 4.11.0.86, PyBullet 3.2.7, CPU DIRECT/TinyRenderer. GPU 미사용. 평가 400회 벽시계 시간 {s['wall_seconds']:.1f}초. 실행일 2026-11-17 KST.",'','| 방법 | 성공 / 전체 | 성공률 | 검출 수 | 인식 오차 평균 | 인식 중앙값 | 계획 중앙값 |','|---|---:|---:|---:|---:|---:|---:|']
-names={'baseline':'RGB + 직접 접근','perception':'HSV + 직접 접근','planning':'RGB + A*','improved':'HSV + A*'}
-for k in names:
- r=m[k]['all'];lines.append(f"| {names[k]} | {r['successes']}/{r['n']} | {r['success_rate']:.0%} | {r['detected_n']} | {r['perception_error_mean_mm']:.2f} mm | {r['perception_median_ms']:.2f} ms | {r['planning_median_ms']:.2f} ms |")
-lines+=['','| 조건 | 기준 성공 | 개선 성공 | 개선 인식 오차 |','|---|---:|---:|---:|']
-conds={'nominal':'기본 조명','dim':'어두운 조명','clutter':'추가 장애물','occluded':'목표 가림','calibration':'보정 오차 +65 mm'}
-for c,name in conds.items():
- a,b=m['baseline'][c],m['improved'][c];err='검출 없음' if b['perception_error_mean_mm'] is None else f"{b['perception_error_mean_mm']:.2f} mm";lines.append(f"| {name} | {a['successes']}/20 | {b['successes']}/20 | {err} |")
-lines+=['','기준 2% → 개선 59%는 이 조건 혼합의 관측값이다. 주된 개선은 경로 계획에 있다(RGB+A*:39%). HSV 인식만 바꾼 경우는 3%에 그쳤고, A*와 결합했을 때 어두운 조명에서 추가 20건을 성공했다. 모든 실패를 포함한 집계다. 59%를 일반 로봇 성공률이나 회사 벤치마크와 비교하지 않는다.','','개선 방법의 실패는 목표 미검출 20건, 목표 자세 차단 1건, 충돌 17건, 최종 위치 오차 초과 3건이었다. 충돌 17건과 위치 오차 3건은 모두 보정 오차 조건에서 발생했다.','',f"전체 개선 성공률 Wilson 95% 구간: {m['improved']['all']['wilson95'][0]:.1%}–{m['improved']['all']['wilson95'][1]:.1%}. 계획 P95 {m['improved']['all']['planning_p95_ms']:.2f} ms. 기본 조명 계획 P95 {m['improved']['nominal']['planning_p95_ms']:.2f} ms로, 평균적인 실시간 동작을 보장하지 않는다.",'','### 기록으로 추적하는 사례','']
-for reason in ['reached','goal_blocked','target_missing','collision','position_error']:
- row=next(r for r in s['episodes'] if r['method']=='improved' and r['reason']==reason)
- lines.append(f"- `{row['id']}`: {reason}, 최종 오차 {row['endpoint_error_mm']:.2f} mm. `dist/data/{row['id']}.json`에서 입력·추정·관절·판정을 확인한다.")
-lines+=['','### 검증 결과','','- Python 테스트 11개: FK/IK, 카메라 왕복, 픽셀 검출, 경로 중간 충돌, Bullet 기하 일치, 집계 수식, 재현성, 전수 기록, 새 계산 HTTP API 및 잘못된 입력 거부.','- 400개 실행 기록·100개 RGB 입력 무결성 및 집계 재계산 통과. 제외 기록 0개.','- DOM 검사: 다섯 조건·seed·두 방법 수치·시간 슬라이더·재생/초기화·탭·오버레이·다운로드 연결 통과.','- 실제 브라우저 렌더링, 화면 크기별 육안 확인, 키보드/스크린리더 수동 검증, 외부 사용자 사용성 테스트는 미실시. 관리 환경의 지원 브라우저 제어 도구 `cua_repl.js`가 없어서 브라우저 QA를 수행할 수 없었다. DOM 테스트를 브라우저 테스트로 간주하지 않는다.','','### 배포·소스 범위','','정적 배포판은 실제로 생성한 이미지와 궤적을 선택·비교·재생한다. 실시간 PyBullet 계산이나 임의 좌표 실행은 로컬 Python 서버에서 수행한다. Sites 배포는 소유자 전용이다. 소스와 실험 기록은 공개 GitHub 저장소 https://github.com/sokldjs554/reachbench 에서 제공한다. 외부 면접관에게 링크를 전달하기 전에 접근 설정을 확인하거나 ZIP의 dist 디렉터리를 별도 정적 호스팅에 배포한다.']
-results='\n'.join(lines)+'\n';Path('docs/RESULTS.md').write_text(results)
-parts=[('# ReachBench · 프로젝트 보고서\n\n[데모로 돌아가기](./index.html) · [소스와 실험 기록 ZIP](./reachbench-source.zip)\n\n카메라 인식 결과가 로봇팔 동작의 성공과 실패에 어떻게 연결되는지 확인하는 CPU 시뮬레이션입니다.\n\n**모든 조사·설계·구현·평가 작업은 Codex가 수행했습니다. 지원자가 직접 수행했다고 확인된 개발·실물 실험은 없습니다.**\n\n'),Path('docs/RESEARCH.md').read_text(),Path('docs/EXPERIMENT.md').read_text(),results,Path('docs/INTERVIEW.md').read_text(),Path('docs/THIRD_PARTY.md').read_text()]
+import json,re,posixpath
+import markdown
+root=Path(__file__).resolve().parents[1]
+s=json.loads((root/'dist/data-v2/summary.json').read_text())
+lines=['# 기준점 보정: 실제 평가 결과','','2026-11-17 KST · CPU 기구학 시뮬레이션. 개발 42회와 분리한 최종 280회. 정상 기준점의 100개 paired 장면과 스트레스 40개 paired 장면을 구분한다. 기존 400회 평가와 seed·조건이 다르므로 기존 59%와 새 100%를 직접 개선 폭으로 비교하지 않는다.','','## 정상 기준점: 편향별 동일 20개 장면','','| X 편향 | 성공 기존→보정 | 충돌 기존→보정 | 목표 인식 평균 오차 mm | 최종 거리 평균 mm | 처리 중앙값 ms |','|---|---:|---:|---:|---:|---:|']
+for bias in s['config']['offsets_mm']:
+    m=s['metrics']['standard'][str(bias)];a,b=m['uncorrected'],m['reference']
+    lines.append(f"| +{bias} mm | {a['successes']}/20 → {b['successes']}/20 | {a['collisions']} → {b['collisions']} | {a['perception_error_mean_mm']:.2f} → {b['perception_error_mean_mm']:.2f} | {a['endpoint_error_mean_mm']:.2f} → {b['endpoint_error_mean_mm']:.2f} | {a['pipeline_median_ms']:.2f} → {b['pipeline_median_ms']:.2f} |")
+a,b=s['metrics']['standard']['all'].values()
+lines += ['',f"정상 기준점 전체 성공 **{a['successes']}/100 → {b['successes']}/100**, 충돌 {a['collisions']} → {b['collisions']}. 평균 인식 오차 {a['perception_error_mean_mm']:.2f} → {b['perception_error_mean_mm']:.2f} mm. 처리 중앙값 {a['pipeline_median_ms']:.2f} → {b['pipeline_median_ms']:.2f} ms, P95 {a['pipeline_p95_ms']:.2f} → {b['pipeline_p95_ms']:.2f} ms. 기준점 처리 자체 중앙값 {b['calibration_median_ms']:.2f} ms.",'',f"성공률 Wilson 95%: 기존 {a['wilson95'][0]:.1%}–{a['wilson95'][1]:.1%}, 보정 {b['wilson95'][0]:.1%}–{b['wilson95'][1]:.1%}. 편향 간 같은 seed를 재사용한 상관을 보정하지 않은 근사 구간이다. 높은 P95와 공유 CPU의 부하를 감안할 때 실시간 제어 성능을 주장할 수 없다.",'','## 기준점 가정이 깨질 때','','| 조건 | 성공 기존→보정 | 충돌 기존→보정 | 보정 후 인식 오차 | 보정 후 최종 거리 | 보정 후 실패 전수 |','|---|---:|---:|---:|---:|---|']
+for p,name in [('markers_missing','기준점 2개'),('board_shift','기준점 전체 +50 mm 오배치')]:
+    a,b=s['metrics'][p]['all'].values();reasons=', '.join(f'{k} {v}회' for k,v in b['reasons'].items())
+    lines.append(f"| {name} | {a['successes']}/20 → {b['successes']}/20 | {a['collisions']} → {b['collisions']} | {b['perception_error_mean_mm']:.2f} mm | {b['endpoint_error_mean_mm']:.2f} mm | {reasons} |")
+lines+=['','기준점 부족에서는 전부 이동을 보류해 충돌을 피했지만 과제는 실패했다. 표시되는 최종 거리는 움직이지 않은 시작 손끝에서 목표까지다. 목표 추정은 남아 있어도 계획기에 전달하지 않는다. 기준점 오배치에서는 내부 잔차가 작아도 절대 좌표가 틀리므로 성공하지 못했다. 잔차 검증만으로 공동 배치 오류를 검출할 수 없다는 반례다.','','정상/스트레스를 모두 합치면 두 방법 성공은 40/140과 100/140이다. UI 상단 40%→100%는 **정상 기준점 100개 장면만의 비율**이며 스트레스를 제외했다는 사실을 표시한다. 성공한 사례를 선별한 것이 아니라 사전에 정의한 조건별 분모를 사용했다.','','## 추적 가능한 성공·실패 사례','']
+for p,reason in [('standard','reached'),('standard','collision'),('standard','position_error'),('markers_missing','calibration_unavailable'),('board_shift','position_error'),('board_shift','no_path')]:
+    r=next(r for r in s['episodes'] if r['profile']==p and r['reason']==reason)
+    lines.append(f"- [{r['id']}](../../dist/data-v2/{r['id']}.json): {reason}, 목표 인식 {r['perception_error_mm']:.2f} mm, 최종 거리 {r['endpoint_error_mm']:.2f} mm.")
+lines+=['','## 검증과 공개 범위','','- Python 테스트 21개 통과: 원 엔진/기하/API 11개와 보정·기준점 실패·held-out 재실행·집계·영상 정합성 검증.','- 최종 280회 **전수 재실행**: RGB 해시·검출·보정값·관절 trace·판정·최종/인식 오차 완전 일치. 타이밍은 비교하지 않음. [검증 기록](reproduction.json).','- 기존 기준/개선 200회 재실행이 원본과 일치. 총 480개 실행의 프레임 trace SHA-256·t·q, 페이지 이미지 해시/크기, 접촉 샘플 검사 통과. 기존 400회 원본 데이터 보존.','- Chromium 1440×1000 및 모바일 390×844: 재생·정지·초기화·시간 탐색, 프레임/2D 동일 index, 가림·보정·기준점 결손·오배치, 실패 링크, seed 변경, 결과 표, 탭, 오버레이 검사 통과. [브라우저 검사](browser-validation.json), [DOM 검사](dom-validation.json).','- 실제 캡처: [데스크톱](../../dist/screenshots/desktop-comparison.png), [모바일](../../dist/screenshots/mobile-comparison.png), [보정 비교](../../dist/screenshots/desktop-calibration.png).','- 외부 면접관/사용자 대상 사용성 테스트, 실제 iOS Safari/Android 기기, 전체 키보드·스크린리더 감사는 미실시. 모바일은 Chromium viewport/touch 에뮬레이션이다.','- 관리 preview relay는 준비 시간 초과로 실패했다. 로컬 정적 파일을 Chromium 요청에 연결해 실제 JS·레이아웃을 검사했고 공개 배포에는 별도 실제 HTTP 검증을 사용한다. DOM 검사와 브라우저 검사를 구분한다.','','공개 데모는 사전 계산된 기록 재생이며 Python을 브라우저 서버에서 실행하지 않는다. 로컬 Python 서버에서 새 목표 좌표를 계산할 수 있다. 새 보정 실험을 임의 조건으로 실행하려면 CLI를 사용한다. 모든 결과는 시뮬레이션이며 실물 로봇·학습 정책·파지·ROS 2 성능이 아니다.']
+(root/'docs/v2/RESULTS.md').write_text('\n'.join(lines)+'\n')
+intro='# ReachBench · 실행과 실패를 확인하는 실험 보고서\n\n[공개 데모](./index.html) · [GitHub](https://github.com/sokldjs554/reachbench) · [소스·데이터 ZIP](https://github.com/sokldjs554/reachbench/archive/refs/heads/main.zip)\n\n카메라 인식 → 위치 추정 → 경로 계획 → 목표 접근 → 평가를 연결합니다. **모든 구현·실험·검증은 Codex가 수행했습니다. 사용자는 요구사항을 정하고 GitHub 저장소를 생성했습니다. 지원자의 독자 개발·실물 성과로 기재하지 않습니다.**\n\n![실제 Chromium 데스크톱 화면](screenshots/desktop-comparison.png)\n\n'
+parts=[intro]
+for name in ['docs/v2/RESULTS.md','docs/v2/RESEARCH.md','docs/v2/EXPERIMENT.md','docs/INTERVIEW.md','docs/THIRD_PARTY.md','docs/RESEARCH.md','docs/RESULTS.md']:
+    content=(root/name).read_text()
+    def link(m):
+        target=m.group(2)
+        if re.match(r'https?://|#',target):return m.group(0)
+        absolute=posixpath.normpath(posixpath.join(posixpath.dirname(name),target))
+        url='https://github.com/sokldjs554/reachbench/blob/main/'+absolute
+        if absolute.startswith('dist/'):url=absolute[5:]
+        return f'[{m.group(1)}]({url})'
+    parts.append(re.sub(r'\[([^\]]*)\]\(([^)]+)\)',link,content))
 content=markdown.markdown('\n\n---\n\n'.join(parts),extensions=['tables','fenced_code'])
-Path('dist/report.html').write_text('<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ReachBench 실험 보고서</title><link rel="stylesheet" href="style.css"></head><body><article class="report">'+content+'</article></body></html>')
+(root/'dist/report.html').write_text('<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ReachBench 실험 보고서</title><link rel="stylesheet" href="style.css"></head><body><article class="report">'+content+'</article></body></html>')
+print('Report generated from actual summaries; v1 results unchanged.')

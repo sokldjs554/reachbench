@@ -3,6 +3,7 @@ from http.server import SimpleHTTPRequestHandler,HTTPServer
 from pathlib import Path
 import json, argparse
 from .sim import scene,rollout,METHODS
+from .recording import record_trace
 ROOT=Path(__file__).resolve().parents[1]/'dist'
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
@@ -25,7 +26,10 @@ class Handler(SimpleHTTPRequestHandler):
                 s.target=[x,y]
             results=[]
             for m in ['baseline','improved']:
-                uid=f'local-{m}';r=rollout(s,m,ROOT/'data'/'frames'/uid);r['id']=uid;results.append(r)
+                uid=f'local-{m}';r=rollout(s,m,ROOT/'data'/'frames'/uid);r['id']=uid
+                r['media_root']=f'media/local/{uid}'
+                record_trace(r,ROOT/r['media_root'])
+                results.append(r)
             self.send_json({'episodes':results})
         except (ValueError,TypeError,KeyError) as e:self.send_json({'error':str(e)},400)
 if __name__=='__main__':
