@@ -1,0 +1,74 @@
+{
+  "public_unauthenticated": true,
+  "system_tls_verification": true,
+  "github_commit": "d5496db321db404b6e90ab266081883a1fa6cfcf",
+  "sites_commit": "6ec546893358b0beb859cbd9fd71d760f7f22293",
+  "files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "05ff506496e622a830ae90634b7ed44c0c4f1205fd414170b04e93001787ce12",
+      "bytes": 13675
+    },
+    {
+      "path": "app.js",
+      "status": 200,
+      "sha256": "4aa27f91bb3e0593cf4fcd870ec968bb79f5d1afefc1e39bb97e246dbe0a54e1",
+      "bytes": 24028
+    },
+    {
+      "path": "style.css",
+      "status": 200,
+      "sha256": "5362fb5da9c217db3840d63c7748be1ab9d02935ca64511d564e95e675252840",
+      "bytes": 17398
+    },
+    {
+      "path": "report.html",
+      "status": 200,
+      "sha256": "979a93bfc336447dcd7ef854dbb279b8c7c8b210ef5c172129e49190cce28a6f",
+      "bytes": 46946
+    },
+    {
+      "path": "data/summary.json",
+      "status": 200,
+      "sha256": "07492aebee606ea9dd6f257c741f415d878b5e948a37367a7334352b40dc76c6",
+      "bytes": 188299
+    },
+    {
+      "path": "data-v2/summary.json",
+      "status": 200,
+      "sha256": "0d9c52e2b13f7583bc2330e30e6234f95d40c2e5341f571d2c41f8ebd4ed35b9",
+      "bytes": 218474
+    },
+    {
+      "path": "data-v2/config.json",
+      "status": 200,
+      "sha256": "5647364a206c6352e7332678e057a138228668c5a283e27e7751d19b03fcc048",
+      "bytes": 1221
+    },
+    {
+      "path": "media/legacy/nominal-1000-baseline/recording.json",
+      "status": 200,
+      "sha256": "84b4e807e0f31f27f11dea82204be6898a362cbafce42355dbb1ae8110b015a2",
+      "bytes": 2680
+    },
+    {
+      "path": "data-v2/recordings/standard-65-3000-reference/recording.json",
+      "status": 200,
+      "sha256": "e18d6339429dc24fb645203a9415a3dd2a3d8489fdc0ec2b39b066c8679b4e95",
+      "bytes": 4011
+    },
+    {
+      "path": "data-v2/recordings/standard-65-3000-reference/page-000.webp",
+      "status": 200,
+      "sha256": "4a3e1ba4ee7193fd025f7f8b9274f464ccbf7eb8a960ba2bcb93537b8f2111c7",
+      "bytes": 40668
+    },
+    {
+      "path": "screenshots/mobile-comparison.png",
+      "status": 200,
+      "sha256": "2e8bd1196ea6ddad350ee7fefaa98aee08b02ec5c2f5389e220392ce7c53f08b",
+      "bytes": 180140
+    }
+  ]
+}

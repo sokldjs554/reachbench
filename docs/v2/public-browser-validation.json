@@ -1,0 +1,95 @@
+{
+  "mode": "public-deployment",
+  "base_url": "https://reachbench-vision-control.ykh13571.chatgpt.site/",
+  "browser": "installed Chromium via Playwright",
+  "tls_note": "Browser proxy certificate verification disabled in test context; not a TLS audit. Public HTTP response checks use system TLS separately.",
+  "screenshots": "https://reachbench-vision-control.ykh13571.chatgpt.site/screenshots/",
+  "reports": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "passed": true,
+      "horizontal_overflow": false,
+      "page_errors": [],
+      "missing_assets": [],
+      "checks": [
+        "recorded frames loaded",
+        "play/pause/reset",
+        "seek and frame/2D exact-index sync",
+        "occlusion no-motion explanation",
+        "recorded collision jump",
+        "legacy/calibration suite switch",
+        "missing references stop",
+        "shifted references failure",
+        "failure drill-down",
+        "seed switch",
+        "overlay toggle",
+        "evaluation tables",
+        "tabs"
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "passed": true,
+      "horizontal_overflow": false,
+      "page_errors": [],
+      "missing_assets": [],
+      "checks": [
+        "recorded frames loaded",
+        "play/pause/reset",
+        "seek and frame/2D exact-index sync",
+        "occlusion no-motion explanation",
+        "recorded collision jump",
+        "legacy/calibration suite switch",
+        "missing references stop",
+        "shifted references failure",
+        "failure drill-down",
+        "seed switch",
+        "overlay toggle",
+        "evaluation tables",
+        "tabs"
+      ]
+    }
+  ],
+  "screenshot_comparison": [
+    {
+      "file": "desktop-calibration.png",
+      "public_sha256": "105512765a6fc78965f05f18e5f2c9f9f011a151d01bb6928c74441544d03ca5",
+      "published_capture_sha256": "c8bfd5d61e321cc4087d73ef09c17ff279f567b4dfd6e726856024b007cd26c3",
+      "byte_identical": false
+    },
+    {
+      "file": "mobile-calibration.png",
+      "public_sha256": "ac147a3ffb9cb078e18379ccbc2ef277be367fd964119a4db68b04f8f89e76e5",
+      "published_capture_sha256": "ac147a3ffb9cb078e18379ccbc2ef277be367fd964119a4db68b04f8f89e76e5",
+      "byte_identical": true
+    },
+    {
+      "file": "desktop-collision.png",
+      "public_sha256": "0d0e14c38a0e64921f0a425a8386f258a03eceb03ee9949b9b35d621ffe6b103",
+      "published_capture_sha256": "27ab98e765fbb383fd6a98672f407ff61d49526040dd05a4849be48b2a0be9d6",
+      "byte_identical": false
+    },
+    {
+      "file": "mobile-comparison.png",
+      "public_sha256": "2e8bd1196ea6ddad350ee7fefaa98aee08b02ec5c2f5389e220392ce7c53f08b",
+      "published_capture_sha256": "2e8bd1196ea6ddad350ee7fefaa98aee08b02ec5c2f5389e220392ce7c53f08b",
+      "byte_identical": true
+    },
+    {
+      "file": "desktop-comparison.png",
+      "public_sha256": "38395ad8ddf078e6b696d3d91ff88d6054bbab18c5253df1143316518cd4cb07",
+      "published_capture_sha256": "38395ad8ddf078e6b696d3d91ff88d6054bbab18c5253df1143316518cd4cb07",
+      "byte_identical": true
+    },
+    {
+      "file": "mobile-collision.png",
+      "public_sha256": "e4fbfbd876bbb098844e99ebfb2740e04554ab192ecfd5772326e922c67851e1",
+      "published_capture_sha256": "e4fbfbd876bbb098844e99ebfb2740e04554ab192ecfd5772326e922c67851e1",
+      "byte_identical": true
+    }
+  ]
+}
