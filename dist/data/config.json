@@ -1,0 +1,58 @@
+{
+  "seeds": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007,
+    1008,
+    1009,
+    1010,
+    1011,
+    1012,
+    1013,
+    1014,
+    1015,
+    1016,
+    1017,
+    1018,
+    1019
+  ],
+  "conditions": [
+    "nominal",
+    "dim",
+    "clutter",
+    "occluded",
+    "calibration"
+  ],
+  "methods": {
+    "baseline": [
+      "rgb",
+      "direct"
+    ],
+    "perception": [
+      "hsv",
+      "direct"
+    ],
+    "planning": [
+      "rgb",
+      "astar"
+    ],
+    "improved": [
+      "hsv",
+      "astar"
+    ]
+  },
+  "success_tolerance_mm": 35,
+  "joint_step_max_rad": 0.025,
+  "nominal_sample_dt_s": 0.05,
+  "camera": "320x320 RGB, perspective 47 deg, height 2.6 m",
+  "training": "none; fixed color thresholds and analytic kinematics",
+  "evaluation": "kinematic motion, discrete PyBullet collision queries, no motor dynamics",
+  "python": "3.11.18",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "source_sha256": "5d7eb9763f2706413d42abee8252edea0d404ad42a9d3c0f75678938be4a1cb9"
+}

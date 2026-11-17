@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "environment": "jsdom 26 (DOM only, not browser rendering)",
+  "checks": [
+    "headline metrics equal summary",
+    "all 5 condition selections",
+    "seed selection",
+    "both outcome cards match episode error",
+    "camera and snapshots exist",
+    "play/scrub/reset",
+    "3 tabs",
+    "overlay toggle",
+    "hosted replay mode",
+    "download data links"
+  ],
+  "browser_visual_qa": "not run: managed cua_repl.js unavailable",
+  "calls": 16
+}

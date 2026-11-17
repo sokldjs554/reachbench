@@ -1,0 +1,14 @@
+{
+  "episodes_validated": 400,
+  "unique_scenes": 100,
+  "invalid_records": 0,
+  "files_hashed": 704,
+  "checks": [
+    "unique episode IDs",
+    "strictly increasing timestamps",
+    "finite joints",
+    "RGB shape and decode",
+    "summary recomputation"
+  ],
+  "excluded_records": 0
+}

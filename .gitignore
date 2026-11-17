@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+work/
+node_modules/
+dist/data/frames/local-*/
+*.tar.gz
+
+.openai/
+.env
+.env.*
+!.env.example

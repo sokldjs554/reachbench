@@ -1,0 +1,383 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ReachBench 실험 보고서</title><link rel="stylesheet" href="style.css"></head><body><article class="report"><h1>ReachBench · 프로젝트 보고서</h1>
+<p><a href="./index.html">데모로 돌아가기</a> · <a href="./reachbench-source.zip">소스와 실험 기록 ZIP</a></p>
+<p>카메라 인식 결과가 로봇팔 동작의 성공과 실패에 어떻게 연결되는지 확인하는 CPU 시뮬레이션입니다.</p>
+<p><strong>모든 조사·설계·구현·평가 작업은 Codex가 수행했습니다. 지원자가 직접 수행했다고 확인된 개발·실물 실험은 없습니다.</strong></p>
+<hr />
+<h1>공고 조사와 방향 선정</h1>
+<p>조사일: 2026-11-17 (Asia/Seoul). 공개 웹 원문을 읽고 정리했다. 채용 상태·전형 일정은 지원 시 다시 확인할 것.</p>
+<h2>1. 공고에서 확인한 사실</h2>
+<p><a href="https://www.wanted.co.kr/wd/381292">원티드 381292</a>의 주요업무:</p>
+<ul>
+<li>로봇의 인식·판단·행동을 위한 Physical AI 기술 연구 및 구현</li>
+<li>시뮬레이션 환경 구축 및 가상 데이터 기반 실험</li>
+<li>카메라, 거리, 힘, 촉각 등 센서를 활용한 로봇 상태·위치 인식</li>
+<li>공간·자세·동작 추정과 2족 보행 / Whole-body Control 등 제어 연계</li>
+<li>로봇 학습 데이터 수집, 전처리, 정제, 증강 파이프라인</li>
+<li>실제 환경 및 실증 프로젝트 적용과 성능 검증</li>
+</ul>
+<p>자격요건: 관련 전공, 학사·석사 졸업 또는 졸업 예정, Python 또는 C/C++ 개발 경험, 로봇·AI·제어·컴퓨터 비전 중 한 분야 이상에 관심, 직접 학습·구현하는 태도. 정규직 전환형 3개월 인턴.</p>
+<p><a href="https://tommoro.ai/en/career/%EC%9D%B8%ED%84%B4-physical-ai-robotics-sw-r-d">회사 공식 동일 직무</a>에서도 동일한 업무와 자격요건을 확인했다. 공식 페이지의 <strong>추가 우대사항</strong>은 ROS/ROS2, PyTorch/OpenCV, 로봇 시뮬레이터·3D 환경, 센서 활용, 제어·컴퓨터 비전·강화학습·모방학습 프로젝트 경험이다. 이 추가 항목을 원티드 원문에 있었다고 인용하지 않는다. 지원자의 전공·졸업 상태는 제공되지 않아 자격 충족 여부를 판단하지 않았다.</p>
+<h2>2. 회사 기술과 연결</h2>
+<p><a href="https://tommoro.ai/">회사 공식 소개</a>의 HABILIS 구성은 Agent(작업 계획·도구·로봇 연결), Brain(시연 데이터 기반 조작 스킬), Console(데이터·학습·추론·배포·운영), Data Foundry(현장·Human·Teleoperation 데이터)이다. <a href="https://tommoro.ai/en/about">About</a>는 VLA 기반 로봇 파운데이션 모델, 모방·강화학습, 실시간 제어·추론, 실행 경험을 평가·학습으로 연결하는 흐름을 설명한다. 이는 회사가 공개적으로 설명한 기술 방향이며 독립적인 성능 검증이 아니다.</p>
+<p>ReachBench는 카메라→공간 추정→경로→기록→실패 분석을 작은 단위로 재현한다. 회사의 모델이나 제품을 구현했다는 주장은 하지 않는다. 특히 본 프로젝트의 고정 색상 분할은 학습된 Physical AI/RFM/VLA가 아니다.</p>
+<h2>3. 대안 비교와 선정 근거</h2>
+<p>점수는 설계 판단(5점 만점)이며 실험 성능 수치가 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>후보</th>
+<th style="text-align: right;">공고 연관성</th>
+<th style="text-align: right;">CPU 실행 가능성</th>
+<th style="text-align: right;">평가 명확성</th>
+<th style="text-align: right;">데모 전달력</th>
+<th>판단</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>휴머노이드 RL 보행</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td>학습 예산·접촉 제어 검증 부족</td>
+</tr>
+<tr>
+<td>VLA 기반 파지</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td>모델·데이터·GPU 의존과 파지 검증 비용</td>
+</tr>
+<tr>
+<td>실내 시각 내비게이션</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td>SLAM·지도·위치추정까지 범위가 커짐</td>
+</tr>
+<tr>
+<td><strong>카메라 기반 2관절 접근</strong></td>
+<td style="text-align: right;"><strong>4</strong></td>
+<td style="text-align: right;"><strong>5</strong></td>
+<td style="text-align: right;"><strong>5</strong></td>
+<td style="text-align: right;"><strong>4</strong></td>
+<td>작은 작업에서 인식 오차가 동작 실패로 이어지는 관계를 분리 평가 가능</td>
+</tr>
+</tbody>
+</table>
+<p>선정 문제: 고정 RGB 카메라로 붉은 작업물과 푸른 장애물을 인식하고, 2관절 평면 로봇팔 끝점을 작업물 XY 좌표의 35 mm 이내로 접근시킨다. 링크 전체가 장애물에 부딪히면 실패. 수직 도달·파지·이송은 범위 밖이다.</p>
+<h2>4. 기술 선택과 디자인 조사</h2>
+<ul>
+<li><a href="https://pybullet.org/wordpress/">PyBullet</a>: GUI/GPU 없이 DIRECT와 CPU TinyRenderer 사용. 도형 생성·관절 기록·독립 충돌 쿼리에 적합. 이번 구현은 상태를 직접 설정하므로 동역학 제어 시뮬레이션으로 소개하지 않는다.</li>
+<li><a href="https://docs.opencv.org/4.x/da/d97/tutorial_threshold_inRange.html">OpenCV HSV inRange</a>: 밝기가 변할 때 고정 RGB 임계값과의 차이를 설명하고 비교할 수 있다. 범용 객체 인식 대체물이 아니다.</li>
+<li><a href="https://docs.foxglove.dev/docs/visualization/panels/3d">Foxglove 3D panel</a>: 이미지, 프레임, 경로, 시간 동기화·비교 기능을 조사했다. 이를 참고해 초기 이미지와 관절 기록 재생을 연결했다.</li>
+<li><a href="https://rerun.io/">Rerun</a>: 다중 모달 데이터를 기록·변환·탐색하고 실패를 원본 데이터로 추적하는 구조를 참고했다.</li>
+<li><a href="https://tommoro.ai/console">HABILIS Console</a>: 로봇 제어·수집·학습·배포를 묶는 흐름을 확인했다. 로그인 이후 제품 UI를 직접 사용한 것은 아니다.</li>
+</ul>
+<p>외부 제품의 이미지·브랜드·UI 코드·상용 자산을 가져오지 않았다. 짙은 공간 뷰, 중립색 작업 패널, 시간축, 입력·인식·행동 단계, 근거 JSON 다운로드를 적용했다.</p>
+<h2>5. 기존 프로젝트와의 관계</h2>
+<p>사용자가 설명한 범위에서 Pathology Edge Lab은 이미지 분석·모델 검증, Harbinger는 데이터 분석을 보여준다. 해당 저장소나 성과를 이번에 검토하지 않았으므로 세부 기여나 성능은 추정하지 않는다. ReachBench의 추가 가치는 좌표 변환·역기구학·충돌 회피·시뮬레이션 기록이라는 연결이다. 직접 실물 하드웨어를 다루거나 학습 정책을 훈련한 경험을 대체하지 않는다.</p>
+<hr />
+<h1>실험 명세</h1>
+<h2>작업과 범위</h2>
+<p>고정 상부 RGB 카메라가 본 붉은 원형 목표의 XY 위치로 로봇팔 끝점을 접근시킨다. 청색 원통 장애물과 로봇 링크의 충돌을 피해야 한다. 성공 조건: 최종 평면 오차 ≤35 mm, 실행된 모든 샘플에서 PyBullet 충돌 없음, 실제 실행 경로 존재. 미검출·도달 불가·경로 차단은 실패로 집계한다.</p>
+<p>2개 회전 관절의 <strong>기구학 경로 실행</strong>이다. 로봇 링크 높이는 0.16 m이며 목표 위로 XY를 맞춘다. 목표와 물리적으로 접촉하거나 집지 않는다. 각 자세를 <code>resetJointState</code>로 설정한 뒤 <code>getClosestPoints</code>로 접촉을 확인한다. 속도/토크 제어·마찰·동역학·관절 추종 오차·안전 인증이 없다. 자기충돌 및 연속시간 충돌 보장은 구현하지 않았다.</p>
+<h2>데이터→인식→계획→평가</h2>
+<ol>
+<li>Scene(seed, condition)가 실제 목표·장애물과 이미지 변형 조건을 생성한다.</li>
+<li>PyBullet DIRECT + CPU TinyRenderer가 320×320 RGB를 렌더링한다. segmentation ID와 depth는 인식에 사용하지 않는다.</li>
+<li>기준 인식은 R&gt;150, G&lt;105, B&lt;105로 목표를, B&gt;125, R&lt;100, G&lt;155로 장애물을 분할한다.</li>
+<li>개선 인식은 OpenCV HSV의 빨강 H∈[0,12]∪[170,179], S≥110,V≥30; 파랑 H∈[95,125],S≥100,V≥25를 분할한다. 3×3 opening, 외곽선 면적 ≥7 px², 최소 외접원. 가장 큰 붉은 영역을 목표로 선택한다. 마스크 정제는 실제 수행하지만 학습은 하지 않는다.</li>
+<li>알려진 카메라와 높이로 픽셀 중심을 세계 좌표로 역투영한다. 청색 원통은 옆면까지 분할되므로 상면 가정과 외접원은 위치·반경에 편향을 만든다. 이 한계는 정답으로 보정하지 않는다.</li>
+<li>IK로 가능한 목표 관절각을 구한다. 기준 방법은 시작점에서 가까운 IK 해까지 직접 관절 보간한다. 개선은 65×65 관절 격자, 8방향 이웃, 유클리드 관절 거리 휴리스틱 A*, 두 IK 후보, 경로 단축을 사용한다.</li>
+<li>계획 단계는 링크 선분과 추정 장애물의 거리에서 링크 반폭 25 mm 및 여유 12 mm를 고려한다. 연결 구간을 나누어 검사하며, 계획기의 샘플 간 최대 관절 변화는 0.05 rad 미만이다. 실행 단계는 더 촘촘한 0.025 rad 이하를 사용한다. <strong>계획기에는 추정 목표·장애물만 전달한다.</strong> 알려진 로봇 치수·시작각·관절 한계는 사용한다.</li>
+<li>실행은 최대 관절 변화 0.025 rad로 보간하며, 각 샘플의 충돌은 PyBullet의 실제 도형으로 독립 판정한다. 명목 샘플 간격 0.05초. 실제 목표 좌표는 마지막 위치 오차 계산에만 사용한다.</li>
+</ol>
+<h2>기하 설정</h2>
+<ul>
+<li>베이스 (-0.5,0) m, 링크 길이 0.55/0.45 m, 반폭 0.025 m</li>
+<li>시작 관절각 (-1.1,1.5) rad, 각 관절 ±2.7 rad</li>
+<li>카메라 (0,0,2.6) m, z축 아래를 바라봄, +Y가 영상 위, 수직 FOV=47°, 주점 (160,160)</li>
+<li>f=320/(2 tan(47°/2)); X=(u−160)(2.6−z)/f; Y=(160−v)(2.6−z)/f</li>
+<li>목표 높이 0.022 m, 반경 0.035 m; 장애물 높이 0.36 m</li>
+<li>XY 추정에는 각 객체의 높이를 알고 있다고 가정한다. 일반 물체·미지 높이에 적용되는 3D 추정기가 아니다.</li>
+<li>FK: p1=base+l1[cos q1,sin q1], p2=p1+l2[cos(q1+q2),sin(q1+q2)]</li>
+</ul>
+<h2>실험 프로토콜</h2>
+<p>개발용 seed 0–9와 100으로 실행 여부를 확인했다. 처음 개발한 장애물 범위가 첫 링크 회전을 막는 장면을 많이 만들었으므로, 손끝 경로 선택을 비교하는 문제에 맞춰 장애물 X 범위를 조정했다. 이는 평가 전 설계 변경이다. 이후 <code>sim.py</code>를 고정하고 seed 1000–1019를 다섯 조건에서 전수 평가했다. 결과를 본 뒤 장면을 삭제하거나 성공 사례만 재선정하지 않았다. 이 분포는 장애물 회피가 필요한 작은 작업을 의도적으로 구성했으며 일반 현장 분포를 대표하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>목표</td>
+<td>X~U(0.10,0.32), Y~U(0.22,0.46) m</td>
+</tr>
+<tr>
+<td>주 장애물</td>
+<td>X~U(0.20,0.35), Y~U(-0.06,0.12), 반경~U(0.045,0.075) m</td>
+</tr>
+<tr>
+<td>기본</td>
+<td>밝기 1.0, 잡음 없음</td>
+</tr>
+<tr>
+<td>어두운 조명</td>
+<td>렌더링 후 RGB×0.38 + N(0,5²), [0,255] clip</td>
+</tr>
+<tr>
+<td>추가 장애물</td>
+<td>(-0.22,0.34), 반경 0.07 m 원통 추가</td>
+</tr>
+<tr>
+<td>목표 가림</td>
+<td>초기 RGB의 목표 투영점 주위 25×25 회색 패치. 3D 가림 물체는 아님</td>
+</tr>
+<tr>
+<td>보정 오차</td>
+<td>모든 픽셀→세계 X 변환에 +0.065 m 편향</td>
+</tr>
+</tbody>
+</table>
+<p>조건 내 같은 seed와 네 방법은 같은 장면/입력을 공유한다. 조건 간에도 seed를 재사용해 비교 가능하게 했다. 이미지 잡음 seed는 scene seed+100000이다. 조명·잡음은 테스트 스트레스이며 학습 증강의 효과를 평가한 것이 아니다. 데이터 정제는 작은 영역 제거·형태학 처리와 기록 무결성 검사에 해당한다. 실패 기록도 남기며 학습 데이터 품질을 검증했다고 주장하지 않는다.</p>
+<h2>해석 시 유의점</h2>
+<ul>
+<li>학습·사전학습 가중치·공개 데이터셋 사용 없음. 결과는 규칙 기반 인식과 기하 계획의 비교다.</li>
+<li>위치 인식 평균 오차는 검출된 장면만 포함한다. 미검출이 많은 기준 방법과 숫자만 비교하면 왜곡된다.</li>
+<li>최종 오차는 정지한 실패 장면까지 포함한다. 성공 장면만의 정밀도와 다르다.</li>
+<li>처리 시간은 perf_counter 1회/실행. 인식·계획만 포함하고 렌더링·파일 I/O·실행은 제외한다. 계획 미실행은 0 ms로 기록된다. 비전용 CPU에서 조건별 순차 실행했으므로 하드웨어 벤치마크나 엄격한 속도 비교로 쓰지 않는다.</li>
+<li>Wilson 95% 구간은 에피소드의 이항 근사이며 같은 seed를 재사용한 조건 간 상관을 보정하지 않는다. 실물 성능의 추론 구간이 아니다.</li>
+<li>A*의 목표 차단/no_path는 이 격자·보수적 추정·여유 거리에서 못 찾았다는 뜻이다. 연속 공간에서 경로가 없다는 증명은 아니다.</li>
+<li>카메라 보정에 잘못된 확신이 있으면 계획기까지 같은 방향으로 틀릴 수 있다. 12 mm 여유로 65 mm 보정 오류를 흡수할 수 없다. 따라서 개선 방법도 충돌한다.</li>
+</ul>
+<hr />
+<h2>실제 실행 결과</h2>
+<p>환경: CPython 3.11.18, Linux x86_64, NumPy 2.2.6, OpenCV 4.11.0.86, PyBullet 3.2.7, CPU DIRECT/TinyRenderer. GPU 미사용. 평가 400회 벽시계 시간 230.7초. 실행일 2026-11-17 KST.</p>
+<table>
+<thead>
+<tr>
+<th>방법</th>
+<th style="text-align: right;">성공 / 전체</th>
+<th style="text-align: right;">성공률</th>
+<th style="text-align: right;">검출 수</th>
+<th style="text-align: right;">인식 오차 평균</th>
+<th style="text-align: right;">인식 중앙값</th>
+<th style="text-align: right;">계획 중앙값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RGB + 직접 접근</td>
+<td style="text-align: right;">2/100</td>
+<td style="text-align: right;">2%</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">26.08 mm</td>
+<td style="text-align: right;">0.64 ms</td>
+<td style="text-align: right;">0.17 ms</td>
+</tr>
+<tr>
+<td>HSV + 직접 접근</td>
+<td style="text-align: right;">3/100</td>
+<td style="text-align: right;">3%</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">20.75 mm</td>
+<td style="text-align: right;">2.09 ms</td>
+<td style="text-align: right;">0.21 ms</td>
+</tr>
+<tr>
+<td>RGB + A*</td>
+<td style="text-align: right;">39/100</td>
+<td style="text-align: right;">39%</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">26.08 mm</td>
+<td style="text-align: right;">0.73 ms</td>
+<td style="text-align: right;">80.49 ms</td>
+</tr>
+<tr>
+<td>HSV + A*</td>
+<td style="text-align: right;">59/100</td>
+<td style="text-align: right;">59%</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">20.75 mm</td>
+<td style="text-align: right;">1.79 ms</td>
+<td style="text-align: right;">92.29 ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th style="text-align: right;">기준 성공</th>
+<th style="text-align: right;">개선 성공</th>
+<th style="text-align: right;">개선 인식 오차</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기본 조명</td>
+<td style="text-align: right;">1/20</td>
+<td style="text-align: right;">20/20</td>
+<td style="text-align: right;">6.12 mm</td>
+</tr>
+<tr>
+<td>어두운 조명</td>
+<td style="text-align: right;">0/20</td>
+<td style="text-align: right;">20/20</td>
+<td style="text-align: right;">6.12 mm</td>
+</tr>
+<tr>
+<td>추가 장애물</td>
+<td style="text-align: right;">1/20</td>
+<td style="text-align: right;">19/20</td>
+<td style="text-align: right;">6.12 mm</td>
+</tr>
+<tr>
+<td>목표 가림</td>
+<td style="text-align: right;">0/20</td>
+<td style="text-align: right;">0/20</td>
+<td style="text-align: right;">검출 없음</td>
+</tr>
+<tr>
+<td>보정 오차 +65 mm</td>
+<td style="text-align: right;">0/20</td>
+<td style="text-align: right;">0/20</td>
+<td style="text-align: right;">64.66 mm</td>
+</tr>
+</tbody>
+</table>
+<p>기준 2% → 개선 59%는 이 조건 혼합의 관측값이다. 주된 개선은 경로 계획에 있다(RGB+A<em>:39%). HSV 인식만 바꾼 경우는 3%에 그쳤고, A</em>와 결합했을 때 어두운 조명에서 추가 20건을 성공했다. 모든 실패를 포함한 집계다. 59%를 일반 로봇 성공률이나 회사 벤치마크와 비교하지 않는다.</p>
+<p>개선 방법의 실패는 목표 미검출 20건, 목표 자세 차단 1건, 충돌 17건, 최종 위치 오차 초과 3건이었다. 충돌 17건과 위치 오차 3건은 모두 보정 오차 조건에서 발생했다.</p>
+<p>전체 개선 성공률 Wilson 95% 구간: 49.2%–68.1%. 계획 P95 422.22 ms. 기본 조명 계획 P95 1445.58 ms로, 평균적인 실시간 동작을 보장하지 않는다.</p>
+<h3>기록으로 추적하는 사례</h3>
+<ul>
+<li><code>nominal-1000-improved</code>: reached, 최종 오차 5.00 mm. <code>dist/data/nominal-1000-improved.json</code>에서 입력·추정·관절·판정을 확인한다.</li>
+<li><code>clutter-1001-improved</code>: goal_blocked, 최종 오차 543.33 mm. <code>dist/data/clutter-1001-improved.json</code>에서 입력·추정·관절·판정을 확인한다.</li>
+<li><code>occluded-1000-improved</code>: target_missing, 최종 오차 681.74 mm. <code>dist/data/occluded-1000-improved.json</code>에서 입력·추정·관절·판정을 확인한다.</li>
+<li><code>calibration-1000-improved</code>: collision, 최종 오차 403.16 mm. <code>dist/data/calibration-1000-improved.json</code>에서 입력·추정·관절·판정을 확인한다.</li>
+<li><code>calibration-1002-improved</code>: position_error, 최종 오차 65.15 mm. <code>dist/data/calibration-1002-improved.json</code>에서 입력·추정·관절·판정을 확인한다.</li>
+</ul>
+<h3>검증 결과</h3>
+<ul>
+<li>Python 테스트 11개: FK/IK, 카메라 왕복, 픽셀 검출, 경로 중간 충돌, Bullet 기하 일치, 집계 수식, 재현성, 전수 기록, 새 계산 HTTP API 및 잘못된 입력 거부.</li>
+<li>400개 실행 기록·100개 RGB 입력 무결성 및 집계 재계산 통과. 제외 기록 0개.</li>
+<li>DOM 검사: 다섯 조건·seed·두 방법 수치·시간 슬라이더·재생/초기화·탭·오버레이·다운로드 연결 통과.</li>
+<li>실제 브라우저 렌더링, 화면 크기별 육안 확인, 키보드/스크린리더 수동 검증, 외부 사용자 사용성 테스트는 미실시. 관리 환경의 지원 브라우저 제어 도구 <code>cua_repl.js</code>가 없어서 브라우저 QA를 수행할 수 없었다. DOM 테스트를 브라우저 테스트로 간주하지 않는다.</li>
+</ul>
+<h3>배포·소스 범위</h3>
+<p>정적 배포판은 실제로 생성한 이미지와 궤적을 선택·비교·재생한다. 실시간 PyBullet 계산이나 임의 좌표 실행은 로컬 Python 서버에서 수행한다. Sites 배포는 소유자 전용이다. 소스와 실험 기록은 공개 GitHub 저장소 https://github.com/sokldjs554/reachbench 에서 제공한다. 외부 면접관에게 링크를 전달하기 전에 접근 설정을 확인하거나 ZIP의 dist 디렉터리를 별도 정적 호스팅에 배포한다.</p>
+<hr />
+<h1>직접 수행할 일과 면접 안내</h1>
+<h2>기여 구분</h2>
+<p><strong>Codex가 수행:</strong> 공고·공식 기술·도구 조사, 주제 선택, 실험 설계, Python 시뮬레이터·인식·경로 계획·평가·데모 구현, 자동 테스트, 결과 기록, 문서 작성과 배포 작업.</p>
+<p><strong>사용자가 제공:</strong> 지원할 공고, 기존 프로젝트의 성격, 보완하고 싶은 역량과 요구사항. 실제 개발·재실행·설계 변경·실물 실험을 수행했다는 증거는 아직 없다.</p>
+<p>본인이 이해하거나 바꾼 부분이 생기면 아래 수행 기록을 직접 채울 것. 현재 저장소를 그대로 본인의 독자 개발 성과로 작성하지 않는다.</p>
+<h2>직접 재현할 순서</h2>
+<ol>
+<li>README 명령으로 환경 설치 후 pytest와 평가를 재실행한다. 결과 파일을 별도 디렉터리에 보관한다.</li>
+<li>데모에서 기본·어두운 조명·가림·보정 오차를 비교하고 같은 seed의 두 방법을 설명한다.</li>
+<li><code>pixel_to_world</code>, <code>ik</code>, <code>edge</code>, <code>plan</code>, <code>rollout</code>을 읽는다. 카메라 높이를 알면 왜 픽셀에서 평면 위치를 계산할 수 있는지 식을 유도한다.</li>
+<li>개선 방법의 no_path/goal_blocked 사례에서 오차, 안전 여유, 격자 간격의 영향을 살핀다. no_path는 실제 경로가 존재하지 않는다는 증명이 아니다.</li>
+<li>본인 변경 실험으로 안전 여유를 6/12/24 mm, 이미지 크기를 160/320/640으로 비교한다. 원 평가 seed로 조정한 뒤에는 새로운 seed 범위를 따로 평가한다.</li>
+<li>변경 diff, 설계 이유, 성공·실패 수, 시간 분포, 예상과 달랐던 점을 직접 기록한다. 그때부터 해당 변경만 자신의 기여로 설명한다.</li>
+</ol>
+<h2>90초 설명 골격</h2>
+<p>“이미지 분석 결과가 실제 움직임의 실패로 어떻게 이어지는지 확인하기 위해, AI 도구와 함께 카메라 기반 로봇팔 접근 시뮬레이션을 만들었습니다. 첫 RGB 이미지에서 색상 영역을 분리하고 카메라 보정값으로 평면 좌표를 추정한 다음, 역기구학과 A*로 관절 경로를 생성합니다. 시뮬레이터 정답은 평가에만 쓰며, 인식과 계획의 기여를 네 가지 조합으로 분리했습니다. 어두운 조명에서는 HSV가 검출 누락을 줄이지만, 가림과 보정 오차는 해결하지 못합니다. 현재는 기구학 접근 작업이고 실제 로봇·학습 모델·보행 제어는 검증하지 않았습니다. 제가 직접 검증·수정한 부분은 [직접 수행 후 사실만 기입]입니다.”</p>
+<h2>예상 질문</h2>
+<ul>
+<li><strong>왜 학습 모델이 없나?</strong> 작은 색상 고정 작업에서 인식→동작→평가 연결을 먼저 검증했다. 일반화를 주장할 수 없으며 실제 장면에는 학습 기반 검출·추적과 별도 데이터 검증이 필요하다.</li>
+<li><strong>정답을 몰래 쓰지 않았나?</strong> perceive는 RGB와 보정값만 받는다. plan은 추정 목표·장애물과 알려진 로봇 기구학만 받는다. 실제 목표·Bullet 객체는 마지막 평가에서 쓴다. 단, 카메라와 물체 높이를 알고 있다는 강한 가정은 공개한다.</li>
+<li><strong>이것이 로봇 제어인가?</strong> 관절 궤적 생성 및 기구학 실행 검증이다. 모터 토크 제어, 관절 추종 오차, 동역학 안정성은 다루지 않았다. 이를 실물 제어 성능이라고 부르면 안 된다.</li>
+<li><strong>왜 성공률이 낮은 조건을 넣었나?</strong> 가림·보정 실패를 의도적으로 포함했다. 전체 비율은 설계된 조건 혼합에 대한 것이며 현장 분포를 대표하지 않는다.</li>
+<li><strong>단순 RGB 기준 방법이 약하지 않나?</strong> 맞다. 현업 SOTA 비교가 아니라 인식과 계획의 인과를 구분하기 위한 교육적 기준이다. HSV+직접 접근, RGB+A* 절제 실험을 함께 제공한다.</li>
+<li><strong>안전한가?</strong> 실제 장비 안전 시스템이 아니다. 제한된 정적 장면의 이산 충돌 검사와 경로 여유 거리만 확인했다.</li>
+<li><strong>학습 데이터를 만들었나?</strong> 합성 이미지·정답·조건·관절 궤적을 수집하고 무결성을 점검했다. 정책 학습에 투입하거나 학습 증강의 효과를 측정하지 않았다.</li>
+</ul>
+<h2>장비·연산 확장</h2>
+<ul>
+<li>CPU만으로: 핸드아이/카메라 보정 오차 추정, 동적 장애물·재관측, 다른 색상·배경, 연속 충돌 검사, ROS2 메시지·rosbag 연계, MuJoCo/PyBullet 실제 모터 제어기.</li>
+<li>카메라와 저가 로봇팔: 좌표계 검증, 관절 한계·엔코더·모터 지연, 실제 조명·색상 변화, 물리 비상정지 및 운영 절차, sim-to-real 오차 분해.</li>
+<li>GPU/학습 데이터: 범용 검출·포즈 추정, 시연 데이터 정책 학습과 held-out 평가, 데이터 증강 전후 비교. 단순히 모델을 붙였다는 사실보다 실패 분포가 어떻게 바뀌는지 측정할 것.</li>
+<li>휴머노이드 플랫폼: 3D 자세·접촉·균형과 Whole-body Control, 보행을 별도 실험으로 검증. 이 프로젝트의 성공률을 이전하지 않는다.</li>
+</ul>
+<h2>본인 수행 기록 (미작성)</h2>
+<table>
+<thead>
+<tr>
+<th>날짜</th>
+<th>직접 실행/변경</th>
+<th>근거 커밋·명령</th>
+<th>관찰 결과</th>
+<th>설명 가능한 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>직접 작성</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>출처와 라이선스</h1>
+<p>외부 데이터셋·사전학습 가중치·CAD/URDF·텍스처·사진·폰트 파일을 내려받아 사용하지 않았다. 모든 실험 장면은 코드의 기본 도형으로 생성했다. RGB 이미지·정답 좌표·궤적은 이 시뮬레이션의 합성 데이터다. 생성 코드·문서·생성 데이터는 이 저장소의 MIT 라이선스로 제공한다. 회사와 도구의 명칭·상표 권리는 각 소유자에게 있다.</p>
+<table>
+<thead>
+<tr>
+<th>의존성</th>
+<th>고정 버전</th>
+<th>라이선스 / 원문</th>
+<th>사용 범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPython</td>
+<td>실행 3.11.18</td>
+<td><a href="https://docs.python.org/3/license.html">PSF</a></td>
+<td>실행 환경</td>
+</tr>
+<tr>
+<td>PyBullet</td>
+<td>3.2.7</td>
+<td><a href="https://github.com/bulletphysics/bullet3/blob/master/LICENSE.txt">zlib; 일부 번들 예제/서드파티 예외</a></td>
+<td>DIRECT, TinyRenderer, 도형·관절·충돌 쿼리. pybullet_data 자산 미사용</td>
+</tr>
+<tr>
+<td>OpenCV</td>
+<td>4.11.0.86 wheel</td>
+<td><a href="https://github.com/opencv/opencv/blob/4.11.0/LICENSE">Apache-2.0</a>; wheel의 서드파티 고지 별도</td>
+<td>HSV, morphology, contours, PNG 입출력</td>
+</tr>
+<tr>
+<td>NumPy</td>
+<td>2.2.6</td>
+<td><a href="https://github.com/numpy/numpy/blob/v2.2.6/LICENSE.txt">BSD-3-Clause</a></td>
+<td>수치 연산·난수</td>
+</tr>
+<tr>
+<td>pytest</td>
+<td>8.3.5</td>
+<td><a href="https://github.com/pytest-dev/pytest/blob/8.3.5/LICENSE">MIT</a></td>
+<td>Python 검증</td>
+</tr>
+<tr>
+<td>jsdom</td>
+<td>26.0.0</td>
+<td><a href="https://github.com/jsdom/jsdom/blob/26.0.0/LICENSE.txt">MIT</a></td>
+<td>개발 시 DOM 동작 검사; 데모 런타임 미포함</td>
+</tr>
+</tbody>
+</table>
+<p>라이브러리 바이너리·node_modules는 배포 소스 ZIP에 넣지 않았다. 설치 시 각 패키지의 라이선스와 배포 조건이 적용된다. 웹 런타임은 표준 HTML/CSS/JS이며 CDN·외부 글꼴·분석 추적기를 사용하지 않는다.</p>
+<p>공고·회사·디자인 참고 페이지는 docs/RESEARCH.md에 링크하고 필요한 사실만 요약했다. 원문 페이지와 제품 이미지를 재배포하지 않았다.</p></article></body></html>
