@@ -1,1 +1,17 @@
-{"name":"reachbench","version":"2.0.0","private":true,"description":"Recorded CPU robotics experiment viewer","scripts":{"check":"node --check dist/app.js","test:ui":"node tests/test_ui.cjs"},"devDependencies":{"jsdom":"26.0.0"}}
+{
+  "name": "reachbench",
+  "version": "3.0.0",
+  "private": true,
+  "description": "RGB-D Panda manipulation, live MuJoCo physics and measured failure recovery",
+  "scripts": {
+    "check": "node --check dist/studio.mjs && node --check dist/studio-engine.mjs && node --check dist/studio-core.mjs",
+    "test:ui": "node --test tests/test_studio.mjs && node tests/test_ui.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.0.0"
+  },
+  "dependencies": {
+    "@mujoco/mujoco": "4.0.1",
+    "three": "0.180.0"
+  }
+}

@@ -1,0 +1,177 @@
+[
+  {
+    "condition": "normal",
+    "method": "one_shot",
+    "n": 20,
+    "successes": 20,
+    "success_rate": 1.0,
+    "placement_error_mm": 3.9578049730389657,
+    "perception_error_mm": 2.4549893066081445,
+    "collisions": 0,
+    "wall_ms": 2243.653982249816,
+    "sensing_ms": 456.0734364506061,
+    "planning_ms": 23.2458544021938,
+    "observations": 1.0,
+    "retries": 0,
+    "failures": {}
+  },
+  {
+    "condition": "normal",
+    "method": "feedback",
+    "n": 20,
+    "successes": 20,
+    "success_rate": 1.0,
+    "placement_error_mm": 3.9076910612445714,
+    "perception_error_mm": 2.753763774098756,
+    "collisions": 0,
+    "wall_ms": 2472.43304035037,
+    "sensing_ms": 603.8868915005878,
+    "planning_ms": 24.790075098280795,
+    "observations": 2.0,
+    "retries": 0,
+    "failures": {}
+  },
+  {
+    "condition": "occluded",
+    "method": "one_shot",
+    "n": 20,
+    "successes": 0,
+    "success_rate": 0.0,
+    "placement_error_mm": 258.2099969156384,
+    "perception_error_mm": null,
+    "collisions": 0,
+    "wall_ms": 443.25866059953114,
+    "sensing_ms": 442.3170503006986,
+    "planning_ms": 0.0,
+    "observations": 1.0,
+    "retries": 0,
+    "failures": {
+      "target_missing": 20
+    }
+  },
+  {
+    "condition": "occluded",
+    "method": "feedback",
+    "n": 20,
+    "successes": 20,
+    "success_rate": 1.0,
+    "placement_error_mm": 3.8485671444507368,
+    "perception_error_mm": 5.891134934203108,
+    "collisions": 0,
+    "wall_ms": 2560.1847355505015,
+    "sensing_ms": 706.0530487000506,
+    "planning_ms": 27.39639969622658,
+    "observations": 3.0,
+    "retries": 0,
+    "failures": {}
+  },
+  {
+    "condition": "shifted",
+    "method": "one_shot",
+    "n": 20,
+    "successes": 0,
+    "success_rate": 0.0,
+    "placement_error_mm": 107.78666260581399,
+    "perception_error_mm": 2.4549893066081445,
+    "collisions": 0,
+    "wall_ms": 1106.8890707996616,
+    "sensing_ms": 418.135777498901,
+    "planning_ms": 12.456858653968084,
+    "observations": 1.0,
+    "retries": 0,
+    "failures": {
+      "empty_grasp": 20
+    }
+  },
+  {
+    "condition": "shifted",
+    "method": "feedback",
+    "n": 20,
+    "successes": 20,
+    "success_rate": 1.0,
+    "placement_error_mm": 2.782443670694448,
+    "perception_error_mm": 2.9919475675529092,
+    "collisions": 0,
+    "wall_ms": 2379.0531289985665,
+    "sensing_ms": 562.774025050021,
+    "planning_ms": 24.088924449461047,
+    "observations": 2.1,
+    "retries": 1,
+    "failures": {}
+  },
+  {
+    "condition": "unreachable",
+    "method": "one_shot",
+    "n": 20,
+    "successes": 0,
+    "success_rate": 0.0,
+    "placement_error_mm": 535.9045671364959,
+    "perception_error_mm": null,
+    "collisions": 0,
+    "wall_ms": 386.048293299973,
+    "sensing_ms": 385.342254599891,
+    "planning_ms": 0.0,
+    "observations": 1.0,
+    "retries": 0,
+    "failures": {
+      "target_missing": 20
+    }
+  },
+  {
+    "condition": "unreachable",
+    "method": "feedback",
+    "n": 20,
+    "successes": 0,
+    "success_rate": 0.0,
+    "placement_error_mm": 535.9045671364959,
+    "perception_error_mm": 16.74293122827803,
+    "collisions": 0,
+    "wall_ms": 523.1256531504187,
+    "sensing_ms": 521.4673597503861,
+    "planning_ms": 0.0,
+    "observations": 2.0,
+    "retries": 0,
+    "failures": {
+      "outside_workspace": 18,
+      "target_missing": 2
+    }
+  },
+  {
+    "condition": "all",
+    "method": "one_shot",
+    "n": 80,
+    "successes": 20,
+    "success_rate": 0.25,
+    "placement_error_mm": 226.4647579077468,
+    "perception_error_mm": 2.4549893066081445,
+    "collisions": 0,
+    "wall_ms": 1044.9625017372455,
+    "sensing_ms": 425.4671297125242,
+    "planning_ms": 8.92567826404047,
+    "observations": 1.0,
+    "retries": 0,
+    "failures": {
+      "empty_grasp": 20,
+      "target_missing": 40
+    }
+  },
+  {
+    "condition": "all",
+    "method": "feedback",
+    "n": 80,
+    "successes": 60,
+    "success_rate": 0.75,
+    "placement_error_mm": 136.61081725322137,
+    "perception_error_mm": 6.847560097770515,
+    "collisions": 0,
+    "wall_ms": 1983.6991395124642,
+    "sensing_ms": 598.5453312502614,
+    "planning_ms": 19.068849810992106,
+    "observations": 2.275,
+    "retries": 1,
+    "failures": {
+      "outside_workspace": 18,
+      "target_missing": 2
+    }
+  }
+]

@@ -1,7 +1,7 @@
 // DOM/data integration; browser_qa.py tests actual rendering and playback.
 const {JSDOM}=require('jsdom');
 const fs=require('fs'),path=require('path'),assert=require('assert');
-const root=path.resolve('dist'),dom=new JSDOM(fs.readFileSync(root+'/index.html','utf8'),{runScripts:'outside-only',url:'https://example.test/'}),w=dom.window;
+const root=path.resolve('dist'),dom=new JSDOM(fs.readFileSync(root+'/legacy/index.html','utf8'),{runScripts:'outside-only',url:'https://example.test/'}),w=dom.window;
 w.requestAnimationFrame=()=>{};w.scrollTo=()=>{};
 w.Image=class {set src(v){assert(fs.existsSync(path.join(root,v.split('?')[0])));queueMicrotask(()=>this.onload());}};
 w.fetch=async url=>url.startsWith('/api')?{ok:false,json:async()=>({})}:{ok:true,json:async()=>JSON.parse(fs.readFileSync(path.join(root,url.split('?')[0]),'utf8'))};

@@ -1,0 +1,54 @@
+{
+  "split": "eval",
+  "seeds": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119
+  ],
+  "conditions": [
+    "normal",
+    "occluded",
+    "shifted",
+    "unreachable"
+  ],
+  "methods": [
+    "one_shot",
+    "feedback"
+  ],
+  "trials": 160,
+  "model": "Franka Emika Panda / MuJoCo Menagerie",
+  "mujoco": "4.0.1",
+  "python": "3.11.18",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "workers": 3,
+  "total_wall_s": 87.39578031300334,
+  "timing_note": "Per episode time includes cold RGB-D renderer creation and physics/control; parallel workers contend for CPU. Not robot hardware latency.",
+  "training": "none; fixed color segmentation, RGB-D geometry, analytic IK, task state machine",
+  "success": "Released cube inside tray XY \u00b165/60 mm, Z in (370,420) mm; fingers open >65 mm; no robot/occluder contact",
+  "source_hashes": {
+    "evaluate.py": "a3164300adee7d2d3acb76c733bdac4149cf57f2518075fa1ef593bcb26d7399",
+    "world.py": "eb010cac2d6837ad2420be8919d904cb57f4ff2da24804ef0d30151236d1a01a",
+    "__init__.py": "acfcec89bcc2c7e4c44f19eb5cf0460335ae94c85e5f3cea8e932ad8c8a0a576",
+    "controller.py": "f359eb2fc5f91707400f67b64b87e5bc96511fec7dac665801abccf4303516c1",
+    "perception.py": "68f5c6911aaae0e6cbac4ef2ebe3767883caf147928aaa395484b33f088bd8f4",
+    "build_model.py": "4b2f989a92468254662cc5c0f40dba44e3a6b7d1dc2e3716c4a377eed7119e5c"
+  },
+  "model_sha256": "b57084e77925109a43d80a18b244d1147472fc442db43aada2ad8c92a1e31f96"
+}

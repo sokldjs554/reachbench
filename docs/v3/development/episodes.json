@@ -1,0 +1,4362 @@
+[
+  {
+    "id": "normal-10-one_shot",
+    "seed": 10,
+    "condition": "normal",
+    "method": "one_shot",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.47759435491636393,
+      -0.03906022627837956,
+      0.383
+    ],
+    "final_target": [
+      0.48362517022252005,
+      0.23764642657158735,
+      0.39387444293703266
+    ],
+    "final_gripper_width_m": 0.07999999925265361,
+    "placement_error_mm": 4.322171563598119,
+    "lift_height_m": 0.2826183955549344,
+    "perception_error_mm": 3.5641447500739485,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.200000000000243,
+    "wall_ms": 1916.0782959952485,
+    "sensing_ms": 621.0529239979223,
+    "planning_ms": 17.72120999521576,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.47683484638391266,
+          -0.04254252295266845,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "descend"
+      },
+      {
+        "t": 2.9,
+        "phase": "close"
+      },
+      {
+        "t": 3.8,
+        "phase": "lift"
+      },
+      {
+        "t": 5.15,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386902176180337,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.15,
+        "phase": "transport"
+      },
+      {
+        "t": 6.8,
+        "phase": "place"
+      },
+      {
+        "t": 8.05,
+        "phase": "release"
+      },
+      {
+        "t": 8.65,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.2,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.47683484638391266,
+            -0.04254252295266845,
+            0.382
+          ],
+          "pixels": 140,
+          "bbox": [
+            106,
+            110,
+            115,
+            123
+          ]
+        },
+        "processing_ms": 621.0529239979223,
+        "truth": [
+          0.4775942980542009,
+          -0.03906023046639219,
+          0.3818744428843924
+        ],
+        "error_mm": 3.5641447500739485
+      }
+    ]
+  },
+  {
+    "id": "normal-10-feedback",
+    "seed": 10,
+    "condition": "normal",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.47759435491636393,
+      -0.03906022627837956,
+      0.383
+    ],
+    "final_target": [
+      0.48359263835983096,
+      0.23767174799175156,
+      0.39387444293703266
+    ],
+    "final_gripper_width_m": 0.07999999928770128,
+    "placement_error_mm": 4.281098900801275,
+    "lift_height_m": 0.28273889024906085,
+    "perception_error_mm": 3.233739756659953,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 2240.664826000284,
+    "sensing_ms": 602.3808069949155,
+    "planning_ms": 21.673953007848468,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.47683484638391266,
+          -0.04254252295266845,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386901738350388,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.47683484638391266,
+            -0.04254252295266845,
+            0.382
+          ],
+          "pixels": 140,
+          "bbox": [
+            106,
+            110,
+            115,
+            123
+          ]
+        },
+        "processing_ms": 462.60570699814707,
+        "truth": [
+          0.4775942980542009,
+          -0.03906023046639219,
+          0.3818744428843924
+        ],
+        "error_mm": 3.5641447500739485
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.4770934396988185,
+            -0.0362004239110613,
+            0.382
+          ],
+          "pixels": 107,
+          "bbox": [
+            108,
+            101,
+            116,
+            112
+          ]
+        },
+        "processing_ms": 139.7750999967684,
+        "truth": [
+          0.47759429827616084,
+          -0.03906023044874441,
+          0.3818744429370327
+        ],
+        "error_mm": 2.903334763245957
+      }
+    ]
+  },
+  {
+    "id": "occluded-10-one_shot",
+    "seed": 10,
+    "condition": "occluded",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.47759435491636393,
+      -0.03906022627837956,
+      0.383
+    ],
+    "final_target": [
+      0.4775942980542009,
+      -0.03906023046639219,
+      0.3818744428843924
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 279.0705997230951,
+    "lift_height_m": -0.00012555711560763294,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 572.6020090005477,
+    "sensing_ms": 572.4574299965752,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 572.4574299965752,
+        "truth": [
+          0.4775942980542009,
+          -0.03906023046639219,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "occluded-10-feedback",
+    "seed": 10,
+    "condition": "occluded",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.47759435491636393,
+      -0.03906022627837956,
+      0.383
+    ],
+    "final_target": [
+      0.4836231197611356,
+      0.23767523359830975,
+      0.39387444293703266
+    ],
+    "final_gripper_width_m": 0.0799999993011074,
+    "placement_error_mm": 4.304827014638235,
+    "lift_height_m": 0.2827314971568604,
+    "perception_error_mm": 2.906907091836014,
+    "observations": 3,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 2320.014386998082,
+    "sensing_ms": 695.6257990023005,
+    "planning_ms": 21.584077992883977,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.477081100634287,
+          -0.03619898297878375,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386901847048785,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 433.3653540015803,
+        "truth": [
+          0.4775942980542009,
+          -0.03906023046639219,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.477081100634287,
+            -0.03619898297878375,
+            0.382
+          ],
+          "pixels": 108,
+          "bbox": [
+            108,
+            101,
+            116,
+            112
+          ]
+        },
+        "processing_ms": 128.36207100190222,
+        "truth": [
+          0.4775942980542009,
+          -0.03906023046639219,
+          0.3818744428843924
+        ],
+        "error_mm": 2.9069070809284354
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.477081100634287,
+            -0.03619898297878375,
+            0.382
+          ],
+          "pixels": 108,
+          "bbox": [
+            108,
+            101,
+            116,
+            112
+          ]
+        },
+        "processing_ms": 133.898373998818,
+        "truth": [
+          0.47759429827616084,
+          -0.03906023044874441,
+          0.3818744429370327
+        ],
+        "error_mm": 2.9069071027435927
+      }
+    ]
+  },
+  {
+    "id": "shifted-10-one_shot",
+    "seed": 10,
+    "condition": "shifted",
+    "method": "one_shot",
+    "success": false,
+    "reason": "empty_grasp",
+    "initial_target": [
+      0.47759435491636393,
+      -0.03906022627837956,
+      0.383
+    ],
+    "final_target": [
+      0.4775942980541889,
+      0.12948414477227727,
+      0.3818744429370329
+    ],
+    "final_gripper_width_m": 5.528852843467582e-09,
+    "placement_error_mm": 110.54203570844463,
+    "lift_height_m": 0.01053387406709061,
+    "perception_error_mm": 3.5641447500739485,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 5.559999999999555,
+    "wall_ms": 932.626194000477,
+    "sensing_ms": 325.9134109976003,
+    "planning_ms": 8.243758988101035,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.47683484638391266,
+          -0.04254252295266845,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "descend"
+      },
+      {
+        "t": 3.31,
+        "phase": "close"
+      },
+      {
+        "t": 4.21,
+        "phase": "lift"
+      },
+      {
+        "t": 5.56,
+        "phase": "verify_grasp",
+        "gripper_width_m": 5.528852843467582e-09,
+        "grasp_detected": false
+      },
+      {
+        "t": 5.56,
+        "phase": "failure",
+        "reason": "empty_grasp"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.47683484638391266,
+            -0.04254252295266845,
+            0.382
+          ],
+          "pixels": 140,
+          "bbox": [
+            106,
+            110,
+            115,
+            123
+          ]
+        },
+        "processing_ms": 325.9134109976003,
+        "truth": [
+          0.4775942980542009,
+          -0.03906023046639219,
+          0.3818744428843924
+        ],
+        "error_mm": 3.5641447500739485
+      }
+    ]
+  },
+  {
+    "id": "shifted-10-feedback",
+    "seed": 10,
+    "condition": "shifted",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.47759435491636393,
+      -0.03906022627837956,
+      0.383
+    ],
+    "final_target": [
+      0.48178996718596206,
+      0.2378150070689125,
+      0.39387444293703266
+    ],
+    "final_gripper_width_m": 0.08000000204985169,
+    "placement_error_mm": 2.824566627949017,
+    "lift_height_m": 0.2761980712392541,
+    "perception_error_mm": 3.2183899936285436,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 11.36000000000063,
+    "wall_ms": 2249.0931840002304,
+    "sensing_ms": 633.890306999092,
+    "planning_ms": 19.400182995013893,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.47683484638391266,
+          -0.04254252295266845,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.71,
+        "phase": "descend"
+      },
+      {
+        "t": 4.06,
+        "phase": "close"
+      },
+      {
+        "t": 4.96,
+        "phase": "lift"
+      },
+      {
+        "t": 6.31,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386894532218925,
+        "grasp_detected": true
+      },
+      {
+        "t": 6.31,
+        "phase": "transport"
+      },
+      {
+        "t": 7.96,
+        "phase": "place"
+      },
+      {
+        "t": 9.21,
+        "phase": "release"
+      },
+      {
+        "t": 9.81,
+        "phase": "retreat"
+      },
+      {
+        "t": 11.36,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.47683484638391266,
+            -0.04254252295266845,
+            0.382
+          ],
+          "pixels": 140,
+          "bbox": [
+            106,
+            110,
+            115,
+            123
+          ]
+        },
+        "processing_ms": 414.1971260032733,
+        "truth": [
+          0.4775942980542009,
+          -0.03906023046639219,
+          0.3818744428843924
+        ],
+        "error_mm": 3.5641447500739485
+      },
+      {
+        "camera": "back",
+        "t": 1.96,
+        "estimate": {
+          "position": [
+            0.47826272294646316,
+            0.1322779303478359,
+            0.382
+          ],
+          "pixels": 124,
+          "bbox": [
+            108,
+            122,
+            117,
+            134
+          ]
+        },
+        "processing_ms": 219.6931809958187,
+        "truth": [
+          0.4775942980541889,
+          0.12948414414103795,
+          0.3818744429370329
+        ],
+        "error_mm": 2.8726352371831387
+      }
+    ]
+  },
+  {
+    "id": "unreachable-10-one_shot",
+    "seed": 10,
+    "condition": "unreachable",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.95,
+      -0.03906022627837956,
+      0.383
+    ],
+    "final_target": [
+      0.9500000079678665,
+      -0.03906020218299791,
+      0.021862920120952683
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 546.6027844168106,
+    "lift_height_m": -0.3601370798790473,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 437.23023000347894,
+    "sensing_ms": 437.1856520010624,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 437.1856520010624,
+        "truth": [
+          0.9500000079678665,
+          -0.03906020218299791,
+          0.021862920120952683
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "unreachable-10-feedback",
+    "seed": 10,
+    "condition": "unreachable",
+    "method": "feedback",
+    "success": false,
+    "reason": "outside_workspace",
+    "initial_target": [
+      0.95,
+      -0.03906022627837956,
+      0.383
+    ],
+    "final_target": [
+      0.9500000079678665,
+      -0.03906020218299791,
+      0.021862920120952683
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 546.6027844168106,
+    "lift_height_m": -0.3601370798790473,
+    "perception_error_mm": 17.11704115334313,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 512.6038920061546,
+    "sensing_ms": 512.4701899985666,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "outside_workspace"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 411.1739129948546,
+        "truth": [
+          0.9500000079678665,
+          -0.03906020218299791,
+          0.021862920120952683
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.9670966212994088,
+            -0.03989621081750781,
+            0.382
+          ],
+          "pixels": 22,
+          "bbox": [
+            26,
+            152,
+            29,
+            158
+          ]
+        },
+        "processing_ms": 101.29627700371202,
+        "truth": [
+          0.9500000079678665,
+          -0.03906020218299791,
+          0.021862920120952683
+        ],
+        "error_mm": 17.11704115334313
+      }
+    ]
+  },
+  {
+    "id": "normal-11-one_shot",
+    "seed": 11,
+    "condition": "normal",
+    "method": "one_shot",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.43829156558960675,
+      -0.035038831729907544,
+      0.383
+    ],
+    "final_target": [
+      0.4828636634647162,
+      0.23759446008121374,
+      0.3938744429370325
+    ],
+    "final_gripper_width_m": 0.07999999935502378,
+    "placement_error_mm": 3.73994528569934,
+    "lift_height_m": 0.28234166622236256,
+    "perception_error_mm": 1.9450443339321535,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.200000000000243,
+    "wall_ms": 1805.2778620040044,
+    "sensing_ms": 349.51624699897366,
+    "planning_ms": 17.534684004203882,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.4381749820181395,
+          -0.036980276878490946,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "descend"
+      },
+      {
+        "t": 2.9,
+        "phase": "close"
+      },
+      {
+        "t": 3.8,
+        "phase": "lift"
+      },
+      {
+        "t": 5.15,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386905189370301,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.15,
+        "phase": "transport"
+      },
+      {
+        "t": 6.8,
+        "phase": "place"
+      },
+      {
+        "t": 8.05,
+        "phase": "release"
+      },
+      {
+        "t": 8.65,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.2,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4381749820181395,
+            -0.036980276878490946,
+            0.382
+          ],
+          "pixels": 140,
+          "bbox": [
+            97,
+            109,
+            106,
+            122
+          ]
+        },
+        "processing_ms": 349.51624699897366,
+        "truth": [
+          0.4382916022090822,
+          -0.03503873182569767,
+          0.3818744428843924
+        ],
+        "error_mm": 1.9450443339321535
+      }
+    ]
+  },
+  {
+    "id": "normal-11-feedback",
+    "seed": 11,
+    "condition": "normal",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.43829156558960675,
+      -0.035038831729907544,
+      0.383
+    ],
+    "final_target": [
+      0.4832964477361413,
+      0.23756089949242978,
+      0.39387444293703283
+    ],
+    "final_gripper_width_m": 0.07999999929666854,
+    "placement_error_mm": 4.100704691042787,
+    "lift_height_m": 0.2819845770776458,
+    "perception_error_mm": 1.7908055017746172,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 1792.5969899952179,
+    "sensing_ms": 443.5938750029891,
+    "planning_ms": 18.371529004070908,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.4381749820181395,
+          -0.036980276878490946,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386904757904678,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4381749820181395,
+            -0.036980276878490946,
+            0.382
+          ],
+          "pixels": 140,
+          "bbox": [
+            97,
+            109,
+            106,
+            122
+          ]
+        },
+        "processing_ms": 329.1083630028879,
+        "truth": [
+          0.4382916022090822,
+          -0.03503873182569767,
+          0.3818744428843924
+        ],
+        "error_mm": 1.9450443339321535
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.43753509196176565,
+            -0.03358751088719585,
+            0.382
+          ],
+          "pixels": 113,
+          "bbox": [
+            116,
+            101,
+            124,
+            113
+          ]
+        },
+        "processing_ms": 114.48551200010115,
+        "truth": [
+          0.43829160213184903,
+          -0.03503873203735249,
+          0.3818744429370328
+        ],
+        "error_mm": 1.636566669617081
+      }
+    ]
+  },
+  {
+    "id": "occluded-11-one_shot",
+    "seed": 11,
+    "condition": "occluded",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.43829156558960675,
+      -0.035038831729907544,
+      0.383
+    ],
+    "final_target": [
+      0.4382916022090822,
+      -0.03503873182569767,
+      0.3818744428843924
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 278.18320303457125,
+    "lift_height_m": -0.00012555711560763294,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 403.22229899902595,
+    "sensing_ms": 403.16688600432826,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 403.16688600432826,
+        "truth": [
+          0.4382916022090822,
+          -0.03503873182569767,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "occluded-11-feedback",
+    "seed": 11,
+    "condition": "occluded",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.43829156558960675,
+      -0.035038831729907544,
+      0.383
+    ],
+    "final_target": [
+      0.4834640711859142,
+      0.23759828792284565,
+      0.39387444293703266
+    ],
+    "final_gripper_width_m": 0.0799999992895231,
+    "placement_error_mm": 4.2152117482553955,
+    "lift_height_m": 0.28195307463328667,
+    "perception_error_mm": 1.6839922191081609,
+    "observations": 3,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 2301.705102996493,
+    "sensing_ms": 670.5270410020603,
+    "planning_ms": 18.29515099962009,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.4373607005189295,
+          -0.033635431568386755,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386904803744626,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 374.1288840028574,
+        "truth": [
+          0.4382916022090822,
+          -0.03503873182569767,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4373607005189295,
+            -0.033635431568386755,
+            0.382
+          ],
+          "pixels": 116,
+          "bbox": [
+            116,
+            101,
+            124,
+            113
+          ]
+        },
+        "processing_ms": 123.68407000030857,
+        "truth": [
+          0.4382916022090822,
+          -0.03503873182569767,
+          0.3818744428843924
+        ],
+        "error_mm": 1.683992152267349
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.4373607005189295,
+            -0.033635431568386755,
+            0.382
+          ],
+          "pixels": 116,
+          "bbox": [
+            116,
+            101,
+            124,
+            113
+          ]
+        },
+        "processing_ms": 172.71408699889435,
+        "truth": [
+          0.43829160213184903,
+          -0.03503873203735249,
+          0.3818744429370328
+        ],
+        "error_mm": 1.6839922859489727
+      }
+    ]
+  },
+  {
+    "id": "shifted-11-one_shot",
+    "seed": 11,
+    "condition": "shifted",
+    "method": "one_shot",
+    "success": false,
+    "reason": "empty_grasp",
+    "initial_target": [
+      0.43829156558960675,
+      -0.035038831729907544,
+      0.383
+    ],
+    "final_target": [
+      0.4382916018840177,
+      0.13350564341261328,
+      0.3818744429370329
+    ],
+    "final_gripper_width_m": 1.1677075857267607e-09,
+    "placement_error_mm": 114.37061885975238,
+    "lift_height_m": 0.010533874067094495,
+    "perception_error_mm": 1.9450443339321535,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 5.559999999999555,
+    "wall_ms": 1068.4193479974056,
+    "sensing_ms": 396.42575399921043,
+    "planning_ms": 10.095981000631582,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.4381749820181395,
+          -0.036980276878490946,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "descend"
+      },
+      {
+        "t": 3.31,
+        "phase": "close"
+      },
+      {
+        "t": 4.21,
+        "phase": "lift"
+      },
+      {
+        "t": 5.56,
+        "phase": "verify_grasp",
+        "gripper_width_m": 1.1677075857267607e-09,
+        "grasp_detected": false
+      },
+      {
+        "t": 5.56,
+        "phase": "failure",
+        "reason": "empty_grasp"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4381749820181395,
+            -0.036980276878490946,
+            0.382
+          ],
+          "pixels": 140,
+          "bbox": [
+            97,
+            109,
+            106,
+            122
+          ]
+        },
+        "processing_ms": 396.42575399921043,
+        "truth": [
+          0.4382916022090822,
+          -0.03503873182569767,
+          0.3818744428843924
+        ],
+        "error_mm": 1.9450443339321535
+      }
+    ]
+  },
+  {
+    "id": "shifted-11-feedback",
+    "seed": 11,
+    "condition": "shifted",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.43829156558960675,
+      -0.035038831729907544,
+      0.383
+    ],
+    "final_target": [
+      0.48176186017503336,
+      0.2379014965441207,
+      0.39387444293703266
+    ],
+    "final_gripper_width_m": 0.08000000275946834,
+    "placement_error_mm": 2.740048910276227,
+    "lift_height_m": 0.277122167182295,
+    "perception_error_mm": 2.1251507761637503,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 11.36000000000063,
+    "wall_ms": 2020.6942959994194,
+    "sensing_ms": 461.02523500303505,
+    "planning_ms": 17.377964992192574,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.4381749820181395,
+          -0.036980276878490946,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.71,
+        "phase": "descend"
+      },
+      {
+        "t": 4.06,
+        "phase": "close"
+      },
+      {
+        "t": 4.96,
+        "phase": "lift"
+      },
+      {
+        "t": 6.31,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.043869047026902315,
+        "grasp_detected": true
+      },
+      {
+        "t": 6.31,
+        "phase": "transport"
+      },
+      {
+        "t": 7.96,
+        "phase": "place"
+      },
+      {
+        "t": 9.21,
+        "phase": "release"
+      },
+      {
+        "t": 9.81,
+        "phase": "retreat"
+      },
+      {
+        "t": 11.36,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4381749820181395,
+            -0.036980276878490946,
+            0.382
+          ],
+          "pixels": 140,
+          "bbox": [
+            97,
+            109,
+            106,
+            122
+          ]
+        },
+        "processing_ms": 302.0959749992471,
+        "truth": [
+          0.4382916022090822,
+          -0.03503873182569767,
+          0.3818744428843924
+        ],
+        "error_mm": 1.9450443339321535
+      },
+      {
+        "camera": "back",
+        "t": 1.96,
+        "estimate": {
+          "position": [
+            0.4382298703209967,
+            0.13581007330913156,
+            0.382
+          ],
+          "pixels": 118,
+          "bbox": [
+            117,
+            123,
+            126,
+            134
+          ]
+        },
+        "processing_ms": 158.92926000378793,
+        "truth": [
+          0.4382916018840177,
+          0.13350564278141092,
+          0.3818744429370329
+        ],
+        "error_mm": 2.3052572183953473
+      }
+    ]
+  },
+  {
+    "id": "unreachable-11-one_shot",
+    "seed": 11,
+    "condition": "unreachable",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.95,
+      -0.035038831729907544,
+      0.383
+    ],
+    "final_target": [
+      0.9500000079678665,
+      -0.035038807634525895,
+      0.021862920120952683
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 544.5606974386018,
+    "lift_height_m": -0.3601370798790473,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 360.0092280030367,
+    "sensing_ms": 359.9575199987157,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 359.9575199987157,
+        "truth": [
+          0.9500000079678665,
+          -0.035038807634525895,
+          0.021862920120952683
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "unreachable-11-feedback",
+    "seed": 11,
+    "condition": "unreachable",
+    "method": "feedback",
+    "success": false,
+    "reason": "outside_workspace",
+    "initial_target": [
+      0.95,
+      -0.035038831729907544,
+      0.383
+    ],
+    "final_target": [
+      0.9500000079678665,
+      -0.035038807634525895,
+      0.021862920120952683
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 544.5606974386018,
+    "lift_height_m": -0.3601370798790473,
+    "perception_error_mm": 17.33192137572423,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 525.2789229998598,
+    "sensing_ms": 525.152360998618,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "outside_workspace"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 409.54145199793857,
+        "truth": [
+          0.9500000079678665,
+          -0.035038807634525895,
+          0.021862920120952683
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.967096565672547,
+            -0.03788542197876337,
+            0.382
+          ],
+          "pixels": 22,
+          "bbox": [
+            26,
+            152,
+            29,
+            158
+          ]
+        },
+        "processing_ms": 115.61090900067938,
+        "truth": [
+          0.9500000079678665,
+          -0.035038807634525895,
+          0.021862920120952683
+        ],
+        "error_mm": 17.33192137572423
+      }
+    ]
+  },
+  {
+    "id": "normal-12-one_shot",
+    "seed": 12,
+    "condition": "normal",
+    "method": "one_shot",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.4789887762628496,
+      -0.031017437181435525,
+      0.383
+    ],
+    "final_target": [
+      0.48211860523783856,
+      0.23770030747394122,
+      0.3938744429370326
+    ],
+    "final_gripper_width_m": 0.07999999930314597,
+    "placement_error_mm": 3.126831282338021,
+    "lift_height_m": 0.28284430376674086,
+    "perception_error_mm": 3.8429089989510206,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.200000000000243,
+    "wall_ms": 1926.8171259973315,
+    "sensing_ms": 382.48746799945366,
+    "planning_ms": 16.33237300120527,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.48053450566565725,
+          -0.03453566745516399,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "descend"
+      },
+      {
+        "t": 2.9,
+        "phase": "close"
+      },
+      {
+        "t": 3.8,
+        "phase": "lift"
+      },
+      {
+        "t": 5.15,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386901461111485,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.15,
+        "phase": "transport"
+      },
+      {
+        "t": 6.8,
+        "phase": "place"
+      },
+      {
+        "t": 8.05,
+        "phase": "release"
+      },
+      {
+        "t": 8.65,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.2,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.48053450566565725,
+            -0.03453566745516399,
+            0.382
+          ],
+          "pixels": 141,
+          "bbox": [
+            106,
+            109,
+            116,
+            122
+          ]
+        },
+        "processing_ms": 382.48746799945366,
+        "truth": [
+          0.4789887748606286,
+          -0.03101733463227697,
+          0.3818744428843924
+        ],
+        "error_mm": 3.8429089989510206
+      }
+    ]
+  },
+  {
+    "id": "normal-12-feedback",
+    "seed": 12,
+    "condition": "normal",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.4789887762628496,
+      -0.031017437181435525,
+      0.383
+    ],
+    "final_target": [
+      0.4830577338987674,
+      0.2376532035315407,
+      0.3938744429370326
+    ],
+    "final_gripper_width_m": 0.07999999937024321,
+    "placement_error_mm": 3.854502595672268,
+    "lift_height_m": 0.28280318793170167,
+    "perception_error_mm": 3.481535594704047,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 2046.2838180028484,
+    "sensing_ms": 476.9534019942512,
+    "planning_ms": 17.51337299356237,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.48053450566565725,
+          -0.03453566745516399,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.0438690125261772,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.48053450566565725,
+            -0.03453566745516399,
+            0.382
+          ],
+          "pixels": 141,
+          "bbox": [
+            106,
+            109,
+            116,
+            122
+          ]
+        },
+        "processing_ms": 342.2655489994213,
+        "truth": [
+          0.4789887748606286,
+          -0.03101733463227697,
+          0.3818744428843924
+        ],
+        "error_mm": 3.8429089989510206
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.47924877285263,
+            -0.027908024138518103,
+            0.382
+          ],
+          "pixels": 99,
+          "bbox": [
+            108,
+            102,
+            116,
+            113
+          ]
+        },
+        "processing_ms": 134.68785299482988,
+        "truth": [
+          0.4789887748642646,
+          -0.031017334856475353,
+          0.3818744429370327
+        ],
+        "error_mm": 3.1201621904570733
+      }
+    ]
+  },
+  {
+    "id": "occluded-12-one_shot",
+    "seed": 12,
+    "condition": "occluded",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.4789887762628496,
+      -0.031017437181435525,
+      0.383
+    ],
+    "final_target": [
+      0.4789887748606286,
+      -0.03101733463227697,
+      0.3818744428843924
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 271.01922117714474,
+    "lift_height_m": -0.00012555711560763294,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 328.274200001033,
+    "sensing_ms": 328.20944300328847,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 328.20944300328847,
+        "truth": [
+          0.4789887748606286,
+          -0.03101733463227697,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "occluded-12-feedback",
+    "seed": 12,
+    "condition": "occluded",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.4789887762628496,
+      -0.031017437181435525,
+      0.383
+    ],
+    "final_target": [
+      0.48436514024018534,
+      0.2376475834280527,
+      0.39387444293703283
+    ],
+    "final_gripper_width_m": 0.0799999993886647,
+    "placement_error_mm": 4.958660408261263,
+    "lift_height_m": 0.28257605846126566,
+    "perception_error_mm": 3.4208844830931326,
+    "observations": 3,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 2126.7815600003814,
+    "sensing_ms": 615.9567270005937,
+    "planning_ms": 19.746175996260718,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.47737851926265845,
+          -0.02799913535566469,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.043869014222380834,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 367.74515399883967,
+        "truth": [
+          0.4789887748606286,
+          -0.03101733463227697,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.47737851926265845,
+            -0.02799913535566469,
+            0.382
+          ],
+          "pixels": 102,
+          "bbox": [
+            108,
+            102,
+            116,
+            113
+          ]
+        },
+        "processing_ms": 115.71070100035286,
+        "truth": [
+          0.4789887748606286,
+          -0.03101733463227697,
+          0.3818744428843924
+        ],
+        "error_mm": 3.4208843833337914
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.47737851926265845,
+            -0.02799913535566469,
+            0.382
+          ],
+          "pixels": 102,
+          "bbox": [
+            108,
+            102,
+            116,
+            113
+          ]
+        },
+        "processing_ms": 132.50087200140115,
+        "truth": [
+          0.4789887748642646,
+          -0.031017334856475353,
+          0.3818744429370327
+        ],
+        "error_mm": 3.420884582852474
+      }
+    ]
+  },
+  {
+    "id": "shifted-12-one_shot",
+    "seed": 12,
+    "condition": "shifted",
+    "method": "one_shot",
+    "success": false,
+    "reason": "empty_grasp",
+    "initial_target": [
+      0.4789887762628496,
+      -0.031017437181435525,
+      0.383
+    ],
+    "final_target": [
+      0.47898877485195507,
+      0.13726698836452833,
+      0.3818744429370328
+    ],
+    "final_gripper_width_m": 8.059816843019958e-09,
+    "placement_error_mm": 102.73798837817486,
+    "lift_height_m": 0.010533874067094107,
+    "perception_error_mm": 3.8429089989510206,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 5.559999999999555,
+    "wall_ms": 1027.6008080036263,
+    "sensing_ms": 352.736086002551,
+    "planning_ms": 12.840982992202044,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.48053450566565725,
+          -0.03453566745516399,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "descend"
+      },
+      {
+        "t": 3.31,
+        "phase": "close"
+      },
+      {
+        "t": 4.21,
+        "phase": "lift"
+      },
+      {
+        "t": 5.56,
+        "phase": "verify_grasp",
+        "gripper_width_m": 8.059816843019958e-09,
+        "grasp_detected": false
+      },
+      {
+        "t": 5.56,
+        "phase": "failure",
+        "reason": "empty_grasp"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.48053450566565725,
+            -0.03453566745516399,
+            0.382
+          ],
+          "pixels": 141,
+          "bbox": [
+            106,
+            109,
+            116,
+            122
+          ]
+        },
+        "processing_ms": 352.736086002551,
+        "truth": [
+          0.4789887748606286,
+          -0.03101733463227697,
+          0.3818744428843924
+        ],
+        "error_mm": 3.8429089989510206
+      }
+    ]
+  },
+  {
+    "id": "shifted-12-feedback",
+    "seed": 12,
+    "condition": "shifted",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.4789887762628496,
+      -0.031017437181435525,
+      0.383
+    ],
+    "final_target": [
+      0.4821902223878153,
+      0.23773789132505332,
+      0.39387444293703255
+    ],
+    "final_gripper_width_m": 0.08000000209545816,
+    "placement_error_mm": 3.148683814763927,
+    "lift_height_m": 0.272766910111502,
+    "perception_error_mm": 3.6913598466432243,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 11.36000000000063,
+    "wall_ms": 2156.3947970062145,
+    "sensing_ms": 526.2936170038301,
+    "planning_ms": 18.876832000387367,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.48053450566565725,
+          -0.03453566745516399,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.71,
+        "phase": "descend"
+      },
+      {
+        "t": 4.06,
+        "phase": "close"
+      },
+      {
+        "t": 4.96,
+        "phase": "lift"
+      },
+      {
+        "t": 6.31,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386902076220266,
+        "grasp_detected": true
+      },
+      {
+        "t": 6.31,
+        "phase": "transport"
+      },
+      {
+        "t": 7.96,
+        "phase": "place"
+      },
+      {
+        "t": 9.21,
+        "phase": "release"
+      },
+      {
+        "t": 9.81,
+        "phase": "retreat"
+      },
+      {
+        "t": 11.36,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.48053450566565725,
+            -0.03453566745516399,
+            0.382
+          ],
+          "pixels": 141,
+          "bbox": [
+            106,
+            109,
+            116,
+            122
+          ]
+        },
+        "processing_ms": 356.1553730032756,
+        "truth": [
+          0.4789887748606286,
+          -0.03101733463227697,
+          0.3818744428843924
+        ],
+        "error_mm": 3.8429089989510206
+      },
+      {
+        "camera": "back",
+        "t": 1.96,
+        "estimate": {
+          "position": [
+            0.47847790585568184,
+            0.1407697398833321,
+            0.382
+          ],
+          "pixels": 109,
+          "bbox": [
+            108,
+            124,
+            117,
+            134
+          ]
+        },
+        "processing_ms": 170.13824400055455,
+        "truth": [
+          0.47898877485195507,
+          0.13726698773389615,
+          0.3818744429370328
+        ],
+        "error_mm": 3.5398106943354275
+      }
+    ]
+  },
+  {
+    "id": "unreachable-12-one_shot",
+    "seed": 12,
+    "condition": "unreachable",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.95,
+      -0.031017437181435525,
+      0.383
+    ],
+    "final_target": [
+      0.9500000962619641,
+      -0.03101748529305608,
+      0.021862920120953998
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 542.5408443802434,
+    "lift_height_m": -0.36013707987904603,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 404.55240700248396,
+    "sensing_ms": 404.3786940019345,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 404.3786940019345,
+        "truth": [
+          0.9500000962619641,
+          -0.03101748529305608,
+          0.021862920120953998
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "unreachable-12-feedback",
+    "seed": 12,
+    "condition": "unreachable",
+    "method": "feedback",
+    "success": false,
+    "reason": "outside_workspace",
+    "initial_target": [
+      0.95,
+      -0.031017437181435525,
+      0.383
+    ],
+    "final_target": [
+      0.9500000962619641,
+      -0.03101748529305608,
+      0.021862920120953998
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 542.5408443802434,
+    "lift_height_m": -0.36013707987904603,
+    "perception_error_mm": 17.561491319171395,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 517.0797380051226,
+    "sensing_ms": 516.9597260101,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "outside_workspace"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 397.0737000054214,
+        "truth": [
+          0.9500000962619641,
+          -0.03101748529305608,
+          0.021862920120953998
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.9671678027995187,
+            -0.03471556987750474,
+            0.382
+          ],
+          "pixels": 19,
+          "bbox": [
+            26,
+            153,
+            29,
+            158
+          ]
+        },
+        "processing_ms": 119.88602600467857,
+        "truth": [
+          0.9500000962619641,
+          -0.03101748529305608,
+          0.021862920120953998
+        ],
+        "error_mm": 17.561491319171395
+      }
+    ]
+  },
+  {
+    "id": "normal-13-one_shot",
+    "seed": 13,
+    "condition": "normal",
+    "method": "one_shot",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.43968598693609234,
+      -0.02699604263296351,
+      0.383
+    ],
+    "final_target": [
+      0.48253454020508146,
+      0.2376396083905534,
+      0.39387444293703266
+    ],
+    "final_gripper_width_m": 0.07999999926275721,
+    "placement_error_mm": 3.463429312274232,
+    "lift_height_m": 0.2822815646098231,
+    "perception_error_mm": 2.010146236492852,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.200000000000243,
+    "wall_ms": 2053.86942000041,
+    "sensing_ms": 403.20843399968,
+    "planning_ms": 19.722700002603233,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.4401909313922159,
+          -0.02894163213863482,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "descend"
+      },
+      {
+        "t": 2.9,
+        "phase": "close"
+      },
+      {
+        "t": 3.8,
+        "phase": "lift"
+      },
+      {
+        "t": 5.15,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.043869040074276486,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.15,
+        "phase": "transport"
+      },
+      {
+        "t": 6.8,
+        "phase": "place"
+      },
+      {
+        "t": 8.05,
+        "phase": "release"
+      },
+      {
+        "t": 8.65,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.2,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4401909313922159,
+            -0.02894163213863482,
+            0.382
+          ],
+          "pixels": 149,
+          "bbox": [
+            97,
+            108,
+            107,
+            121
+          ]
+        },
+        "processing_ms": 403.20843399968,
+        "truth": [
+          0.43968598553387256,
+          -0.026995940083804893,
+          0.3818744428843924
+        ],
+        "error_mm": 2.010146236492852
+      }
+    ]
+  },
+  {
+    "id": "normal-13-feedback",
+    "seed": 13,
+    "condition": "normal",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.43968598693609234,
+      -0.02699604263296351,
+      0.383
+    ],
+    "final_target": [
+      0.48294800651831327,
+      0.23760916023783643,
+      0.3938744429370326
+    ],
+    "final_gripper_width_m": 0.07999999925039775,
+    "placement_error_mm": 3.795636600144951,
+    "lift_height_m": 0.2819641777161368,
+    "perception_error_mm": 1.860706555308966,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 2217.397376000008,
+    "sensing_ms": 545.3719250072027,
+    "planning_ms": 19.92690100451,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.4401909313922159,
+          -0.02894163213863482,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386903618591191,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4401909313922159,
+            -0.02894163213863482,
+            0.382
+          ],
+          "pixels": 149,
+          "bbox": [
+            97,
+            108,
+            107,
+            121
+          ]
+        },
+        "processing_ms": 405.9746830025688,
+        "truth": [
+          0.43968598553387256,
+          -0.026995940083804893,
+          0.3818744428843924
+        ],
+        "error_mm": 2.010146236492852
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.43964317093822747,
+            -0.025285209111631117,
+            0.382
+          ],
+          "pixels": 107,
+          "bbox": [
+            116,
+            102,
+            124,
+            114
+          ]
+        },
+        "processing_ms": 139.39724200463388,
+        "truth": [
+          0.43968598553679317,
+          -0.02699594030753171,
+          0.38187444293703265
+        ],
+        "error_mm": 1.7112668741250794
+      }
+    ]
+  },
+  {
+    "id": "occluded-13-one_shot",
+    "seed": 13,
+    "condition": "occluded",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.43968598693609234,
+      -0.02699604263296351,
+      0.383
+    ],
+    "final_target": [
+      0.43968598553387256,
+      -0.026995940083804893,
+      0.3818744428843924
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 270.02231719546785,
+    "lift_height_m": -0.00012555711560763294,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 363.67132700252114,
+    "sensing_ms": 363.6377650036593,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 363.6377650036593,
+        "truth": [
+          0.43968598553387256,
+          -0.026995940083804893,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "occluded-13-feedback",
+    "seed": 13,
+    "condition": "occluded",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.43968598693609234,
+      -0.02699604263296351,
+      0.383
+    ],
+    "final_target": [
+      0.4829467248884531,
+      0.2376210871609347,
+      0.3938744429370326
+    ],
+    "final_gripper_width_m": 0.07999999925124357,
+    "placement_error_mm": 3.787137951553741,
+    "lift_height_m": 0.2819552490626358,
+    "perception_error_mm": 1.7112667622601512,
+    "observations": 3,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 2181.3367499999003,
+    "sensing_ms": 597.300631008693,
+    "planning_ms": 19.196955014194828,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.43964317093822747,
+          -0.025285209111631117,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.0438690373309433,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 326.08674200309906,
+        "truth": [
+          0.43968598553387256,
+          -0.026995940083804893,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.43964317093822747,
+            -0.025285209111631117,
+            0.382
+          ],
+          "pixels": 107,
+          "bbox": [
+            116,
+            102,
+            124,
+            114
+          ]
+        },
+        "processing_ms": 125.43731200275943,
+        "truth": [
+          0.43968598553387256,
+          -0.026995940083804893,
+          0.3818744428843924
+        ],
+        "error_mm": 1.7112666503952227
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.43964317093822747,
+            -0.025285209111631117,
+            0.382
+          ],
+          "pixels": 107,
+          "bbox": [
+            116,
+            102,
+            124,
+            114
+          ]
+        },
+        "processing_ms": 145.77657700283453,
+        "truth": [
+          0.43968598553679317,
+          -0.02699594030753171,
+          0.38187444293703265
+        ],
+        "error_mm": 1.7112668741250794
+      }
+    ]
+  },
+  {
+    "id": "shifted-13-one_shot",
+    "seed": 13,
+    "condition": "shifted",
+    "method": "one_shot",
+    "success": false,
+    "reason": "empty_grasp",
+    "initial_target": [
+      0.43968598693609234,
+      -0.02699604263296351,
+      0.383
+    ],
+    "final_target": [
+      0.4396859855247912,
+      0.1378118729804701,
+      0.3818744429370326
+    ],
+    "final_gripper_width_m": 2.4969885015083643e-09,
+    "placement_error_mm": 109.85277905846041,
+    "lift_height_m": 0.010533874067094107,
+    "perception_error_mm": 2.010146236492852,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 5.559999999999555,
+    "wall_ms": 922.9739419970429,
+    "sensing_ms": 346.221201994922,
+    "planning_ms": 7.610690998262726,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.4401909313922159,
+          -0.02894163213863482,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "descend"
+      },
+      {
+        "t": 3.31,
+        "phase": "close"
+      },
+      {
+        "t": 4.21,
+        "phase": "lift"
+      },
+      {
+        "t": 5.56,
+        "phase": "verify_grasp",
+        "gripper_width_m": 2.4969885015083643e-09,
+        "grasp_detected": false
+      },
+      {
+        "t": 5.56,
+        "phase": "failure",
+        "reason": "empty_grasp"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4401909313922159,
+            -0.02894163213863482,
+            0.382
+          ],
+          "pixels": 149,
+          "bbox": [
+            97,
+            108,
+            107,
+            121
+          ]
+        },
+        "processing_ms": 346.221201994922,
+        "truth": [
+          0.43968598553387256,
+          -0.026995940083804893,
+          0.3818744428843924
+        ],
+        "error_mm": 2.010146236492852
+      }
+    ]
+  },
+  {
+    "id": "shifted-13-feedback",
+    "seed": 13,
+    "condition": "shifted",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.43968598693609234,
+      -0.02699604263296351,
+      0.383
+    ],
+    "final_target": [
+      0.4821842883491474,
+      0.23783705492144933,
+      0.39387444293703266
+    ],
+    "final_gripper_width_m": 0.08000000279328312,
+    "placement_error_mm": 3.0739952838362763,
+    "lift_height_m": 0.27348715831864345,
+    "perception_error_mm": 2.8793492306694333,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 11.36000000000063,
+    "wall_ms": 2084.0056689994526,
+    "sensing_ms": 462.42913799505914,
+    "planning_ms": 19.283046989585273,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.4401909313922159,
+          -0.02894163213863482,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.71,
+        "phase": "descend"
+      },
+      {
+        "t": 4.06,
+        "phase": "close"
+      },
+      {
+        "t": 4.96,
+        "phase": "lift"
+      },
+      {
+        "t": 6.31,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.043868938674373435,
+        "grasp_detected": true
+      },
+      {
+        "t": 6.31,
+        "phase": "transport"
+      },
+      {
+        "t": 7.96,
+        "phase": "place"
+      },
+      {
+        "t": 9.21,
+        "phase": "release"
+      },
+      {
+        "t": 9.81,
+        "phase": "retreat"
+      },
+      {
+        "t": 11.36,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4401909313922159,
+            -0.02894163213863482,
+            0.382
+          ],
+          "pixels": 149,
+          "bbox": [
+            97,
+            108,
+            107,
+            121
+          ]
+        },
+        "processing_ms": 315.6632800018997,
+        "truth": [
+          0.43968598553387256,
+          -0.026995940083804893,
+          0.3818744428843924
+        ],
+        "error_mm": 2.010146236492852
+      },
+      {
+        "camera": "back",
+        "t": 1.96,
+        "estimate": {
+          "position": [
+            0.43868433471250573,
+            0.14142412087810702,
+            0.382
+          ],
+          "pixels": 105,
+          "bbox": [
+            117,
+            124,
+            126,
+            134
+          ]
+        },
+        "processing_ms": 146.76585799315944,
+        "truth": [
+          0.4396859855247912,
+          0.13781187234946923,
+          0.3818744429370326
+        ],
+        "error_mm": 3.748552224846015
+      }
+    ]
+  },
+  {
+    "id": "unreachable-13-one_shot",
+    "seed": 13,
+    "condition": "unreachable",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.95,
+      -0.02699604263296351,
+      0.383
+    ],
+    "final_target": [
+      0.9500000962619641,
+      -0.026996090744584065,
+      0.021862920120953998
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 540.5432480006996,
+    "lift_height_m": -0.36013707987904603,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 358.18288400332676,
+    "sensing_ms": 358.14143100287765,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 358.14143100287765,
+        "truth": [
+          0.9500000962619641,
+          -0.026996090744584065,
+          0.021862920120953998
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "unreachable-13-feedback",
+    "seed": 13,
+    "condition": "unreachable",
+    "method": "feedback",
+    "success": false,
+    "reason": "outside_workspace",
+    "initial_target": [
+      0.95,
+      -0.02699604263296351,
+      0.383
+    ],
+    "final_target": [
+      0.9500000962619641,
+      -0.026996090744584065,
+      0.021862920120953998
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 540.5432480006996,
+    "lift_height_m": -0.36013707987904603,
+    "perception_error_mm": 18.82345073288229,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 487.4479610007256,
+    "sensing_ms": 487.3006580019137,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "outside_workspace"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 367.7551979999407,
+        "truth": [
+          0.9500000962619641,
+          -0.026996090744584065,
+          0.021862920120953998
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.9671678265770072,
+            -0.0347156330446948,
+            0.382
+          ],
+          "pixels": 19,
+          "bbox": [
+            26,
+            153,
+            29,
+            158
+          ]
+        },
+        "processing_ms": 119.54546000197297,
+        "truth": [
+          0.9500000962619641,
+          -0.026996090744584065,
+          0.021862920120953998
+        ],
+        "error_mm": 18.82345073288229
+      }
+    ]
+  },
+  {
+    "id": "normal-14-one_shot",
+    "seed": 14,
+    "condition": "normal",
+    "method": "one_shot",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.4803831976093352,
+      -0.02297464808449149,
+      0.383
+    ],
+    "final_target": [
+      0.48290475102554303,
+      0.23765976220348037,
+      0.3938744429370327
+    ],
+    "final_gripper_width_m": 0.07999999940991023,
+    "placement_error_mm": 3.730186518748416,
+    "lift_height_m": 0.2827241436172606,
+    "perception_error_mm": 3.5610838217207483,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.200000000000243,
+    "wall_ms": 1975.93347899965,
+    "sensing_ms": 369.0999870013911,
+    "planning_ms": 18.239988014101982,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.48079173613310483,
+          -0.026512124211908482,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "descend"
+      },
+      {
+        "t": 2.9,
+        "phase": "close"
+      },
+      {
+        "t": 3.8,
+        "phase": "lift"
+      },
+      {
+        "t": 5.15,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.043869010890482465,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.15,
+        "phase": "transport"
+      },
+      {
+        "t": 6.8,
+        "phase": "place"
+      },
+      {
+        "t": 8.05,
+        "phase": "release"
+      },
+      {
+        "t": 8.65,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.2,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.48079173613310483,
+            -0.026512124211908482,
+            0.382
+          ],
+          "pixels": 130,
+          "bbox": [
+            107,
+            108,
+            116,
+            120
+          ]
+        },
+        "processing_ms": 369.0999870013911,
+        "truth": [
+          0.4803832342288467,
+          -0.02297454818028192,
+          0.3818744428843924
+        ],
+        "error_mm": 3.5610838217207483
+      }
+    ]
+  },
+  {
+    "id": "normal-14-feedback",
+    "seed": 14,
+    "condition": "normal",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.4803831976093352,
+      -0.02297464808449149,
+      0.383
+    ],
+    "final_target": [
+      0.4820836067772105,
+      0.237764378680667,
+      0.3938744429370328
+    ],
+    "final_gripper_width_m": 0.07999999964475507,
+    "placement_error_mm": 3.056046446880983,
+    "lift_height_m": 0.28295087857889833,
+    "perception_error_mm": 3.714179378669749,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 2167.4589079993893,
+    "sensing_ms": 516.9546760007506,
+    "planning_ms": 19.603970999014564,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.48079173613310483,
+          -0.026512124211908482,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386900706573621,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.48079173613310483,
+            -0.026512124211908482,
+            0.382
+          ],
+          "pixels": 130,
+          "bbox": [
+            107,
+            108,
+            116,
+            120
+          ]
+        },
+        "processing_ms": 340.91937700577546,
+        "truth": [
+          0.4803832342288467,
+          -0.02297454818028192,
+          0.3818744428843924
+        ],
+        "error_mm": 3.5610838217207483
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.4823482334454977,
+            -0.019643693665932216,
+            0.382
+          ],
+          "pixels": 101,
+          "bbox": [
+            107,
+            103,
+            115,
+            114
+          ]
+        },
+        "processing_ms": 176.03529899497516,
+        "truth": [
+          0.4803832341514495,
+          -0.02297454839138259,
+          0.3818744429370328
+        ],
+        "error_mm": 3.8672749356187497
+      }
+    ]
+  },
+  {
+    "id": "occluded-14-one_shot",
+    "seed": 14,
+    "condition": "occluded",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.4803831976093352,
+      -0.02297464808449149,
+      0.383
+    ],
+    "final_target": [
+      0.4803832342288467,
+      -0.02297454818028192,
+      0.3818744428843924
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 262.97482742478905,
+    "lift_height_m": -0.00012555711560763294,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 362.6406209950801,
+    "sensing_ms": 362.59521300235065,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 362.59521300235065,
+        "truth": [
+          0.4803832342288467,
+          -0.02297454818028192,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "occluded-14-feedback",
+    "seed": 14,
+    "condition": "occluded",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.4803831976093352,
+      -0.02297464808449149,
+      0.383
+    ],
+    "final_target": [
+      0.48213229404616464,
+      0.23777395232923798,
+      0.3938744429370327
+    ],
+    "final_gripper_width_m": 0.07999999973816786,
+    "placement_error_mm": 3.082525933680727,
+    "lift_height_m": 0.2829499354662506,
+    "perception_error_mm": 3.867274825045914,
+    "observations": 3,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 10.950000000000493,
+    "wall_ms": 2088.432736003597,
+    "sensing_ms": 584.0503569997963,
+    "planning_ms": 16.375018989492673,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "approach",
+        "target": [
+          0.4823482334454977,
+          -0.019643693665932216,
+          0.382
+        ]
+      },
+      {
+        "t": 1.55,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.3,
+        "phase": "descend"
+      },
+      {
+        "t": 3.65,
+        "phase": "close"
+      },
+      {
+        "t": 4.55,
+        "phase": "lift"
+      },
+      {
+        "t": 5.9,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386900687943665,
+        "grasp_detected": true
+      },
+      {
+        "t": 5.9,
+        "phase": "transport"
+      },
+      {
+        "t": 7.55,
+        "phase": "place"
+      },
+      {
+        "t": 8.8,
+        "phase": "release"
+      },
+      {
+        "t": 9.4,
+        "phase": "retreat"
+      },
+      {
+        "t": 10.95,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 334.07457300199894,
+        "truth": [
+          0.4803832342288467,
+          -0.02297454818028192,
+          0.3818744428843924
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.4823482334454977,
+            -0.019643693665932216,
+            0.382
+          ],
+          "pixels": 101,
+          "bbox": [
+            107,
+            103,
+            115,
+            114
+          ]
+        },
+        "processing_ms": 106.5523459983524,
+        "truth": [
+          0.4803832342288467,
+          -0.02297454818028192,
+          0.3818744428843924
+        ],
+        "error_mm": 3.867274714473078
+      },
+      {
+        "camera": "back",
+        "t": 1.55,
+        "estimate": {
+          "position": [
+            0.4823482334454977,
+            -0.019643693665932216,
+            0.382
+          ],
+          "pixels": 101,
+          "bbox": [
+            107,
+            103,
+            115,
+            114
+          ]
+        },
+        "processing_ms": 143.423437999445,
+        "truth": [
+          0.4803832341514495,
+          -0.02297454839138259,
+          0.3818744429370328
+        ],
+        "error_mm": 3.8672749356187497
+      }
+    ]
+  },
+  {
+    "id": "shifted-14-one_shot",
+    "seed": 14,
+    "condition": "shifted",
+    "method": "one_shot",
+    "success": false,
+    "reason": "empty_grasp",
+    "initial_target": [
+      0.4803831976093352,
+      -0.02297464808449149,
+      0.383
+    ],
+    "final_target": [
+      0.48038323391448223,
+      0.13434385583494401,
+      0.3872105935074733
+    ],
+    "final_gripper_width_m": 7.863605111150218e-09,
+    "placement_error_mm": 105.65683919207645,
+    "lift_height_m": 0.010533874067094495,
+    "perception_error_mm": 3.5610838217207483,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 5.559999999999555,
+    "wall_ms": 986.4047640003264,
+    "sensing_ms": 374.16487299924484,
+    "planning_ms": 8.62739900185261,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.48079173613310483,
+          -0.026512124211908482,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "descend"
+      },
+      {
+        "t": 3.31,
+        "phase": "close"
+      },
+      {
+        "t": 4.21,
+        "phase": "lift"
+      },
+      {
+        "t": 5.56,
+        "phase": "verify_grasp",
+        "gripper_width_m": 7.863605111150218e-09,
+        "grasp_detected": false
+      },
+      {
+        "t": 5.56,
+        "phase": "failure",
+        "reason": "empty_grasp"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.48079173613310483,
+            -0.026512124211908482,
+            0.382
+          ],
+          "pixels": 130,
+          "bbox": [
+            107,
+            108,
+            116,
+            120
+          ]
+        },
+        "processing_ms": 374.16487299924484,
+        "truth": [
+          0.4803832342288467,
+          -0.02297454818028192,
+          0.3818744428843924
+        ],
+        "error_mm": 3.5610838217207483
+      }
+    ]
+  },
+  {
+    "id": "shifted-14-feedback",
+    "seed": 14,
+    "condition": "shifted",
+    "method": "feedback",
+    "success": true,
+    "reason": "placed",
+    "initial_target": [
+      0.4803831976093352,
+      -0.02297464808449149,
+      0.383
+    ],
+    "final_target": [
+      0.4819655536274876,
+      0.23789450692513295,
+      0.3938744429370326
+    ],
+    "final_gripper_width_m": 0.08000000211650585,
+    "placement_error_mm": 2.8803649336226202,
+    "lift_height_m": 0.27999876377132193,
+    "perception_error_mm": 3.3571012326338194,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 11.36000000000063,
+    "wall_ms": 1916.8198049956118,
+    "sensing_ms": 483.4998380028992,
+    "planning_ms": 18.94788998470176,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "disturbance",
+        "description": "external lateral force: 2 N for 60 ms"
+      },
+      {
+        "t": 0.41,
+        "phase": "approach",
+        "target": [
+          0.48079173613310483,
+          -0.026512124211908482,
+          0.382
+        ]
+      },
+      {
+        "t": 1.96,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 2.71,
+        "phase": "descend"
+      },
+      {
+        "t": 4.06,
+        "phase": "close"
+      },
+      {
+        "t": 4.96,
+        "phase": "lift"
+      },
+      {
+        "t": 6.31,
+        "phase": "verify_grasp",
+        "gripper_width_m": 0.04386853138353705,
+        "grasp_detected": true
+      },
+      {
+        "t": 6.31,
+        "phase": "transport"
+      },
+      {
+        "t": 7.96,
+        "phase": "place"
+      },
+      {
+        "t": 9.21,
+        "phase": "release"
+      },
+      {
+        "t": 9.81,
+        "phase": "retreat"
+      },
+      {
+        "t": 11.36,
+        "phase": "success",
+        "reason": "placed"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.48079173613310483,
+            -0.026512124211908482,
+            0.382
+          ],
+          "pixels": 130,
+          "bbox": [
+            107,
+            108,
+            116,
+            120
+          ]
+        },
+        "processing_ms": 355.93394200259354,
+        "truth": [
+          0.4803832342288467,
+          -0.02297454818028192,
+          0.3818744428843924
+        ],
+        "error_mm": 3.5610838217207483
+      },
+      {
+        "camera": "back",
+        "t": 1.96,
+        "estimate": {
+          "position": [
+            0.4807699997494701,
+            0.1394279990639438,
+            0.382
+          ],
+          "pixels": 117,
+          "bbox": [
+            108,
+            123,
+            116,
+            135
+          ]
+        },
+        "processing_ms": 127.56589600030566,
+        "truth": [
+          0.4803832339153705,
+          0.13629869093436367,
+          0.38746455170750216
+        ],
+        "error_mm": 3.1531186435468905
+      }
+    ]
+  },
+  {
+    "id": "unreachable-14-one_shot",
+    "seed": 14,
+    "condition": "unreachable",
+    "method": "one_shot",
+    "success": false,
+    "reason": "target_missing",
+    "initial_target": [
+      0.95,
+      -0.02297464808449149,
+      0.383
+    ],
+    "final_target": [
+      0.9500000079719046,
+      -0.022974624008022394,
+      0.021862920120952773
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 538.5681575861603,
+    "lift_height_m": -0.36013707987904725,
+    "perception_error_mm": null,
+    "observations": 1,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 357.20069400122156,
+    "sensing_ms": 357.15667699696496,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "target_missing"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 357.15667699696496,
+        "truth": [
+          0.9500000079719046,
+          -0.022974624008022394,
+          0.021862920120952773
+        ],
+        "error_mm": null
+      }
+    ]
+  },
+  {
+    "id": "unreachable-14-feedback",
+    "seed": 14,
+    "condition": "unreachable",
+    "method": "feedback",
+    "success": false,
+    "reason": "outside_workspace",
+    "initial_target": [
+      0.95,
+      -0.02297464808449149,
+      0.383
+    ],
+    "final_target": [
+      0.9500000079719046,
+      -0.022974624008022394,
+      0.021862920120952773
+    ],
+    "final_gripper_width_m": 0.07999999657288165,
+    "placement_error_mm": 538.5681575861603,
+    "lift_height_m": -0.36013707987904725,
+    "perception_error_mm": 13.793519479427498,
+    "observations": 2,
+    "retries": 0,
+    "collisions": [],
+    "duration_s": 0.0,
+    "wall_ms": 462.39032900484744,
+    "sensing_ms": 462.29939100157935,
+    "planning_ms": 0,
+    "events": [
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "front",
+        "detected": false
+      },
+      {
+        "t": 0.0,
+        "phase": "change_view"
+      },
+      {
+        "t": 0.0,
+        "phase": "observe",
+        "camera": "back",
+        "detected": true
+      },
+      {
+        "t": 0.0,
+        "phase": "failure",
+        "reason": "outside_workspace"
+      }
+    ],
+    "sensors": [
+      {
+        "camera": "front",
+        "t": 0.0,
+        "estimate": null,
+        "processing_ms": 346.65370500442805,
+        "truth": [
+          0.9500000079719046,
+          -0.022974624008022394,
+          0.021862920120952773
+        ],
+        "error_mm": null
+      },
+      {
+        "camera": "back",
+        "t": 0.0,
+        "estimate": {
+          "position": [
+            0.9636550012949506,
+            -0.021024665809261347,
+            0.382
+          ],
+          "pixels": 12,
+          "bbox": [
+            26,
+            155,
+            28,
+            158
+          ]
+        },
+        "processing_ms": 115.6456859971513,
+        "truth": [
+          0.9500000079719046,
+          -0.022974624008022394,
+          0.021862920120952773
+        ],
+        "error_mm": 13.793519479427498
+      }
+    ]
+  }
+]

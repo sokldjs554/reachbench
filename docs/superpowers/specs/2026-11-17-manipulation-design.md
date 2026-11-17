@@ -1,0 +1,11 @@
+# ReachBench: observe, grasp, recover
+
+The user authorized implementing the preceding research direction without further design questions. Existing v1/v2 data and UI remain accessible under /legacy/. The new primary task is a real Panda gripper lifting a cube and placing it in a tray using physics, camera-derived target estimates and bounded observation/retry recovery. No object attachment constraints and no runtime arm qpos teleportation.
+
+Choice by Codex: MuJoCo Python for CPU experiments; the same MJCF and controller logic in browser WASM if the runtime can be verified. This offers actual interactive physics on static hosting. If camera parity cannot be established, distinguish browser geometric/sensor experiments from Python camera-based benchmark; never reuse metrics as if they were measured live. Alternative PyBullet replay is retained only as the old archive, not the new main experience. Full VLA/GPU/ROS2 scope deferred until a reliable basic manipulation loop exists.
+
+Scenarios: normal, target hidden behind a physical occluder, target shifted after first observation, and a deliberately unrecoverable target. Methods: one-shot vs additional observation/retry. Identical initial conditions and disturbances; tune on dev seeds 10–14, evaluate held-out 100–119. Success requires cube within tray bounds and released, not end effector near goal. Log perception error, placement error, obstacle contacts, simulation time, CPU processing time, observations, retries, and all failures. Record camera observations, geometry, motor states and interventions.
+
+First screen: large clear 3D robot/workbench, task and one execution button, scenario choices, current observation/action/result. Benchmark evidence and sensing diagnostics progressively disclosed. Recorded runs explicitly labeled; live simulation metrics separate from held-out Python results. Licensed assets attributed; user's contribution not invented.
+
+Validation: physical grasp without weld; no oracle coordinates enter perception/controller; paired scene equality; stop and retry bounds; deterministic seeds; aggregation equals raw records; functional live UI/reset/scenario switch/error state; desktop/mobile layout. Sites hosting and GitHub code/data synchronized only after checks.

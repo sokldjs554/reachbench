@@ -1,84 +1,86 @@
-# ReachBench · Vision to Motion
+# ReachBench — Observe. Grasp. Recover.
 
-[공개 데모](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [새 실험 결과](docs/v2/RESULTS.md) · [전체 보고서](https://reachbench-vision-control.ykh13571.chatgpt.site/report.html) · [기여·면접 안내](docs/INTERVIEW.md)
+**가림과 위치 변화가 있는 작업대에서, 카메라로 물체를 찾아 집고 트레이에 놓는 로봇 실험.**
 
-카메라 인식 → 위치 추정 → 경로 계획 → 목표 접근 → 평가를 연결하는 CPU 로봇팔 실험. 투모로로보틱스 Physical AI / Robotics R&D 인턴 업무 중 시뮬레이션·센서 인식·공간 정보와 동작 연계·데이터 검증을 보여준다.
+[공개 데모](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [실험·한계](docs/v3/EXPERIMENT.md) · [18개 프로젝트 비교 조사](docs/v3/RESEARCH.md) · [면접 준비와 기여 구분](docs/v3/INTERVIEW.md)
 
-![실제 PyBullet 기록을 재생하는 데스크톱 화면](dist/screenshots/desktop-comparison.png)
+![실제 브라우저 화면](docs/v3/desktop.png)
 
-공개 데모는 **사전 계산한 실제 PyBullet 실행의 프레임 재생기**다. 로그와 일치하는 재실행에서 렌더링한 프레임이며 2D 경로도 같은 관절 샘플을 표시한다. 새 계산은 로컬 Python에서 지원한다. 실물 로봇, 모터 동역학 제어, 파지·놓기, ROS 2, 보행/WBC, 학습 정책 결과가 아니다.
+첫 화면의 **실험 실행**을 누르면 브라우저에서 MuJoCo 물리를 직접 계산한다. `목표 가림 → 개선`을 실행한 다음 **같은 배치에서 기준 방법 실행**으로 비교할 수 있다. 평가 표의 기록은 별도 Python 실험을 재생하며 화면에 `PYTHON / RECORDED`로 표시한다. Chrome/Edge 최신 버전 권장; 첫 로딩은 WASM 약 11 MB와 압축 모델 약 15 MB가 필요하다.
 
-**Codex가 조사·설계·구현·평가·테스트·문서화·배포를 수행했다. 사용자는 요구사항을 정하고 GitHub 저장소를 생성했다.** 본인이 직접 재현·수정한 부분만 이후 자신의 기여로 기록한다.
+## 실제 구현
 
-## 1분 체험
+Python MuJoCo 4.0.1 + Franka Panda, 두 고정 RGB-D 카메라, HSV 분할·depth 역투영, 감쇠 최소제곱 IK, 관절 모터 추종, 물리 접촉 그리퍼, 추가 관찰·최대 1회 집기 재시도, 같은 장면의 기준/개선 평가. 큐브를 로봇에 강제로 붙이는 제약이나 실행 중 관절 순간이동은 사용하지 않는다. 리셋과 **기록 재생**은 저장된 자세를 설정한다.
 
-1. 기본 화면의 **두 실행 재생**을 눌러 RGB 직접 접근과 HSV+A*의 실제 움직임을 비교한다. **첫 충돌로 이동**에서 접촉 시점과 2D 접촉점을 본다.
-2. 환경 조건을 **목표 가림**으로 변경한다. 입력 패치 → 검출 없음 → 이동 보류를 확인한다. 표시된 거리는 이동하지 않은 시작 손끝과 실제 목표 사이 거리다.
-3. **보정 오차 +65 mm** → **이 실패를 개선한 실험 보기**로 이동한다. 실제 목표와 추정 위치를 구분하고 기준점 보정 전·후를 비교한다.
-4. 새 실험에서 기준점 결손/오배치를 선택하고, **평가와 실패 사례**에서 실패 기록을 바로 연다.
+입력 픽셀 → 카메라 보정에 따른 XY 추정 → 접근·집기·운반·놓기 → 트레이 배치 판정이 연결된다. 정답 위치는 평가·시나리오 생성에만 사용한다. 알려진 44 mm 큐브와 테이블 높이를 이용하는 제한된 위치 추정이며 범용 물체 인식·6D 자세 추정은 아니다.
 
-[모바일 실제 캡처](dist/screenshots/mobile-comparison.png) · [보정 비교 화면](dist/screenshots/desktop-calibration.png)
+## 독립 평가 결과
 
-## 실제 결과
+개발 seed 10–14, 최종 seed 100–119. 4조건 × 20장면 × 2방법 = **160회**. 동일 조건·초기 배치로 비교했다.
 
-원본 400회(100장면 × 4방법)를 보존했다. RGB+직접 접근 2/100, HSV+직접 접근 3/100, RGB+A* 39/100, HSV+A* 59/100. [기존 결과](docs/RESULTS.md).
+| 조건 | 단일 관찰 | 추가 관찰·재시도 |
+|---|---:|---:|
+| 기본 집기 | 20/20 | 20/20 |
+| 목표 가림 | 0/20 | 20/20 |
+| 관찰 후 위치 변화 | 0/20 | 20/20 |
+| 작업 범위 밖 | 0/20 | 0/20 |
+| 전체 | **20/80 (25%)** | **60/80 (75%)** |
 
-새 실험은 **HSV+A* 대 기준점 보정+HSV+A***를 같은 RGB·시작 자세·계획기로 비교했다. 개발 seed 2000–2002의 42회와 분리한 최종 seed 3000–3019의 280회다. 성공은 무충돌·경로 존재·최종 XY 거리 ≤35 mm.
+이 수치는 정해진 네 조건의 Python 시뮬레이션 결과다. 가림판 접촉은 모두 0회였고, 범위 밖 실패 20회는 개선 후에도 남았다. 성공률 개선은 추가 관찰과 재시도를 **합친 방법**의 효과다. 둘의 개별 기여를 분리하는 ablation은 수행하지 않았다. [전체 160회 기록](dist/bench/episodes.json), [집계](dist/bench/summary.json), [설정·소스 해시](dist/bench/config.json)를 공개한다.
 
-| 조건 | 성공 기존 → 보정 | 충돌 기존 → 보정 | 인식 평균 오차 기존 → 보정 |
-|---|---:|---:|---:|
-| 정상 기준점, 0/20/40/65/100 mm 편향 전체 | 40/100 → 100/100 | 39 → 0 | 46.36 → 2.29 mm |
-| 정상 기준점, +65 mm만 | 0/20 → 20/20 | 18 → 0 | 65.03 → 2.29 mm |
-| 기준점 2개, +65 mm | 0/20 → 0/20 | 18 → 0 | 보정 보류 |
-| 기준점 전체 +50 mm 오배치, +65 mm | 0/20 → 0/20 | 18 → 0 | 65.03 → 50.84 mm |
+학습·증강 효과 실험, VLA, ROS 2, 하드웨어 검증은 수행하지 않았다. 회사의 로봇 파운데이션 모델을 구현한 프로젝트가 아니다.
 
-기준점 위치가 알려져 있다는 가정 아래 공통 XY 편향을 영상 관측으로 추정한다. 기준점이 틀리면 잔차가 작아도 보정은 틀릴 수 있다. 정상/스트레스 전체로는 40/140 → 100/140이며 **100%는 정상 기준점 100장면에만 해당한다.** 기존 59%와 새 100%는 조건·seed가 달라 직접 개선 폭으로 비교하지 않는다. 학습·데이터 증강은 수행하지 않았다.
+## 실행과 재현
 
-## 설치·로컬 실행
-
-Python 3.11 권장. 실제 검증 환경은 Linux x86_64, CPython 3.11.18, PyBullet 3.2.7, OpenCV 4.11.0.86, NumPy 2.2.6. GPU·모델 키·계정·GUI 불필요.
+Python 3.11, Linux x86-64, CPU 물리 + Mesa/EGL 오프스크린 렌더링에서 실행했다. Linux에서는 EGL/OpenGL 시스템 라이브러리가 필요하다. GPU·API 키·유료 서비스는 필요 없다.
 
 ```bash
-git clone https://github.com/sokldjs554/reachbench.git
-cd reachbench
 python3.11 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements-dev.txt
-python -m reachbench.serve
+pip install -r requirements-manipulation.txt
+# Linux headless; 데스크톱 macOS에서는 MUJOCO_GL=glfw 등 환경에 맞게 선택
+export MUJOCO_GL=egl
+python -m manipulation.controller --seed 100 --condition occluded --method feedback --out work/my-run
+python -m manipulation.evaluate --split dev --out work/dev --workers 3
+python -m manipulation.evaluate --split eval --out work/eval --workers 3
 ```
 
-http://127.0.0.1:8000 → **로컬 Python 기능 · 새로운 목표 좌표로 실행**. 목표 X/Y를 바꾸면 원 RGB/HSV 비교를 실제 새로 계산하고 프레임을 생성한다. 로컬 결과는 평가 집계에 추가하지 않는다. 서버는 localhost 전용·순차 처리다. Windows는 `.venv\Scripts\activate`; 다른 OS는 미검증. Python 3.12에서 PyBullet 소스 빌드가 필요할 수 있다.
-
-## 재현·검증
+평가 출력은 `work/`에 생성해 공개 원본을 덮어쓰지 않는다. 벽시계 시간은 호스트·부하에 따라 달라진다. 공개 웹은 정적 파일만으로 실행한다.
 
 ```bash
-python -m pytest -q
-# 원 공개 결과를 덮어쓰지 않는 전수 재현 검사
-PYTHONPATH=. python scripts/reproduce_v2.py
-# 별도 폴더로 최종 평가와 실제 프레임 생성
-python -m reachbench.calibration --start 3000 --count 20 --split evaluation --record --out work/my-evaluation
-npm ci
-npm run check
-npm run test:ui
-# 선택: 실제 Chromium 데스크톱·모바일 흐름 검사
-python -m pip install -r requirements-browser.txt
-python -m playwright install chromium
-python scripts/browser_qa.py
+python -m http.server 8000 --directory dist
+# http://localhost:8000
 ```
 
-21개 Python 테스트, 최종 280회 전수 재실행 일치, 원본 기준/개선 200회 재실행 일치, 총 480개 실행의 프레임/trace/접촉 정합성을 확인했다. Chromium 1440×1000과 390×844에서 주요 흐름과 실제 렌더링을 검사했다. 실제 휴대전화·Safari·외부 사용자 테스트는 하지 않았다. [상세 프로토콜](docs/v2/EXPERIMENT.md) · [브라우저 기록](docs/v2/browser-validation.json) · [전수 재현 기록](docs/v2/reproduction.json).
+배포 자산을 다시 빌드하려면 Node.js 20+에서:
 
-정적 배포는 `dist/`를 게시한다. 공개 데모에서 새 Python 계산은 지원하지 않는다. 보고서/ZIP 재생성: `python scripts/build_report.py`, `python scripts/package_source.py` (로컬 ZIP은 `work/`에 생성). 공개 ZIP 링크는 GitHub의 전체 소스 아카이브를 사용한다.
+```bash
+npm ci
+python -m scripts.build_studio
+npm run check
+```
 
-## 코드·데이터
+검증:
 
-- `reachbench/sim.py`: 변경하지 않은 원 엔진, 카메라/인식/FK/IK/A*/기구학 실행
-- `reachbench/calibration.py`: RGB 기준점 관측, 편향 추정, paired 평가
-- `reachbench/recording.py`: 실제 PyBullet 프레임·접촉점·trace index와 해시
-- `reachbench/serve.py`: 로컬 새 좌표 계산과 프레임 생성
-- `dist/data/`: 원본 400회 불변 기록 / `dist/media/legacy/`: 기준/개선 200회 재실행 프레임
-- `dist/data-v2/`: 최종 280회 JSON/CSV/입력 RGB/집계/프레임
-- `docs/v2/development/`: 분리한 개발 42회 기록
-- `docs/v2/RESEARCH.md`: 공고·참고 사례·개선 방향 판단
-- `docs/v2/EXPERIMENT.md`: 설정·수식·재현·오차와 시간 정의
-- `docs/THIRD_PARTY.md`: 출처·라이선스. 외부 모델·로봇 자산·영상 복사 없음
+```bash
+pip install -r requirements.txt   # 보존된 PyBullet 실험 테스트용
+python -m pytest -q
+npm run test:ui
+pip install playwright
+# 시스템 Chromium 필요. 다른 설치 경로라면 tests/browser_studio.py의 executable_path 조정
+python tests/browser_studio.py --url http://localhost:8000 --out work/browser
+```
+
+[실제 검증 기록](docs/v3/VALIDATION.md). 브라우저와 Python은 같은 물리 모델·제어 구조를 사용하지만 렌더러·수치 연산·시간 분할이 다르므로 결과가 완전히 같지는 않다.
+
+## 데이터와 구조
+
+- `manipulation/`: 물리 작업대, RGB-D 인식, 제어기, 평가 실행.
+- `dist/studio*.mjs`: 브라우저 센서·물리·UI. `studio-core.mjs`는 좌표 계산과 성공 판정.
+- `dist/bench/`: 전체 결과와 대표 실행. RGB 원본·depth·보정 정보는 NPZ, 센서 미리보기는 JPG, 관절 상태·모터 명령·단계·시간은 JSON. 실패도 저장한다.
+- `manipulation/assets/panda/`: Apache-2.0 모델 및 출처·파일 해시. [외부 자산](docs/v3/LICENSES.md).
+- `dist/legacy/`: 이전 PyBullet 접근·보정 실험 UI. [기존 결과](docs/RESULTS.md), [보정 결과](docs/v2/RESULTS.md). 기존 데이터·엔진은 보존했다.
+
+## 기여
+
+확인된 사용자 기여는 문제·요구사항 제시, 결과물 피드백, GitHub 저장소 생성이다. 이번 조사·구현·실험 실행·검증·문서·배포는 Codex가 수행했다. 사용자가 직접 개발·실험한 이력으로 기재하면 안 된다. 직접 재현하고 설명할 작업은 [면접 준비 문서](docs/v3/INTERVIEW.md)에 분리했다.
