@@ -2,7 +2,7 @@
 
 **가림과 위치 변화가 있는 작업대에서, 카메라로 물체를 찾아 집고 트레이에 놓는 로봇 실험.**
 
-[공개 데모](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [실험·한계](docs/v3/EXPERIMENT.md) · [18개 프로젝트 비교 조사](docs/v3/RESEARCH.md)
+[공개 데모](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [첫 집기 실패와 복구 비교](https://reachbench-vision-control.ykh13571.chatgpt.site/retry/) · [실험·한계](docs/v3/EXPERIMENT.md) · [18개 프로젝트 비교 조사](docs/v3/RESEARCH.md)
 
 ![실제 브라우저 화면](docs/v3/desktop.png)
 
@@ -28,7 +28,7 @@ Python MuJoCo 4.0.1 + Franka Panda, 두 고정 RGB-D 카메라, HSV 분할·dept
 
 이 수치는 정해진 네 조건의 Python 시뮬레이션 결과다. 가림판 접촉은 모두 0회였고, 범위 밖 실패 20회는 개선 후에도 남았다. 성공률 개선은 추가 관찰과 재시도를 **합친 방법**의 효과다. [전체 160회 기록](dist/bench/episodes.json), [집계](dist/bench/summary.json), [설정·소스 해시](dist/bench/config.json)를 공개한다.
 
-재관측을 유지하고 재시도만 바꾼 후속 실험에서 seed 107은 실패에서 배치 성공으로 바뀌었다. 별도 평가 seed 200–219는 두 설정 모두 20/20 성공했고 재시도가 발동한 사례는 0건이었다. [42회 원본·재현 방법](docs/v3/retry-study/README.md).
+재관측을 유지하고 재시도만 바꾼 후속 실험에서 seed 107은 실패에서 배치 성공으로 바뀌었다. 별도 평가 seed 200–219는 두 설정 모두 20/20 성공했고 재시도가 발동한 사례는 0건이었다. [42회 원본·재현 방법](docs/v3/retry-study/README.md). 관측 86개마다 직전 관절 상태와 다음 기록 명령을 연결했다. [시간 기준과 데이터 형식](docs/v3/retry-study/ALIGNMENT.md).
 
 학습·증강 효과 실험, VLA, ROS 2, 하드웨어 검증은 수행하지 않았다. 회사의 로봇 파운데이션 모델을 구현한 프로젝트가 아니다.
 

@@ -4,7 +4,7 @@
   "private": true,
   "description": "RGB-D Panda manipulation, live MuJoCo physics and measured failure recovery",
   "scripts": {
-    "check": "node --check dist/studio.mjs && node --check dist/studio-engine.mjs && node --check dist/studio-core.mjs",
+    "check": "node --check dist/studio.mjs && node --check dist/studio-engine.mjs && node --check dist/studio-core.mjs && node --check dist/retry/compare.mjs",
     "test:ui": "node --test tests/test_studio.mjs && node tests/test_ui.cjs"
   },
   "devDependencies": {

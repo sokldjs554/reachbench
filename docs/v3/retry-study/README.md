@@ -58,3 +58,15 @@ python -m scripts.summarize_retry_study "$base" > "$base/runs.csv"
 ```
 
 원본의 86개 관측에서 RGB-D 위치 추정값을 다시 계산해 로그와 대조했다. 별도 Linux 환경(Python 3.11, MuJoCo 4.0.1, EGL)에서 seed 107의 두 설정을 독립 재실행해 집기·배치 판정과 시뮬레이션 시간을 재현했다. 최종 거리 값에는 부동소수점 끝자리 차이가 있었고, 처리 시간은 환경마다 달라진다. 기존 [160회 벤치마크](../EXPERIMENT.md)의 결과와 이 후속 실험은 별도로 집계한다.
+
+## 기록 비교 화면
+
+[공개 비교 화면](https://reachbench-vision-control.ykh13571.chatgpt.site/retry/)은 두 실행의 첫 집기 확인 시점에서 열린다. 끔 기록은 6.31초에서 끝나고 켬 기록은 17.56초까지 이어진다. 공통 시간 슬라이더 아래의 사건 버튼으로 집기와 배치 시점으로 이동할 수 있다.
+
+외부 시점 장면은 원본 관절·물체 자세로 MuJoCo에서 재구성했다. 포즈 샘플의 실제 시각은 각 화면에 표시된다. 아래의 카메라 사진은 각 실행에서 저장한 원본 센서 JPEG다. 사진을 선택하면 직전 상태와 다음 기록 명령을 확인할 수 있다. [관측–행동 자료와 생성 명령](ALIGNMENT.md).
+
+비교 화면의 자세 프레임을 다시 만들려면 저장소 루트에서 실행한다.
+
+```bash
+MUJOCO_GL=egl python -m scripts.render_retry_replay --out work/rebuilt-frames
+```

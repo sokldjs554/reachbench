@@ -5,3 +5,9 @@
 .heading{flex-direction:column}.heading .bench-summary{display:grid;grid-template-columns:1fr 1fr;width:100%;min-width:0;border:1px solid var(--line);padding:9px 12px;gap:2px 16px;background:#fff}.bench-summary>span{grid-column:1/-1;font-size:11px}.bench-summary>div{margin:0}.bench-summary strong{font-size:25px}.bench-summary>p{font-size:10px!important;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0}.viewport{height:320px;min-height:320px}
 .evidence .table-scroll table,.evidence .table-scroll tbody{display:block;white-space:normal}.evidence .table-scroll caption{display:block;white-space:normal;line-height:1.6;font-size:11px}.evidence .table-scroll thead{display:none}.evidence .table-scroll tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);padding-bottom:9px}.evidence .table-scroll td{border:0;max-width:none!important;padding:10px 14px}.evidence .table-scroll td:first-child{grid-column:1/-1;background:#e9eeeb;font-weight:700}.evidence .table-scroll td:nth-child(2)::before,.evidence .table-scroll td:nth-child(3)::before{display:block;font-size:11px;color:var(--muted);margin-bottom:6px}.evidence .table-scroll td:nth-child(2)::before{content:'기준 · 단일 관찰'}.evidence .table-scroll td:nth-child(3)::before{content:'개선 · 추가 관찰·재시도'}.evidence .table-scroll td:nth-child(4),.evidence .table-scroll td:nth-child(5){grid-column:1/-1}.replay-link{padding:9px 12px;margin-bottom:3px}
 }
+
+.play-controls{flex-wrap:wrap}
+.play-controls .case-link{padding:9px 15px;border:1px solid #31575a;color:#174c50;background:#eff6f4;font-weight:700;border-radius:4px;text-decoration:none;font-size:14px}
+.case-link:focus-visible{outline:3px solid #145d7b;outline-offset:2px}
+
+nav .mobile-case{display:none}@media(max-width:760px){nav .mobile-case{display:inline;color:#075e58;font-weight:700}}

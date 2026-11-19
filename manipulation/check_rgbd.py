@@ -1,8 +1,9 @@
 import numpy as np
 
 
-def inspect_rgbd(path):
-    with np.load(path) as frame:
+def depth_quality(path):
+    """Validate a recorded RGB-D frame and count usable depth samples."""
+    with np.load(path, allow_pickle=False) as frame:
         rgb = frame["rgb"]
         depth = frame["depth"]
 
@@ -15,8 +16,20 @@ def inspect_rgbd(path):
 
     height, width = depth.shape
     valid = np.isfinite(depth) & (depth > 0) & (depth < 3)
+    return {
+        "height": height,
+        "width": width,
+        "valid_depth_pixels": int(valid.sum()),
+        "total_pixels": depth.size,
+    }
+
+
+def inspect_rgbd(path):
+    quality = depth_quality(path)
+    width, height = quality["width"], quality["height"]
+    ratio = quality["valid_depth_pixels"] / quality["total_pixels"]
     print(f"이미지 크기 (너비 x 높이): {width} x {height}")
-    print(f"유효 깊이 비율: {valid.mean():.2%}")
+    print(f"유효 깊이 비율: {ratio:.2%}")
 
 
 if __name__ == "__main__":
