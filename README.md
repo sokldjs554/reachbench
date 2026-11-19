@@ -2,7 +2,7 @@
 
 **가림과 위치 변화가 있는 작업대에서, 카메라로 물체를 찾아 집고 트레이에 놓는 로봇 실험.**
 
-[공개 데모](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [실험·한계](docs/v3/EXPERIMENT.md) · [18개 프로젝트 비교 조사](docs/v3/RESEARCH.md) · [면접 준비와 기여 구분](docs/v3/INTERVIEW.md)
+[공개 데모](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [실험·한계](docs/v3/EXPERIMENT.md) · [18개 프로젝트 비교 조사](docs/v3/RESEARCH.md)
 
 ![실제 브라우저 화면](docs/v3/desktop.png)
 
@@ -81,6 +81,6 @@ python tests/browser_studio.py --url http://localhost:8000 --out work/browser
 - `manipulation/assets/panda/`: Apache-2.0 모델 및 출처·파일 해시. [외부 자산](docs/v3/LICENSES.md).
 - `dist/legacy/`: 이전 PyBullet 접근·보정 실험 UI. [기존 결과](docs/RESULTS.md), [보정 결과](docs/v2/RESULTS.md). 기존 데이터·엔진은 보존했다.
 
-## 기여
+## 제작 도구
 
-확인된 사용자 기여는 문제·요구사항 제시, 결과물 피드백, GitHub 저장소 생성이다. 이번 조사·구현·실험 실행·검증·문서·배포는 Codex가 수행했다. 사용자가 직접 개발·실험한 이력으로 기재하면 안 된다. 직접 재현하고 설명할 작업은 [면접 준비 문서](docs/v3/INTERVIEW.md)에 분리했다.
+초기 구현·실험 실행·검증·문서화에 Codex를 사용했다. 외부 라이브러리와 로봇 모델의 출처·라이선스는 [외부 자산 문서](docs/v3/LICENSES.md)에 정리했다.
