@@ -2,7 +2,6 @@
 import argparse
 import json
 from pathlib import Path
-from urllib.parse import urljoin
 
 from playwright.sync_api import sync_playwright, expect
 
@@ -58,8 +57,10 @@ def check(browser, url, out, mobile):
     expect(page.locator("#alignment")).to_contain_text("20 ms")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     assert page.locator("#photos img").evaluate_all("(imgs)=>imgs.every(i=>i.complete && i.naturalWidth>0)")
-    samples=context.request.get(urljoin(page.url,"observations.jsonl"))
-    assert samples.ok and len([json.loads(line) for line in samples.text().splitlines()])==86
+    with page.expect_download() as download:
+        page.get_by_role("link",name="관측·행동 데이터 받기 (JSONL)").click()
+    samples = Path(download.value.path()).read_text().splitlines()
+    assert len({json.loads(line)["sample_id"] for line in samples}) == 86
     assert not errors,errors
     context.close()
 

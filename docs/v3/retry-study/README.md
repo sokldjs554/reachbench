@@ -70,3 +70,9 @@ python -m scripts.summarize_retry_study "$base" > "$base/runs.csv"
 ```bash
 MUJOCO_GL=egl python -m scripts.render_retry_replay --out work/rebuilt-frames
 ```
+
+**공개 화면 검증 (2026-11-19, Sites v5).** Chromium의 [데스크톱 1440 × 1000](desktop.png)과 [모바일 뷰포트 390 × 844](mobile.png)에서 홈 진입, 공동 재생·정지·초기화, 시간 탐색, 두 번째 집기·배치 이동, 먼저 끝난 실행의 시간 고정, 관측 선택, 7축 기록과 JSONL 86행 다운로드를 확인했다. 화면 비교용 프레임과 정렬 데이터를 포함한 배포 파일 30개가 저장소와 바이트 단위로 일치했다.
+
+```bash
+python tests/browser_retry.py https://reachbench-vision-control.ykh13571.chatgpt.site/
+```
