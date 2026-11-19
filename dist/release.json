@@ -3,7 +3,7 @@
   "date_kst": "2026-11-17",
   "mode": "live MuJoCo WASM + independently recorded Python evaluation",
   "sha256": {
-    "index.html": "8b535568c4b3eb5039df6f8a02d63423662b5371cd454d2725704e6743c4e746",
+    "index.html": "72e1d9033f0ec2e3bbe99b61573189b6cf9fa15f6fbaa02ff441b466bceb6e2d",
     "studio.css": "3e6e471a2d1722a9231b82494f28e69de27a89cf8273a8c7980090446f0dc905",
     "studio.mjs": "86d88336318a9bc1feca30a1fd1dbf08158fd26cac8fca2fc9acb9edf727003d",
     "studio-core.mjs": "969c3cfa75e21cc7df5c0918388cf0f11228b0969a64045281e1d2da2dadf60c",
@@ -13,6 +13,8 @@
     "bench/episodes.json": "af1c03588f70424146997abd6dde663a08d1fd86853b9577948c6019208207de",
     "bench/summary.json": "8896b8b54881f5879e3592754f3bf76a36d84b6e7884c52636eeaeff218defe3",
     "vendor/mujoco.js": "6ab204c4c51d0a5f68a5c96e56f607314551b7b1e2770603d84c7a1318e70070",
-    "vendor/mujoco.wasm": "904645316cfe464162473b063550e9c0f5c15e06fba77a7b9dd6fdd1c47b3f7c"
-  }
+    "vendor/mujoco.wasm": "904645316cfe464162473b063550e9c0f5c15e06fba77a7b9dd6fdd1c47b3f7c",
+    "report.html": "293eabc0eb94026e9cb9c07193a9cb5c1bb37719e23a95f0322f86733cdf36f2"
+  },
+  "documentation_updated_kst": "2026-11-19"
 }
