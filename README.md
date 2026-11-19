@@ -73,6 +73,15 @@ python tests/browser_studio.py --url http://localhost:8000 --out work/browser
 
 [실제 검증 기록](docs/v3/VALIDATION.md). 브라우저와 Python은 같은 물리 모델·제어 구조를 사용하지만 렌더러·수치 연산·시간 분할이 다르므로 결과가 완전히 같지는 않다.
 
+RGB-D 파일의 이미지 크기와 유효 깊이 비율을 검사하려면:
+
+```bash
+python -m manipulation.check_rgbd dist/bench/runs/shifted-107-feedback/camera-1.npz
+python -m pytest -q tests/test_rgbd_validation.py
+```
+
+[검사 조건과 테스트 결과](docs/v3/RGBD_VALIDATION.md). 유효 깊이 비율은 인식 정확도가 아니다.
+
 ## 데이터와 구조
 
 - `manipulation/`: 물리 작업대, RGB-D 인식, 제어기, 평가 실행.
