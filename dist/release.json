@@ -1,9 +1,9 @@
 {
-  "version": "3.1.7",
+  "version": "3.1.8",
   "date_kst": "2026-11-21",
   "mode": "live MuJoCo WASM + independently recorded Python evaluation",
   "sha256": {
-    "index.html": "05c3b529d3fc237c9e8f6e032626f3a84afe687911daa47a4eb6ac3c313bc980",
+    "index.html": "78ed88cc260b919f12ece3dd643ba1c10cfd358a38f8a3e8ca81996769deb8b1",
     "studio.css": "2d4cb6c2ee96ee82d615c1f7aa2d54b063a2c32d8a731e29210451820f83cd8e",
     "studio.mjs": "715ce3a707fd94f3e5844d005a90a3fb22fde7d3dc766bf0019d0fcaa0b355db",
     "studio-core.mjs": "969c3cfa75e21cc7df5c0918388cf0f11228b0969a64045281e1d2da2dadf60c",
@@ -16,7 +16,7 @@
     "vendor/mujoco.wasm": "904645316cfe464162473b063550e9c0f5c15e06fba77a7b9dd6fdd1c47b3f7c",
     "report.html": "b94ed72869a81d83b234abdc18aa4c5b75c3fb2827ad1427c38024da311bc338",
     "retry/study.json": "abd4f001d408f711e8e58d845bbb418ed2687ef618abd486f0bc968b1315fecd",
-    "retry/index.html": "ef8fc948472ea731fe0a99033f34f4eb9b85444c23f5aac8f7d9449d590f3cc4",
+    "retry/index.html": "6233fc81802d8cb35936faa2c3548eecc55692b21ef0f16a79a9f8ec4e8b014d",
     "retry/observations.jsonl": "93b67c9f02394f72900aa238da94e6d42a1060ffd163695a5417ee0369554ddd",
     "retry/frames.json": "0919a1905a8ae9d7055565c83a133f7581d228f5f62af5a4f6061783e5ca9528",
     "retry/compare.css": "4907dc023b93009e07060727282a8731ee33d3007eb3c2d7d7a776a8fba259f7",
