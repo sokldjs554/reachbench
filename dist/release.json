@@ -1,11 +1,11 @@
 {
-  "version": "3.1.2",
+  "version": "3.1.3",
   "date_kst": "2026-11-20",
   "mode": "live MuJoCo WASM + independently recorded Python evaluation",
   "sha256": {
-    "index.html": "87014725fb30256567b07cc63662f6eb0dde2818a8abc8a2315985628cea2c79",
-    "studio.css": "58211842da3b870de7364e0dafeea219c1751b6389075c5140fb3b478a72acbf",
-    "studio.mjs": "48575adbd288391d527f60213c078f2196e602cfecf6958f09339840a515732e",
+    "index.html": "05fc7cad37eaeb2f40002aaab1b9343796a8c55af28a6ccbbc408afc967bf168",
+    "studio.css": "2d4cb6c2ee96ee82d615c1f7aa2d54b063a2c32d8a731e29210451820f83cd8e",
+    "studio.mjs": "715ce3a707fd94f3e5844d005a90a3fb22fde7d3dc766bf0019d0fcaa0b355db",
     "studio-core.mjs": "969c3cfa75e21cc7df5c0918388cf0f11228b0969a64045281e1d2da2dadf60c",
     "studio-engine.mjs": "e3e5a5370481a9780873d3929c8833e4e482d2806115279d3cff8fce5277a0c3",
     "assets/workcell.mjb.gz": "24ed7613653bb885e0c1d875a91ce4b10a0801d74e5657f51f194b078294933f",

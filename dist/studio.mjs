@@ -61,7 +61,11 @@ async function replay(id){
 function rateCell(r,base=false){return `<strong>${(100*r.success_rate).toFixed(0)}%</strong><small>${r.successes}/${r.n}</small><div class="bar ${base?'base':''}"><i style="width:${100*r.success_rate}%"></i></div>`;}
 async function benchmark(){
  try{summary=await json('bench/summary.json');const find=(c,m)=>summary.find(r=>r.condition===c&&r.method===m);
- $('#rate-base').textContent=(find('all','one_shot').success_rate*100).toFixed(0)+'%';$('#rate-feedback').textContent=(find('all','feedback').success_rate*100).toFixed(0)+'%';
+ for (const [key, method] of [['base', 'one_shot'], ['feedback', 'feedback']]) {
+   const result = find('all', method);
+   $('#rate-' + key).textContent = (result.success_rate * 100).toFixed(0) + '%';
+   $('#count-' + key).textContent = result.successes + '/' + result.n;
+ }
  $('#benchmark-rows').innerHTML=Object.entries(conditions).map(([c,[name]])=>{const a=find(c,'one_shot'),b=find(c,'feedback');const failures=[...new Set([...Object.keys(a.failures),...Object.keys(b.failures)])].map(x=>reasons[x]||x).join(' · ')||'해당 평가에서 실패 없음';return `<tr><td>${name}</td><td>${rateCell(a,true)}</td><td>${rateCell(b)}</td><td style="white-space:normal;font-size:12px;max-width:220px">${failures}</td><td><button class="replay-link" data-record="${c}-100-one_shot">기준 ↗</button><button class="replay-link" data-record="${c}-100-feedback">개선 ↗</button>${c==='shifted'?'<button class="replay-link" data-record="shifted-107-feedback">재시도 사례 ↗</button> <a href="retry/">재시도 켬·끔 비교</a>':''}</td></tr>`;}).join('');
  $$('[data-record]').forEach(b=>b.onclick=()=>{replay(b.dataset.record);});
  $('#metric-details').innerHTML='<table><thead><tr><th>조건 / 방법</th><th>평균 인식 XY 오차</th><th>평균 최종 놓기 오차</th><th>가림판 접촉</th><th>평균 처리 시간</th><th>관측 / 재시도</th></tr></thead><tbody>'+summary.filter(r=>r.condition!=='all').map(r=>`<tr><td>${conditions[r.condition][0]} / ${r.method==='one_shot'?'기준':'개선'}</td><td>${r.perception_error_mm==null?'—':r.perception_error_mm.toFixed(1)+' mm'}</td><td>${r.placement_error_mm.toFixed(1)} mm</td><td>${r.collisions}/${r.n}</td><td>${(r.wall_ms/1000).toFixed(2)} s</td><td>${r.observations.toFixed(1)}회 / 총 ${r.retries}회</td></tr>`).join('')+'</tbody></table>';
