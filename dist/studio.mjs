@@ -12,8 +12,12 @@ function selections(){
 function clear(){
  $('#sensor-history').replaceChildren();$('#sensor-empty').hidden=false;$('#events').replaceChildren();$('#compare-other').hidden=true;$('#result').className='run-result';$('#result').innerHTML='<span>THIS RUN</span><b>아직 실행하지 않았습니다</b><p>물체를 집어 트레이에 놓아야 성공입니다.</p>';
 }
+function setSensorPreview(visible) {
+ $('#occlusion-preview').hidden = !visible;
+ $('#sensor-empty').hidden = visible;
+}
 function reset(){
- state.request++;state.replay=false;clear();engine?.reset(state.seed,state.condition);$('#replay-controls').hidden=true;$('#mode-badge').innerHTML='<i></i> LIVE PHYSICS';$('#engine-label').textContent='MuJoCo 4.0.1 · 브라우저 실행';$('#run').innerHTML='<span>▶</span> 실험 실행';$('#pause').textContent='일시정지';$('#pause').disabled=true;$('#run').disabled=!engine?.ready;selections();
+ state.request++;state.replay=false;clear();setSensorPreview(state.condition === 'occluded');engine?.reset(state.seed,state.condition);$('#replay-controls').hidden=true;$('#mode-badge').innerHTML='<i></i> LIVE PHYSICS';$('#engine-label').textContent='MuJoCo 4.0.1 · 브라우저 실행';$('#run').innerHTML='<span>▶</span> 실험 실행';$('#pause').textContent='일시정지';$('#pause').disabled=true;$('#run').disabled=!engine?.ready;selections();
 }
 function event(e){
  if(e.replay&&e.terminal){$('#pause').disabled=true;$('#pause').textContent='일시정지';}
@@ -30,7 +34,7 @@ function sensor(o){
  if(o.estimate){const [x,y,x1,y1]=o.estimate.bbox;ctx.strokeStyle='#5ce9d7';ctx.lineWidth=2;ctx.strokeRect(x-2,y-2,x1-x+4,y1-y+4);}
  card.append(canvas);const label=document.createElement('b');label.className=o.estimate?'found':'missing';label.textContent=`${o.camera==='front'?'정면':'후면'} · ${o.estimate?'목표 검출':'검출 실패'}`;card.append(label);const text=document.createElement('p');text.textContent=`t=${o.t.toFixed(2)}s · ${o.estimate?o.estimate.pixels:0} px`;card.append(text);$('#sensor-history').append(card);$('#sensor-history').scrollLeft=$('#sensor-history').scrollWidth;
 }
-function start(){if(!engine?.ready)return;if(state.replay){engine.seek(0);engine.running=true;$('#pause').disabled=false;return;}reset();engine.start(state.method);$('#pause').disabled=false;$('#result').innerHTML='<span>LIVE RESULT</span><b>실행 중</b><p>센서와 모터의 실제 계산 결과를 기다립니다.</p>';}
+function start(){if(!engine?.ready)return;if(state.replay){engine.seek(0);engine.running=true;$('#pause').disabled=false;return;}reset();setSensorPreview(false);engine.start(state.method);$('#pause').disabled=false;$('#result').innerHTML='<span>LIVE RESULT</span><b>실행 중</b><p>센서와 모터의 실제 계산 결과를 기다립니다.</p>';}
 const runButton = $('#run');
 const narrowWorkbench = matchMedia('(max-width:760px)');
 function positionRunButton() {
@@ -41,6 +45,11 @@ function positionRunButton() {
 positionRunButton();
 narrowWorkbench.addEventListener('change',positionRunButton);
 runButton.onclick=start;
+$('#hero-run').onclick = () => {
+ if (state.replay) reset();
+ start();
+ $('#workbench').scrollIntoView({block:'start'});
+};
 $('#pause').onclick=()=>{engine.running=!engine.running;$('#pause').textContent=engine.running?'일시정지':'계속 실행';};
 $('#reset').onclick=()=>{if(state.replay){engine.running=false;engine.seek(0);$('#pause').disabled=true;$('#pause').textContent='일시정지';}else reset();};
 $('#new-scene').onclick=()=>{state.seed=state.seed>=119?100:state.seed+1;reset();};
@@ -53,7 +62,7 @@ async function json(url){const r=await fetch(url);if(!r.ok)throw Error('자료�
 async function replay(id){
  const request=++state.request;if(engine)engine.running=false;try{
  const r=await json(`bench/runs/${id}/run.json`);if(request!==state.request)return;
- clear();state.seed=r.seed;state.condition=r.condition;state.method=r.method;state.replay=true;selections();if(engine?.ready)engine.loadReplay(r);$('#mode-badge').textContent='PYTHON / RECORDED';$('#engine-label').textContent='실제 실행의 관절 기록 재구성 · 라이브 계산 아님';$('#replay-controls').hidden=!engine?.ready||r.duration_s===0;$('#run').disabled=!engine?.ready||r.duration_s===0;$('#run').innerHTML='<span>▶</span> 기록 재생';showResult(r,true);if(r.duration_s===0)$('#run').textContent='이동 없음';$('#result').insertAdjacentHTML('beforeend',`<p><a href="bench/runs/${id}/run.json" target="_blank">이 실행의 원본 기록 ↗</a></p>`);
+ clear();setSensorPreview(false);state.seed=r.seed;state.condition=r.condition;state.method=r.method;state.replay=true;selections();if(engine?.ready)engine.loadReplay(r);$('#mode-badge').textContent='PYTHON / RECORDED';$('#engine-label').textContent='실제 실행의 관절 기록 재구성 · 라이브 계산 아님';$('#replay-controls').hidden=!engine?.ready||r.duration_s===0;$('#run').disabled=!engine?.ready||r.duration_s===0;$('#run').innerHTML='<span>▶</span> 기록 재생';showResult(r,true);if(r.duration_s===0)$('#run').textContent='이동 없음';$('#result').insertAdjacentHTML('beforeend',`<p><a href="bench/runs/${id}/run.json" target="_blank">이 실행의 원본 기록 ↗</a></p>`);
  for(const o of r.sensors){const card=document.createElement('article');card.className='sensor-card';const im=new Image();im.src=`bench/runs/${id}/${o.image}`;im.alt=`실제 Python ${o.camera} 카메라 입력`;card.append(im);const b=document.createElement('b');b.textContent=`${o.camera==='front'?'정면':'후면'} · ${o.estimate?'목표 검출':'검출 실패'}`;b.className=o.estimate?'found':'missing';card.append(b);const p=document.createElement('p');p.textContent=`t=${o.t.toFixed(2)}s${o.error_mm==null?'':` · 추정 오차 ${o.error_mm.toFixed(1)}mm`}`;card.append(p);if(o.estimate){const q=document.createElement('p');q.textContent=`추정 XY ${(o.estimate.position[0]*1000).toFixed(0)}, ${(o.estimate.position[1]*1000).toFixed(0)} mm / 평가 정답 ${(o.truth[0]*1000).toFixed(0)}, ${(o.truth[1]*1000).toFixed(0)} mm`;card.append(q);}$('#sensor-history').append(card);}
  $('#sensor-empty').hidden=true;for(const e of r.events)event(e);if(engine?.ready)engine.seek(0);else{$('#phase').textContent='기록의 최종 결과';$('#phase-note').textContent='3D 없이 센서 영상·판단 기록을 확인할 수 있습니다.';}$('#viewport').scrollIntoView({behavior:'smooth',block:'start'});
  }catch(e){$('#result').textContent=e.message;}
@@ -74,6 +83,6 @@ async function benchmark(){
 selections();benchmark();
 try{
  engine=new Workbench($('#viewport'),event,sensor);window.reachbench={engine,state};
- await engine.load(text=>$('#loading-text').textContent=text);$('#loading').hidden=true;$('#run').disabled=false;$('#reset').disabled=false;$('#new-scene').disabled=false;
+ await engine.load(text=>$('#loading-text').textContent=text);$('#loading').hidden=true;$('#hero-run').disabled=false;$('#run').disabled=false;$('#reset').disabled=false;$('#new-scene').disabled=false;
 }catch(e){console.error(e);$('#loading').hidden=true;$('#error').hidden=false;$('#error').textContent='실시간 3D 실행을 시작할 수 없습니다. '+e.message+' 아래 평가 기록과 GitHub의 로컬 실행 방법을 확인해 주세요.';}
 setInterval(()=>{if(!engine?.ready)return;$('#clock').textContent=engine.elapsed.toFixed(2)+' s';if(engine.replay)$('#scrub').value=Math.round((engine.replay.duration_s ? engine.elapsed/engine.replay.duration_s*1000 : 0));},100);
