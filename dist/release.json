@@ -1,9 +1,9 @@
 {
-  "version": "3.1.5",
+  "version": "3.1.6",
   "date_kst": "2026-11-20",
   "mode": "live MuJoCo WASM + independently recorded Python evaluation",
   "sha256": {
-    "index.html": "c80edc45f2715e6fd904819d48780301c027a279a78a6bf52942de06574fa769",
+    "index.html": "1fc46175669cdeb916e7c44fc590c5146733f5dc6aee0904043ca0d1b77a8b38",
     "studio.css": "2d4cb6c2ee96ee82d615c1f7aa2d54b063a2c32d8a731e29210451820f83cd8e",
     "studio.mjs": "715ce3a707fd94f3e5844d005a90a3fb22fde7d3dc766bf0019d0fcaa0b355db",
     "studio-core.mjs": "969c3cfa75e21cc7df5c0918388cf0f11228b0969a64045281e1d2da2dadf60c",
