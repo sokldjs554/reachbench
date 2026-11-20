@@ -1,9 +1,9 @@
 {
-  "version": "3.1.6",
-  "date_kst": "2026-11-20",
+  "version": "3.1.7",
+  "date_kst": "2026-11-21",
   "mode": "live MuJoCo WASM + independently recorded Python evaluation",
   "sha256": {
-    "index.html": "1fc46175669cdeb916e7c44fc590c5146733f5dc6aee0904043ca0d1b77a8b38",
+    "index.html": "05c3b529d3fc237c9e8f6e032626f3a84afe687911daa47a4eb6ac3c313bc980",
     "studio.css": "2d4cb6c2ee96ee82d615c1f7aa2d54b063a2c32d8a731e29210451820f83cd8e",
     "studio.mjs": "715ce3a707fd94f3e5844d005a90a3fb22fde7d3dc766bf0019d0fcaa0b355db",
     "studio-core.mjs": "969c3cfa75e21cc7df5c0918388cf0f11228b0969a64045281e1d2da2dadf60c",
@@ -14,9 +14,9 @@
     "bench/summary.json": "8896b8b54881f5879e3592754f3bf76a36d84b6e7884c52636eeaeff218defe3",
     "vendor/mujoco.js": "6ab204c4c51d0a5f68a5c96e56f607314551b7b1e2770603d84c7a1318e70070",
     "vendor/mujoco.wasm": "904645316cfe464162473b063550e9c0f5c15e06fba77a7b9dd6fdd1c47b3f7c",
-    "report.html": "293eabc0eb94026e9cb9c07193a9cb5c1bb37719e23a95f0322f86733cdf36f2",
+    "report.html": "b94ed72869a81d83b234abdc18aa4c5b75c3fb2827ad1427c38024da311bc338",
     "retry/study.json": "abd4f001d408f711e8e58d845bbb418ed2687ef618abd486f0bc968b1315fecd",
-    "retry/index.html": "087bac438ec68262f94f6008b84cb89832c3985852447348566ecd2cc109ace1",
+    "retry/index.html": "ef8fc948472ea731fe0a99033f34f4eb9b85444c23f5aac8f7d9449d590f3cc4",
     "retry/observations.jsonl": "93b67c9f02394f72900aa238da94e6d42a1060ffd163695a5417ee0369554ddd",
     "retry/frames.json": "0919a1905a8ae9d7055565c83a133f7581d228f5f62af5a4f6061783e5ca9528",
     "retry/compare.css": "4907dc023b93009e07060727282a8731ee33d3007eb3c2d7d7a776a8fba259f7",
@@ -43,7 +43,8 @@
     "retry/sensors/on-3.jpg": "2ff76786f024dade31fa5bd1d028591bca4335ea851c6949143e67dba8f2aa2b",
     "retry/media/preview-placed.jpg": "e3734506eb17afa2aef044382cf0c4e30ae96ba5bd471dc62106b7a69ce06bea",
     "retry/media/preview-empty.jpg": "195471282f2fcc636dbd5e5354a764a70dea62f6fcb0299ff1244c8142650f13",
-    "retry/media/preview-grasp.jpg": "83d616c6791398d5ae2da42d09548e4e47036c9dcca7ffdf40770e981047075c"
+    "retry/media/preview-grasp.jpg": "83d616c6791398d5ae2da42d09548e4e47036c9dcca7ffdf40770e981047075c",
+    "legacy/index.html": "3218a91e412249bd1c1af400160f5f1ec3b2d3032cc2267ec89363313ac11321"
   },
   "documentation_updated_kst": "2026-11-19"
 }
