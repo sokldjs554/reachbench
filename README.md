@@ -1,8 +1,12 @@
-# ReachBench — Observe. Grasp. Recover.
+# ReachBench: RGB-D 기반 로봇팔 파지 제어와 실패 복구
 
-**가림과 위치 변화가 있는 작업대에서, 카메라로 물체를 찾아 집고 트레이에 놓는 로봇 실험.**
+MuJoCo에서 Franka Panda가 RGB-D 카메라로 물체 위치를 추정해 집고 트레이에 놓는다. 목표가 가려지거나 첫 관찰 뒤 물체가 움직이는 장면에서 단일 관찰과 추가 관찰·재시도 방식을 비교한다.
 
-[공개 데모](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [첫 집기 실패와 복구 비교](https://reachbench-vision-control.ykh13571.chatgpt.site/retry/) · [실험·한계](docs/v3/EXPERIMENT.md) · [18개 프로젝트 비교 조사](docs/v3/RESEARCH.md)
+[브라우저에서 실행](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [첫 파지 실패·복구 비교](https://reachbench-vision-control.ykh13571.chatgpt.site/retry/) · [조건별 평가 기록](#독립-평가-결과)
+
+**트레이 배치 성공률: 25% → 75%.** 같은 초기 배치의 4조건·80장면에서 두 방법을 각각 실행한 Python 시뮬레이션 결과다(총 160회).
+
+[카메라 관측·관절 상태·모터 명령 기록](docs/v3/retry-study/ALIGNMENT.md) · [실험·한계](docs/v3/EXPERIMENT.md) · [18개 프로젝트 비교 조사](docs/v3/RESEARCH.md)
 
 ![실제 브라우저 화면](docs/v3/desktop.png)
 
