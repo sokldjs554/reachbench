@@ -6,57 +6,6 @@
       "reason": "empty_grasp",
       "placement_error_mm": 72.97994503359162,
       "retries": 0,
-      "events": [
-        {
-          "t": 0.0,
-          "phase": "observe",
-          "camera": "front",
-          "detected": true
-        },
-        {
-          "t": 0.0,
-          "phase": "disturbance",
-          "description": "external lateral force: 2 N for 60 ms"
-        },
-        {
-          "t": 0.41,
-          "phase": "approach",
-          "target": [
-            0.5066308050895636,
-            -0.0020124867392548457,
-            0.382
-          ]
-        },
-        {
-          "t": 1.96,
-          "phase": "observe",
-          "camera": "back",
-          "detected": true
-        },
-        {
-          "t": 2.71,
-          "phase": "descend"
-        },
-        {
-          "t": 4.06,
-          "phase": "close"
-        },
-        {
-          "t": 4.96,
-          "phase": "lift"
-        },
-        {
-          "t": 6.31,
-          "phase": "verify_grasp",
-          "gripper_width_m": 2.3401833293631358e-05,
-          "grasp_detected": false
-        },
-        {
-          "t": 6.31,
-          "phase": "failure",
-          "reason": "empty_grasp"
-        }
-      ],
       "duration_s": 6.31,
       "observations": [
         {
@@ -133,13 +82,7 @@
           ],
           "image": "sensors/off-1.jpg"
         }
-      ]
-    },
-    "on": {
-      "success": true,
-      "reason": "placed",
-      "placement_error_mm": 2.287821230825489,
-      "retries": 1,
+      ],
       "events": [
         {
           "t": 0.0,
@@ -183,73 +126,22 @@
           "t": 6.31,
           "phase": "verify_grasp",
           "gripper_width_m": 2.3401833293631358e-05,
-          "grasp_detected": false
+          "grasp_detected": false,
+          "prior_grip_command": 0.0,
+          "command_t": 6.3
         },
         {
           "t": 6.31,
-          "phase": "retry"
-        },
-        {
-          "t": 6.61,
-          "phase": "observe",
-          "camera": "back",
-          "detected": true
-        },
-        {
-          "t": 6.61,
-          "phase": "approach",
-          "target": [
-            0.5050562124242348,
-            0.17466871938039968,
-            0.382
-          ]
-        },
-        {
-          "t": 8.16,
-          "phase": "observe",
-          "camera": "back",
-          "detected": true
-        },
-        {
-          "t": 8.91,
-          "phase": "descend"
-        },
-        {
-          "t": 10.26,
-          "phase": "close"
-        },
-        {
-          "t": 11.16,
-          "phase": "lift"
-        },
-        {
-          "t": 12.51,
-          "phase": "verify_grasp",
-          "gripper_width_m": 0.04386925229780719,
-          "grasp_detected": true
-        },
-        {
-          "t": 12.51,
-          "phase": "transport"
-        },
-        {
-          "t": 14.16,
-          "phase": "place"
-        },
-        {
-          "t": 15.41,
-          "phase": "release"
-        },
-        {
-          "t": 16.01,
-          "phase": "retreat"
-        },
-        {
-          "t": 17.56,
-          "phase": "success",
-          "reason": "placed"
+          "phase": "failure",
+          "reason": "empty_grasp"
         }
-      ],
+      ]
+    },
+    "on": {
+      "success": true,
+      "reason": "placed",
+      "placement_error_mm": 2.287821230825489,
+      "retries": 1,
       "duration_s": 17.56,
       "observations": [
         {
@@ -399,6 +291,120 @@
             255.0
           ],
           "image": "sensors/on-3.jpg"
+        }
+      ],
+      "events": [
+        {
+          "t": 0.0,
+          "phase": "observe",
+          "camera": "front",
+          "detected": true
+        },
+        {
+          "t": 0.0,
+          "phase": "disturbance",
+          "description": "external lateral force: 2 N for 60 ms"
+        },
+        {
+          "t": 0.41,
+          "phase": "approach",
+          "target": [
+            0.5066308050895636,
+            -0.0020124867392548457,
+            0.382
+          ]
+        },
+        {
+          "t": 1.96,
+          "phase": "observe",
+          "camera": "back",
+          "detected": true
+        },
+        {
+          "t": 2.71,
+          "phase": "descend"
+        },
+        {
+          "t": 4.06,
+          "phase": "close"
+        },
+        {
+          "t": 4.96,
+          "phase": "lift"
+        },
+        {
+          "t": 6.31,
+          "phase": "verify_grasp",
+          "gripper_width_m": 2.3401833293631358e-05,
+          "grasp_detected": false,
+          "prior_grip_command": 0.0,
+          "command_t": 6.3
+        },
+        {
+          "t": 6.31,
+          "phase": "retry"
+        },
+        {
+          "t": 6.61,
+          "phase": "observe",
+          "camera": "back",
+          "detected": true
+        },
+        {
+          "t": 6.61,
+          "phase": "approach",
+          "target": [
+            0.5050562124242348,
+            0.17466871938039968,
+            0.382
+          ]
+        },
+        {
+          "t": 8.16,
+          "phase": "observe",
+          "camera": "back",
+          "detected": true
+        },
+        {
+          "t": 8.91,
+          "phase": "descend"
+        },
+        {
+          "t": 10.26,
+          "phase": "close"
+        },
+        {
+          "t": 11.16,
+          "phase": "lift"
+        },
+        {
+          "t": 12.51,
+          "phase": "verify_grasp",
+          "gripper_width_m": 0.04386925229780719,
+          "grasp_detected": true,
+          "prior_grip_command": 0.0,
+          "command_t": 12.5
+        },
+        {
+          "t": 12.51,
+          "phase": "transport"
+        },
+        {
+          "t": 14.16,
+          "phase": "place"
+        },
+        {
+          "t": 15.41,
+          "phase": "release"
+        },
+        {
+          "t": 16.01,
+          "phase": "retreat"
+        },
+        {
+          "t": 17.56,
+          "phase": "success",
+          "reason": "placed"
         }
       ]
     }

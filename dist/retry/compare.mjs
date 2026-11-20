@@ -34,6 +34,9 @@ function makePanel(mode, frames, run) {
   canvas.height = frames.height;
   canvas.setAttribute("aria-label", (mode === "off" ? "재시도 끔" : "재시도 켬") + " 관절 기록 재구성");
   const stamp = element("span", null, picture);
+  const terminal = element("b", run.duration_s.toFixed(2) + "초 종료 · 마지막 자세", picture);
+  terminal.className = "terminal";
+  terminal.hidden = true;
   const box = element("div", null, panel);
   box.className = "readout";
   const status = element("b", null, box);
@@ -68,6 +71,7 @@ function makePanel(mode, frames, run) {
     const shown = Math.min(t, stop);
     const i = lastAt(stream.times, shown, n => n);
     showFrame(i);
+    terminal.hidden = t + 1e-7 < stop;
     time.textContent = sTime(shown);
     const e = run.events[lastAt(run.events, shown, e => e.t)];
     if (lastStatus === e) return;
@@ -75,7 +79,12 @@ function makePanel(mode, frames, run) {
     status.textContent = phases[e.phase] || e.phase;
     const grasp = run.events.findLast(x => x.phase === "verify_grasp" && x.t <= shown);
     const info = [];
-    if (grasp) info.push("집기 판정 " + (grasp.gripper_width_m*1000).toFixed(3) + " mm");
+    if (grasp) {
+      const command = grasp.prior_grip_command;
+      const name = command === 0 ? "닫기" : command === 255 ? "열기" : "그리퍼";
+      info.push(sTime(grasp.command_t) + " " + name + " 명령 " + command);
+      info.push(sTime(grasp.t) + " 집기 판정 " + (grasp.gripper_width_m*1000).toFixed(3) + " mm");
+    }
     if (e.phase === "success" || e.phase === "failure") info.push("물체–트레이 " + run.placement_error_mm.toFixed(2) + " mm");
     if (!info.length) info.push("단계 시작 " + sTime(e.t));
     detail.textContent = info.join(" · ");
@@ -92,6 +101,7 @@ async function main() {
   const updatePanels = modes.map(m => makePanel(m, frames, runs[m]));
   const slider = $("#timeline"), play = $("#play");
   slider.max = duration;
+  const eventControls = [];
   const evals = study.evaluation;
   $("#evaluation").textContent = "별도 평가 seed 200–219  ·  재시도 끔 " + evals.off_successes + "/" + evals.n_pairs +
     " 성공  ·  켬 " + evals.on_successes + "/" + evals.n_pairs + " 성공  ·  실제 재시도 " + evals.on_retry_runs + "건";
@@ -99,6 +109,9 @@ async function main() {
     if (lastObservation === o) return;
     lastObservation = o;
     [...$("#photos").children].forEach(b => b.setAttribute("aria-pressed",String(Number(b.dataset.t) === o.t)));
+    const method = selected === "on" ? "재시도 켬" : "재시도 끔";
+    const camera = o.camera === "front" ? "정면 카메라" : "후면 카메라";
+    $("#selected-observation").textContent = method + " · " + camera + " · " + o.t.toFixed(2) + "초";
     const section = $("#alignment");
     section.replaceChildren();
     function metric(label,value,note) {
@@ -106,7 +119,7 @@ async function main() {
       element("span",label,cell); element("b",value,cell); element("small",note,cell);
     }
     const xy = o.estimate_xy_m?.map(x => (x*1000).toFixed(1)).join(", ");
-    metric("카메라 관측",sTime(o.t) + (o.camera === "front" ? " · 정면" : " · 후면"),xy ? "추정 XY ("+xy+") mm" : "미검출");
+    metric("카메라 위치 추정",xy ? "("+xy+") mm" : "미검출","작업대 기준 XY");
     metric("관측 직전 또는 같은 시각의 상태","손가락 간격 " + o.gap_mm.toFixed(2) + " mm",
       sTime(o.state_t) + " · 관측과 " + o.state_lag_ms + " ms 차이");
     const grip = o.next_ctrl?.[7];
@@ -138,6 +151,10 @@ async function main() {
   function paint() {
     for(const p of updatePanels) p(time);
     slider.value = time;
+    for (const {t, buttons} of eventControls) {
+      const current = Math.abs(time - t) < 0.005;
+      for (const button of buttons) button.setAttribute("aria-current", current ? "time" : "false");
+    }
     slider.setAttribute("aria-valuetext",sTime(time));
     $("#clock").textContent = sTime(time) + " / " + sTime(duration);
     const obs = runs[selected].observations;
@@ -166,6 +183,12 @@ async function main() {
   for(const [label,t] of [["첫 집기 실패",checks[0].t],["두 번째 집기",checks[1].t],["배치 결과",duration]]) {
     const btn=element("button",t.toFixed(2)+"초 · "+label,$("#jumps"));
     btn.onclick=()=>seek(t);
+    const marker = element("button", null, $("#markers"));
+    marker.style.left = (100 * t / duration) + "%";
+    marker.title = t.toFixed(2) + "초 · " + label;
+    marker.setAttribute("aria-label", "시간축에서 " + label + " 보기");
+    marker.onclick = () => seek(t);
+    eventControls.push({t, buttons:[btn, marker]});
   }
   setMode("on");
   const moments = new Map([["empty", checks[0].t], ["grasp", checks[1].t], ["placed", duration]]);

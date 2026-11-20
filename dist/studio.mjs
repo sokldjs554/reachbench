@@ -31,7 +31,16 @@ function sensor(o){
  card.append(canvas);const label=document.createElement('b');label.className=o.estimate?'found':'missing';label.textContent=`${o.camera==='front'?'정면':'후면'} · ${o.estimate?'목표 검출':'검출 실패'}`;card.append(label);const text=document.createElement('p');text.textContent=`t=${o.t.toFixed(2)}s · ${o.estimate?o.estimate.pixels:0} px`;card.append(text);$('#sensor-history').append(card);$('#sensor-history').scrollLeft=$('#sensor-history').scrollWidth;
 }
 function start(){if(!engine?.ready)return;if(state.replay){engine.seek(0);engine.running=true;$('#pause').disabled=false;return;}reset();engine.start(state.method);$('#pause').disabled=false;$('#result').innerHTML='<span>LIVE RESULT</span><b>실행 중</b><p>센서와 모터의 실제 계산 결과를 기다립니다.</p>';}
-$('#run').onclick=start;
+const runButton = $('#run');
+const narrowWorkbench = matchMedia('(max-width:760px)');
+function positionRunButton() {
+ const toolbar = narrowWorkbench.matches ? $('#mobile-runbar') : $('.play-controls');
+ if (narrowWorkbench.matches) toolbar.append(runButton);
+ else toolbar.prepend(runButton);
+}
+positionRunButton();
+narrowWorkbench.addEventListener('change',positionRunButton);
+runButton.onclick=start;
 $('#pause').onclick=()=>{engine.running=!engine.running;$('#pause').textContent=engine.running?'일시정지':'계속 실행';};
 $('#reset').onclick=()=>{if(state.replay){engine.running=false;engine.seek(0);$('#pause').disabled=true;$('#pause').textContent='일시정지';}else reset();};
 $('#new-scene').onclick=()=>{state.seed=state.seed>=119?100:state.seed+1;reset();};

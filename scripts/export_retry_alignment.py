@@ -88,9 +88,15 @@ def generate(root, out):
                     shutil.copyfile(folder / jpg, out / image)
                     observations.append({**aligned, "image": image})
             if case:
+                events = []
+                for event in run["events"]:
+                    if event["phase"] == "verify_grasp":
+                        prior = next(frame for frame in reversed(run["trace"]) if frame["t"] < event["t"])
+                        event = {**event, "prior_grip_command": prior["ctrl"][7], "command_t": prior["t"]}
+                    events.append(event)
                 cases[mode] = {
-                    **{key: run[key] for key in ("success", "reason", "placement_error_mm", "retries", "events")},
-                    "duration_s": round(run["duration_s"], 3), "observations": observations,
+                    **{key: run[key] for key in ("success", "reason", "placement_error_mm", "retries")},
+                    "duration_s": round(run["duration_s"], 3), "observations": observations, "events": events,
                 }
             else:
                 evaluation[f"{mode}_successes"] += int(run["success"])
