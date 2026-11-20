@@ -72,6 +72,25 @@ def render_run(run, mode, directory):
     return {"times": [run["trace"][i]["t"] for i in indices], "sheets": sheets}
 
 
+def preview_images(run, stream, directory):
+    """Crop the recorded hand/tray region at the three decisions on the home page."""
+    checks = [e for e in run["events"] if e["phase"] == "verify_grasp"]
+    if [e["grasp_detected"] for e in checks] != [False, True] or not run["success"]:
+        raise ValueError("The seed 107 recovery landmarks have changed")
+    moments = [("empty", checks[0]["t"]), ("grasp", checks[1]["t"]),
+               ("placed", run["events"][-1]["t"])]
+    for slug, t in moments:
+        index = bisect_right(stream["times"], t) - 1
+        sheet_index, tile = divmod(index, SHEET_SIZE)
+        sheet = cv2.imread(str(directory / stream["sheets"][sheet_index]))
+        row, column = divmod(tile, COLUMNS)
+        y, x = row * HEIGHT + 90, column * WIDTH + 140
+        crop = sheet[y:y+156, x:x+248]
+        if not cv2.imwrite(str(directory / "media" / f"preview-{slug}.jpg"), crop,
+                           [cv2.IMWRITE_JPEG_QUALITY, 92]):
+            raise IOError(slug)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, default=Path("docs/v3/retry-study/records.tar.gz"))
@@ -83,7 +102,10 @@ def main():
         for mode in ("off", "on"):
             path = f"work/retry-study/seed107-{mode}/run.json"
             raw = archive.extractfile(path).read()
-            entry = render_run(json.loads(raw), mode, args.out)
+            run = json.loads(raw)
+            entry = render_run(run, mode, args.out)
+            if mode == "on":
+                preview_images(run, entry, args.out)
             manifest[mode] = dict(entry, source_path=path, source_sha256=hashlib.sha256(raw).hexdigest())
     (args.out / "frames.json").write_text(json.dumps(manifest, indent=2) + "\n")
 

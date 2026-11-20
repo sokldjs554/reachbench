@@ -1,10 +1,10 @@
 {
-  "version": "3.1.0",
-  "date_kst": "2026-11-19",
+  "version": "3.1.1",
+  "date_kst": "2026-11-20",
   "mode": "live MuJoCo WASM + independently recorded Python evaluation",
   "sha256": {
-    "index.html": "e83d9b227fdacb09c0ddf01585fe8dde13bf2d65c05006f9586b9c54eaacbd5f",
-    "studio.css": "af13eb0599a7d1bf1f98ab5b3d3543568b5c56364d660b3fd3c3d00b66e45acd",
+    "index.html": "03c4f7039cf7e2d07cf09e472167e12d3eed1255a9f6f38f63532c6209470aab",
+    "studio.css": "6a8fa3ef1856e4fc10998a59eb29c410d11cc25255070a01498184dc30a934b3",
     "studio.mjs": "503663d2fcf13407eeed53c4563524ab72d80732b0a88956c0c58de848f8a17e",
     "studio-core.mjs": "969c3cfa75e21cc7df5c0918388cf0f11228b0969a64045281e1d2da2dadf60c",
     "studio-engine.mjs": "e3e5a5370481a9780873d3929c8833e4e482d2806115279d3cff8fce5277a0c3",
@@ -20,7 +20,7 @@
     "retry/observations.jsonl": "93b67c9f02394f72900aa238da94e6d42a1060ffd163695a5417ee0369554ddd",
     "retry/frames.json": "0919a1905a8ae9d7055565c83a133f7581d228f5f62af5a4f6061783e5ca9528",
     "retry/compare.css": "13472ac5bc55fb6086655dd3c9009274538ad00268a93df8c1da7382417cde3a",
-    "retry/compare.mjs": "c09f45b8e61a6de8a2314536eb808bc6f835c313be91d75e7586c43c4fafac9a",
+    "retry/compare.mjs": "bf80d28e31603c6ec6af69294e6ee4dcf74c8462063d88c2a6f4644527ef07fa",
     "retry/media/on-07.jpg": "67b882b38125f2f87bf3625c07938850c67ccbcc01acdde1c78d1026a17ed768",
     "retry/media/on-08.jpg": "820a963c8fb244bd74104246049d42c8a5c3f8879da398cfe1f4b694985e5d29",
     "retry/media/on-03.jpg": "f28dfcd304eb45374b8086eb49c2cce37d1dc30ddad1b57c6f29b551ba5f7bda",
@@ -40,7 +40,10 @@
     "retry/sensors/off-0.jpg": "f83542afa901170a4028410f8c5c70bd2a5fcdd816100fc7f5479082a6800be9",
     "retry/sensors/on-1.jpg": "34411c04905061803b3ef615fef5bbdf5dc8918ba23732bae91d155f960afbfa",
     "retry/sensors/off-1.jpg": "34411c04905061803b3ef615fef5bbdf5dc8918ba23732bae91d155f960afbfa",
-    "retry/sensors/on-3.jpg": "2ff76786f024dade31fa5bd1d028591bca4335ea851c6949143e67dba8f2aa2b"
+    "retry/sensors/on-3.jpg": "2ff76786f024dade31fa5bd1d028591bca4335ea851c6949143e67dba8f2aa2b",
+    "retry/media/preview-placed.jpg": "e3734506eb17afa2aef044382cf0c4e30ae96ba5bd471dc62106b7a69ce06bea",
+    "retry/media/preview-empty.jpg": "195471282f2fcc636dbd5e5354a764a70dea62f6fcb0299ff1244c8142650f13",
+    "retry/media/preview-grasp.jpg": "83d616c6791398d5ae2da42d09548e4e47036c9dcca7ffdf40770e981047075c"
   },
   "documentation_updated_kst": "2026-11-19"
 }

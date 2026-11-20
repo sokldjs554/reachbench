@@ -168,6 +168,8 @@ async function main() {
     btn.onclick=()=>seek(t);
   }
   setMode("on");
+  const moments = new Map([["empty", checks[0].t], ["grasp", checks[1].t], ["placed", duration]]);
+  seek(moments.get(new URLSearchParams(location.search).get("event")) ?? checks[0].t);
   $("#loading").hidden=true;$("#workbench").hidden=false;$("#inspector").hidden=false;
 }
 main().catch(() => { $("#loading").textContent="기록을 불러오지 못했습니다. 페이지를 새로고침하거나 상단의 실험 원본을 확인해 주세요."; });
