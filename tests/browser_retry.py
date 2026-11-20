@@ -89,7 +89,10 @@ def check(browser, url, out, mobile):
     expect(page.locator("#clock")).to_contain_text("1.96 s")
     expect(page.locator("#alignment")).to_contain_text("20 ms")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-    assert page.locator("#photos img").evaluate_all("(imgs)=>imgs.every(i=>i.complete && i.naturalWidth>0)")
+    page.wait_for_function("""() => {
+        const images = [...document.querySelectorAll('#photos img')];
+        return images.length === 2 && images.every(image => image.complete && image.naturalWidth > 0);
+    }""")
     with page.expect_download() as download:
         page.get_by_role("link",name="관측·행동 데이터 받기 (JSONL)").click()
     samples = Path(download.value.path()).read_text().splitlines()
