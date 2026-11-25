@@ -10,3 +10,5 @@
 .markers button[aria-current=time]::before{background:var(--teal)}
 .jumps button[aria-current=time]{border-color:var(--teal);background:#e1efeb;font-weight:700}
 @media(max-width:650px){.picture .terminal{font-size:.75rem;top:3px;left:3px;padding:2px 4px}}
+
+.picture .event-still{position:absolute;inset:0 0 auto;width:100%;height:auto;aspect-ratio:8/5;object-fit:contain;background:#293536}

@@ -1,0 +1,70 @@
+{
+  "width": 800,
+  "height": 500,
+  "cameras": {
+    "gripper": {
+      "lookat": [
+        0.503,
+        0.173,
+        0.538
+      ],
+      "distance": 0.43,
+      "azimuth": 166,
+      "elevation": -20
+    },
+    "tray": {
+      "lookat": [
+        0.48,
+        0.2,
+        0.505
+      ],
+      "distance": 0.82,
+      "azimuth": 139,
+      "elevation": -43
+    }
+  },
+  "sources": {
+    "off": {
+      "path": "work/retry-study/seed107-off/run.json",
+      "sha256": "a808c2af43b2d7fd186db9f12afb11f32954971bc4404fe02e3c583012bc814d"
+    },
+    "on": {
+      "path": "work/retry-study/seed107-on/run.json",
+      "sha256": "cfa7db4fb25e034a03a99e0f479696459175051530a6bb1bab4b7ef620f9b583"
+    }
+  },
+  "views": {
+    "empty-off": {
+      "image": "media/preview-empty-off.jpg",
+      "mode": "off",
+      "event_s": 6.31,
+      "pose_s": 6.31,
+      "trace_index": 159,
+      "camera": "gripper"
+    },
+    "empty": {
+      "image": "media/preview-empty.jpg",
+      "mode": "on",
+      "event_s": 6.31,
+      "pose_s": 6.3,
+      "trace_index": 158,
+      "camera": "gripper"
+    },
+    "grasp": {
+      "image": "media/preview-grasp.jpg",
+      "mode": "on",
+      "event_s": 12.51,
+      "pose_s": 12.5,
+      "trace_index": 313,
+      "camera": "gripper"
+    },
+    "placed": {
+      "image": "media/preview-placed.jpg",
+      "mode": "on",
+      "event_s": 17.56,
+      "pose_s": 17.56,
+      "trace_index": 440,
+      "camera": "tray"
+    }
+  }
+}

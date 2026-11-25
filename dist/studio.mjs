@@ -1,4 +1,3 @@
-import {Workbench} from './studio-engine.mjs';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const conditions={normal:['기본 집기','시야가 확보된 작업대에서 물체를 집어 트레이에 놓습니다.'],occluded:['목표 가림','정면에서 목표가 보이지 않으면 후면 카메라로 다시 확인합니다.'],shifted:['관찰 후 위치 변화','첫 관측 뒤 2 N의 외력을 60 ms 가합니다. 개선 방법은 내려가기 전에 다시 관찰합니다.'],unreachable:['작업 범위 밖','카메라에서 찾았더라도 작업 범위 밖이면 이동을 보류합니다.']};
 const phases={ready:['시작을 기다립니다','조건과 방법을 고르고 실행하세요.'],starting:['카메라 관측 준비','RGB-D 입력으로 목표를 찾습니다.'],observe:['목표 관찰','센서 영상에서 위치를 추정합니다.'],change_view:['다른 카메라로 재관측','정면 검출 실패 → 후면 카메라'],approach:['목표 위로 접근','관절 모터가 IK 목표를 추종합니다.'],replan:['새 위치로 접근 수정','추가 관측을 제어 목표에 반영합니다.'],disturbance:['물체에 외력 발생','2 N · 60 ms, 물리적으로 물체를 밀었습니다.'],descend:['그리퍼 내려가기','추정한 물체 중심으로 접근합니다.'],close:['그리퍼 닫기','부착 제약 없이 손가락 접촉으로 집습니다.'],lift:['물체 들어올리기','닫힌 그리퍼를 유지하며 상승합니다.'],verify_grasp:['집기 확인','손가락 간격으로 빈 집기 여부를 확인합니다.'],retry:['집기 실패 → 재시도','손을 열고 다시 관찰합니다.'],transport:['트레이로 운반','그립을 유지하며 이동합니다.'],place:['물체 내려놓기','트레이 위로 내려갑니다.'],release:['그리퍼 열기','물체를 놓습니다.'],retreat:['그리퍼 후퇴','물체가 트레이 안에 남았는지 평가합니다.'],settle:['물체 안정화 대기','물리 시뮬레이션 진행 중'],success:['작업 완료','트레이 안에 물체를 놓았습니다.'],failure:['작업 중단','실패 이유를 오른쪽에서 확인하세요.']};
@@ -82,7 +81,20 @@ async function benchmark(){
 }
 selections();benchmark();
 try{
+ const {Workbench} = await import('./studio-engine.mjs');
  engine=new Workbench($('#viewport'),event,sensor);window.reachbench={engine,state};
  await engine.load(text=>$('#loading-text').textContent=text);$('#loading').hidden=true;$('#hero-run').disabled=false;$('#run').disabled=false;$('#reset').disabled=false;$('#new-scene').disabled=false;
-}catch(e){console.error(e);$('#loading').hidden=true;$('#error').hidden=false;$('#error').textContent='실시간 3D 실행을 시작할 수 없습니다. '+e.message+' 아래 평가 기록과 GitHub의 로컬 실행 방법을 확인해 주세요.';}
+}catch(e){
+ console.error(e);
+ if(engine) engine.ready = false;
+ $('#loading').hidden = true;
+ $('#error').hidden = false;
+ $('#viewport').classList.add('unavailable');
+ $('#mode-badge').textContent = '실시간 3D 사용 불가';
+ $('#engine-label').hidden = true;
+ $('#phase').textContent = $('#error strong').textContent;
+ $('#phase-note').textContent = '';
+ $('#result').innerHTML = '<span>THIS RUN</span><b>실시간 실행 불가</b><p>평가 표에서 실행별 센서 기록을 열 수 있습니다.</p>';
+ for(const b of $$('[data-condition], [data-method], #speed, #run, #hero-run, #new-scene, #reset, #pause')) b.disabled = true;
+}
 setInterval(()=>{if(!engine?.ready)return;$('#clock').textContent=engine.elapsed.toFixed(2)+' s';if(engine.replay)$('#scrub').value=Math.round((engine.replay.duration_s ? engine.elapsed/engine.replay.duration_s*1000 : 0));},100);

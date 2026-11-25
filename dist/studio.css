@@ -65,3 +65,10 @@ nav .mobile-case{display:none}@media(max-width:760px){nav .mobile-case{display:i
 .camera-note a,.retry-eval a{color:var(--teal);text-decoration:underline}
 .retry-eval{border-left:3px solid var(--teal);padding:.5rem 1rem;margin:1rem 0}
 .retry-eval a{display:inline-block;margin-top:.3rem;font-size:.9rem}
+
+.viewport.unavailable .view-label,.viewport.unavailable .scene-legend,.viewport.unavailable .orbit-hint,.viewport.unavailable canvas{display:none}
+.viewport.unavailable #error{inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:15px;background:#203038;color:#fff;text-align:center}
+#error strong{font-size:clamp(1rem,2vw,1.3rem)}
+#error a{display:inline-block;border-radius:3px;padding:8px 16px;background:#eff6f4;color:#174c50;font-weight:700}
+.model-credit{max-width:70ch;font:14px/1.65 system-ui,sans-serif}
+.model-credit a{white-space:nowrap}

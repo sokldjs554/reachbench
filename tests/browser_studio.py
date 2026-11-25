@@ -63,6 +63,9 @@ async def main():
   await fallback.route('**/assets/workcell.mjb.gz',lambda route:route.abort())
   await fallback.goto(args.url,wait_until='networkidle',timeout=90000)
   await fallback.locator('#error').wait_for(state='visible')
+  assert await fallback.locator('#phase').inner_text() == '이 브라우저에서는 실시간 3D를 열 수 없습니다'
+  assert not (await fallback.locator('#phase-note').inner_text()).strip()
+  assert await fallback.get_by_role('link',name='기록으로 두 실행 비교하기').is_visible()
   await fallback.locator('[data-record="occluded-100-feedback"]').click()
   await fallback.wait_for_selector('.sensor-card img')
   assert '트레이 배치 성공' in await fallback.locator('#result').inner_text()

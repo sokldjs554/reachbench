@@ -19,7 +19,7 @@ export class Workbench {
   this.target=new THREE.WebGLRenderTarget(224,224,{minFilter:THREE.NearestFilter,magFilter:THREE.NearestFilter});
   this.depthMaterial=new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking,blending:THREE.NoBlending});
   this.resize=new ResizeObserver(()=>this.fit());this.resize.observe(container);this.fit();
-  this.last=performance.now();this.animate=this.animate.bind(this);requestAnimationFrame(this.animate);
+  this.last=performance.now();this.animate=this.animate.bind(this);
  }
  fit(){const {width,height}=this.container.getBoundingClientRect();this.renderer.setSize(width,height);this.camera.aspect=width/Math.max(1,height);this.camera.updateProjectionMatrix();}
  async load(progress){
@@ -30,7 +30,7 @@ export class Workbench {
   this.mj.FS.writeFile('/workcell.mjb',bytes);this.vfs=new this.mj.MjVFS();this.model=this.mj.MjModel.from_binary_path('/workcell.mjb',this.vfs);this.data=new this.mj.MjData(this.model);this.ikdata=new this.mj.MjData(this.model);
   this.jp=new this.mj.DoubleBuffer(3*this.model.nv);this.jr=new this.mj.DoubleBuffer(3*this.model.nv);
   this.tcp=this.id('SITE','tcp');this.cube=this.id('BODY','cube');this.cubeAdr=this.model.jnt_qposadr[this.id('JOINT','cube_joint')];this.occluder=this.id('BODY','occluder');this.occluderGeom=this.id('GEOM','occluder_geom');
-  progress('장면 구성 중');this.buildGeometry();this.ready=true;this.reset(100,'occluded');return this;
+  progress('장면 구성 중');this.buildGeometry();this.ready=true;this.reset(100,'occluded');requestAnimationFrame(this.animate);return this;
  }
  id(type,name){return this.mj.mj_name2id(this.model,this.mj.mjtObj['mjOBJ_'+type].value,name);}
  buildGeometry(){

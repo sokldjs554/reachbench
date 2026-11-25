@@ -3,8 +3,8 @@ const modes = ["off", "on"];
 const phases = {
   observe:"카메라 관측", disturbance:"물체에 외력 적용", approach:"목표로 접근",
   descend:"그리퍼 하강", close:"그리퍼 닫기", lift:"물체 들어 올리기",
-  verify_grasp:"집기 판정", retry:"손을 열고 재시도", transport:"트레이로 운반",
-  place:"물체 내려놓기", release:"그리퍼 열기", retreat:"후퇴", success:"배치 성공", failure:"빈 집기 · 종료"
+  verify_grasp:"집기 판정", retry:"빈손 확인 · 손을 열고 재시도", transport:"트레이로 운반",
+  place:"물체 내려놓기", release:"그리퍼 열기", retreat:"후퇴", success:"배치 성공", failure:"빈손 확인 · 재시도를 꺼서 실행 종료"
 };
 const sTime = (n) => n.toFixed(2) + " s";
 const lastAt = (items, t, time) => items.findLastIndex(item => time(item) <= t + 1e-7);
@@ -20,7 +20,7 @@ async function loadJSON(path) {
   return response.json();
 }
 
-function makePanel(mode, frames, run) {
+function makePanel(mode, frames, run, views) {
   const panel = element("article", null, $("#panels"));
   panel.className = "panel " + mode;
   const head = element("div", null, panel);
@@ -33,6 +33,13 @@ function makePanel(mode, frames, run) {
   canvas.width = frames.width;
   canvas.height = frames.height;
   canvas.setAttribute("aria-label", (mode === "off" ? "재시도 끔" : "재시도 켬") + " 관절 기록 재구성");
+  const still = element("img", null, picture);
+  still.className = "event-still";
+  still.hidden = true;
+  const landmarks = Object.entries(views).filter(([, view]) => view.mode === mode);
+  const descriptions = {
+    gripper: "집게와 큐브 확대", tray: "트레이에 놓인 큐브와 열린 집게"
+  };
   const stamp = element("span", null, picture);
   const terminal = element("b", run.duration_s.toFixed(2) + "초 종료 · 마지막 자세", picture);
   terminal.className = "terminal";
@@ -71,12 +78,23 @@ function makePanel(mode, frames, run) {
     const shown = Math.min(t, stop);
     const i = lastAt(stream.times, shown, n => n);
     showFrame(i);
+    const landmark = landmarks.find(([, view]) => Math.abs(shown - view.event_s) < 0.000001);
+    still.hidden = !landmark;
+    if (landmark) {
+      const [key, view] = landmark;
+      if (still.dataset.event !== key) {
+        still.alt = descriptions[view.camera];
+        still.src = view.image;
+        still.dataset.event = key;
+      }
+      stamp.textContent = "자세 기록 " + sTime(view.pose_s);
+    }
     terminal.hidden = t + 1e-7 < stop;
     time.textContent = sTime(shown);
     const e = run.events[lastAt(run.events, shown, e => e.t)];
     if (lastStatus === e) return;
     lastStatus = e;
-    status.textContent = phases[e.phase] || e.phase;
+    status.textContent = e.phase === "transport" ? "두 번째 집기 성공 · 트레이로 운반" : phases[e.phase] || e.phase;
     const grasp = run.events.findLast(x => x.phase === "verify_grasp" && x.t <= shown);
     const info = [];
     if (grasp) {
@@ -92,13 +110,13 @@ function makePanel(mode, frames, run) {
 }
 
 async function main() {
-  const [study,frames] = await Promise.all([loadJSON("study.json"),loadJSON("frames.json")]);
+  const [study,frames,events] = await Promise.all([loadJSON("study.json"),loadJSON("frames.json"),loadJSON("event-views.json")]);
   const runs = study.runs;
   const duration = Math.max(...modes.map(m => frames[m].times.at(-1)));
   const checks = runs.on.events.filter(e => e.phase === "verify_grasp");
   let time = checks[0].t, playing = false, frameID = 0, origin = 0;
   let selected = "", lastObservation = null;
-  const updatePanels = modes.map(m => makePanel(m, frames, runs[m]));
+  const updatePanels = modes.map(m => makePanel(m, frames, runs[m], events.views));
   const slider = $("#timeline"), play = $("#play");
   slider.max = duration;
   const eventControls = [];

@@ -14,7 +14,7 @@ def check(browser, url, out, mobile):
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(url, wait_until="domcontentloaded")
-    compare = page.get_by_role("link", name="두 실행 비교", exact=True)
+    compare = page.get_by_role("link", name="재시도 켬·끔 비교", exact=True)
     expect(compare).to_be_visible()
     bounds = compare.bounding_box()
     assert bounds["y"] + bounds["height"] <= size["height"]
@@ -48,6 +48,9 @@ def check(browser, url, out, mobile):
     expect(on.locator(".readout b")).to_contain_text("재시도")
     expect(off.locator(".picture span")).to_contain_text("자세 기록")
     expect(on.locator(".picture span")).to_contain_text("자세 기록")
+    expect(off.locator(".event-still")).to_have_attribute("data-event","empty-off")
+    expect(on.locator(".event-still")).to_have_attribute("data-event","empty")
+    expect(off.locator(".readout b")).to_contain_text("재시도를 꺼서 실행 종료")
     expect(page.locator("#evaluation")).to_contain_text("실제 재시도 0건")
     page.screenshot(path=out / ("mobile.png" if mobile else "desktop.png"), full_page=True)
     page.locator("#play").click()
@@ -62,10 +65,13 @@ def check(browser, url, out, mobile):
     marker = page.get_by_role("button", name="시간축에서 두 번째 집기 보기")
     marker.click()
     expect(marker).to_have_attribute("aria-current","time")
+    expect(on.locator(".event-still")).to_have_attribute("data-event","grasp")
+    expect(off.locator(".event-still")).to_have_attribute("data-event","empty-off")
     expect(on.locator(".readout small")).to_contain_text("12.50 s 닫기 명령 0")
     expect(page.locator("#clock")).to_have_text("12.51 s / 17.56 s")
     expect(on.locator(".readout small")).to_contain_text("43.869 mm")
     page.get_by_role("button", name="17.56초 · 배치 결과").click()
+    expect(on.locator(".event-still")).to_have_attribute("data-event","placed")
     expect(on.locator(".readout b")).to_have_text("배치 성공")
     expect(on.locator(".picture span")).to_have_text("자세 기록 17.56 s")
     expect(on.locator(".readout small")).to_contain_text("2.29 mm")
@@ -101,6 +107,23 @@ def check(browser, url, out, mobile):
     context.close()
 
 
+def check_without_webgl(browser, url, mobile):
+    width, height = (390, 844) if mobile else (1440, 1000)
+    context = browser.new_context(viewport={"width": width, "height": height},
+                                  ignore_https_errors=True, user_agent="Mozilla/5.0")
+    page = context.new_page()
+    page.goto(url, wait_until="domcontentloaded")
+    expect(page.locator("#phase")).to_have_text("이 브라우저에서는 실시간 3D를 열 수 없습니다")
+    expect(page.get_by_text("조건과 방법을 고르고 실행하세요.", exact=True)).not_to_be_visible()
+    expect(page.locator("#hero-run")).to_be_disabled()
+    page.get_by_role("link", name="기록으로 두 실행 비교하기").click()
+    expect(page.locator("#clock")).to_have_text("6.31 s / 17.56 s")
+    page.get_by_role("button", name="12.51초 · 두 번째 집기").click()
+    expect(page.locator(".panel.off time")).to_have_text("6.31 s")
+    expect(page.locator(".panel.on .event-still")).to_have_attribute("data-event", "grasp")
+    context.close()
+
+
 if __name__ == "__main__":
     ap=argparse.ArgumentParser()
     ap.add_argument("url")
@@ -114,3 +137,9 @@ if __name__ == "__main__":
             check(browser,args.url,args.out,mobile)
             print("mobile" if mobile else "desktop","comparison passed",flush=True)
         browser.close()
+        blocked = pw.chromium.launch(executable_path="/usr/bin/chromium", headless=True,
+                                     args=["--no-sandbox", "--disable-webgl"])
+        for mobile in (False, True):
+            check_without_webgl(blocked, args.url, mobile)
+            print("mobile" if mobile else "desktop", "no-WebGL fallback passed", flush=True)
+        blocked.close()
