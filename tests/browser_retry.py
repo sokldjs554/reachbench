@@ -14,7 +14,7 @@ def check(browser, url, out, mobile):
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(url, wait_until="domcontentloaded")
-    compare = page.get_by_role("link", name="재시도 켬·끔 비교", exact=True)
+    compare = page.locator(".entry-actions").get_by_role("link", name="재시도 켬·끔 비교", exact=True)
     expect(compare).to_be_visible()
     bounds = compare.bounding_box()
     assert bounds["y"] + bounds["height"] <= size["height"]

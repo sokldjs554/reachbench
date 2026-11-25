@@ -76,3 +76,11 @@ MUJOCO_GL=egl python -m scripts.render_retry_replay --out work/rebuilt-frames
 ```bash
 python tests/browser_retry.py https://reachbench-vision-control.ykh13571.chatgpt.site/
 ```
+
+**공개 화면 검증 (2026-11-26, Sites v16).** [홈의 변경 전후 미리보기](grasp-views-before-after.png)는 같은 공개 주소를 배포 전후에 캡처한 이미지다. Chromium 데스크톱 1440 × 1000과 모바일 너비 390 × 844에서 세 장면이 로드되고, 비교 화면의 시점 버튼·슬라이더·재생·일시정지가 작동하며, 끔 기록이 6.31초에 고정되는 것을 확인했다. WebGL을 끈 두 너비 모두 3D 영역의 안내 링크로 첫 집기 실패 비교를 열 수 있었다.
+
+WebGL을 켠 Chromium에서는 SwiftShader로 MuJoCo를 실행했다. 데스크톱에서 seed 100의 네 조건과 두 방법을 조합한 여덟 실행을 끝까지 검사했다. 모바일 너비에서도 가림 조건에서 두 방법의 결과를 확인했다. 물리 단계는 묶어서 진행했으며, 모바일 검증에는 데스크톱 Chromium의 뷰포트를 사용했다.
+
+```bash
+python tests/browser_studio.py --url https://reachbench-vision-control.ykh13571.chatgpt.site/ --out work/public-studio
+```
