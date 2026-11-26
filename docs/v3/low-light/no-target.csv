@@ -1,0 +1,17 @@
+background,camera,gain,detector,detected
+ordinary_tray,front,1.0,fixed,False
+ordinary_tray,front,1.0,adaptive,False
+ordinary_tray,front,0.35,fixed,False
+ordinary_tray,front,0.35,adaptive,False
+ordinary_tray,back,1.0,fixed,False
+ordinary_tray,back,1.0,adaptive,False
+ordinary_tray,back,0.35,fixed,False
+ordinary_tray,back,0.35,adaptive,False
+red_tray,front,1.0,fixed,True
+red_tray,front,1.0,adaptive,True
+red_tray,front,0.35,fixed,True
+red_tray,front,0.35,adaptive,True
+red_tray,back,1.0,fixed,True
+red_tray,back,1.0,adaptive,True
+red_tray,back,0.35,fixed,True
+red_tray,back,0.35,adaptive,True

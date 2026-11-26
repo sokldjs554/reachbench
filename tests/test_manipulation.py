@@ -77,3 +77,14 @@ def test_retry_bound_and_unreachable_halt():
     assert not r['success'] and r['duration_s']==0
     assert r['observations']==2 and r['retries']==0
     assert r['lift_height_m']==0
+
+
+def test_scene_relative_value_floor_recovers_dark_red_but_rejects_near_black():
+    rgb = np.full((32, 32, 3), 57, dtype=np.uint8)
+    rgb[10:18, 12:20] = (50, 5, 5)
+    inputs = dict(rgb=rgb, depth=np.ones((32, 32)), rotation=np.eye(3),
+                  position=np.zeros(3), fovy=45)
+    assert estimate_target(**inputs) is None
+    assert estimate_target(**inputs, adaptive=True)['bbox'] == [12, 10, 19, 17]
+    rgb[10:18, 12:20] = (12, 1, 1)
+    assert estimate_target(**inputs, adaptive=True) is None

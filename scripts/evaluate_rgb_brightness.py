@@ -10,7 +10,7 @@ import numpy as np
 from manipulation.perception import estimate_target
 
 
-def measurements(archive):
+def measurements(archive, *, adaptive=False):
     # Both retry settings have identical observations here. Count each scene once.
     for seed in range(200, 220):
         folder = archive / "eval-on" / f"seed{seed}"
@@ -20,13 +20,14 @@ def measurements(archive):
                 for gain in (1.0, 0.65, 0.35):
                     rgb = np.rint(frame["rgb"].astype(float) * gain).astype(np.uint8)
                     estimate = estimate_target(
-                        rgb, frame["depth"], frame["rotation"], frame["position"], frame["fovy"].item()
+                        rgb, frame["depth"], frame["rotation"], frame["position"], frame["fovy"].item(),
+                        adaptive=adaptive,
                     )
                     error = None
                     if estimate is not None:
                         xy = np.array(estimate["position"][:2])
                         error = np.linalg.norm(xy - sensor["truth"][:2]) * 1000
-                    if gain == 1.0:
+                    if gain == 1.0 and not adaptive:
                         logged = sensor["error_mm"]
                         if (error is None) != (logged is None) or (
                             error is not None and not np.isclose(error, logged, rtol=0, atol=1e-4)
@@ -39,7 +40,8 @@ def measurements(archive):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path, help="Extracted work/retry-study directory")
+    parser.add_argument("--adaptive", action="store_true", help="Use the brightness-adjusted detector")
     args = parser.parse_args()
     writer = csv.writer(sys.stdout, lineterminator="\n")
     writer.writerow(("seed", "observation", "camera", "rgb_gain", "detected", "xy_error_mm"))
-    writer.writerows(measurements(args.archive))
+    writer.writerows(measurements(args.archive, adaptive=args.adaptive))

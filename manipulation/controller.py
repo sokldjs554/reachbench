@@ -14,7 +14,10 @@ from .perception import estimate_target
 TRAY=np.array([.48,.24,.382])
 ENABLE_RETRY = True
 class Episode:
-    def __init__(self,w,method,record=False,out=None):
+    def __init__(self,w,method,record=False,out=None, *, adaptive=False, rgb_gain=1.0):
+        if not 0 < rgb_gain <= 1:
+            raise ValueError("rgb_gain must be in (0, 1]")
+        self.adaptive=adaptive;self.rgb_gain=rgb_gain
         self.w=w;self.method=method;self.record=record;self.out=Path(out) if out else None
         if self.out:self.out.mkdir(parents=True,exist_ok=True)
         self.trace=[];self.events=[];self.observations=[];self.collisions=[]
@@ -46,7 +49,10 @@ class Episode:
             w.command(before+(q-before)*s,grip);self.tick()
         self.hold(.15)
     def sense(self,camera):
-        t=time.perf_counter();obs=self.w.observe(camera);estimate=estimate_target(**obs)
+        t=time.perf_counter();obs=self.w.observe(camera)
+        if self.rgb_gain != 1:
+            obs['rgb'] = np.rint(obs['rgb'].astype(float) * self.rgb_gain).astype(np.uint8)
+        estimate=estimate_target(**obs, adaptive=self.adaptive)
         ms=(time.perf_counter()-t)*1000;self.sensing_ms+=ms;self.last_camera=camera
         entry={'camera':camera,'t':round(self.w.data.time-self.start,3),'estimate':estimate,'processing_ms':ms}
         # Evaluation metadata, never returned as a policy input.
@@ -104,21 +110,23 @@ class Episode:
         self.emit('success' if success else 'failure',reason=reason)
         if self.record:self.trace.append({'t':round(w.data.time-self.start,3),'qpos':w.data.qpos.round(6).tolist(),'ctrl':w.data.ctrl.round(6).tolist(),'phase':self.phase})
         errors=[o['error_mm'] for o in self.observations if o['error_mm'] is not None]
-        return {'retry_enabled': self.method == 'feedback' and ENABLE_RETRY,'id':f'{w.condition}-{w.seed}-{self.method}','seed':w.seed,'condition':w.condition,'method':self.method,'success':success,'reason':reason,'initial_target':w.initial.tolist(),'final_target':final.tolist(),'final_gripper_width_m':width,'placement_error_mm':float(np.linalg.norm(final[:2]-TRAY[:2])*1000),'lift_height_m':float(self.max_height-self.initial_height),'perception_error_mm':float(np.mean(errors)) if errors else None,'observations':len(self.observations),'retries':self.retries,'collisions':self.collisions,'duration_s':w.data.time-self.start,'wall_ms':wall,'sensing_ms':self.sensing_ms,'planning_ms':self.planning_ms,'events':self.events,'sensors':self.observations,'trace':self.trace}
+        return {'detector':'adaptive' if self.adaptive else 'fixed','rgb_gain':self.rgb_gain,'retry_enabled': self.method == 'feedback' and ENABLE_RETRY,'id':f'{w.condition}-{w.seed}-{self.method}','seed':w.seed,'condition':w.condition,'method':self.method,'success':success,'reason':reason,'initial_target':w.initial.tolist(),'final_target':final.tolist(),'final_gripper_width_m':width,'placement_error_mm':float(np.linalg.norm(final[:2]-TRAY[:2])*1000),'lift_height_m':float(self.max_height-self.initial_height),'perception_error_mm':float(np.mean(errors)) if errors else None,'observations':len(self.observations),'retries':self.retries,'collisions':self.collisions,'duration_s':w.data.time-self.start,'wall_ms':wall,'sensing_ms':self.sensing_ms,'planning_ms':self.planning_ms,'events':self.events,'sensors':self.observations,'trace':self.trace}
 
-def run(seed=10,condition='normal',method='feedback',record=False,out=None):
+def run(seed=10,condition='normal',method='feedback',record=False,out=None, *, adaptive=False, rgb_gain=1.0):
     if condition not in ['normal','occluded','shifted','unreachable']:raise ValueError(condition)
     if method not in ['one_shot','feedback']:raise ValueError(method)
     with Workcell(seed,condition) as w:
-        e=Episode(w,method,record,out);t=time.perf_counter();reason=e.execute();return e.result(reason,(time.perf_counter()-t)*1000)
+        e=Episode(w,method,record,out,adaptive=adaptive,rgb_gain=rgb_gain);t=time.perf_counter();reason=e.execute();return e.result(reason,(time.perf_counter()-t)*1000)
 
 if __name__=='__main__':
     import argparse,json
     ap=argparse.ArgumentParser();ap.add_argument('--seed',type=int,default=10);ap.add_argument('--condition',default='normal');ap.add_argument('--method',default='feedback');ap.add_argument('--out',default='work/v3/sample')
     ap.add_argument('--no-retry', action='store_true', help='Stop after an empty grasp; keep feedback observations enabled.')
+    ap.add_argument('--adaptive', action='store_true', help='Adjust the HSV value threshold to scene brightness')
+    ap.add_argument('--rgb-gain', type=float, default=1.0, help='Multiply rendered RGB before sensing (0 < gain <= 1)')
     args=ap.parse_args()
     if args.no_retry:
         ENABLE_RETRY = False
-    r=run(args.seed,args.condition,args.method,True,args.out)
+    r=run(args.seed,args.condition,args.method,True,args.out,adaptive=args.adaptive,rgb_gain=args.rgb_gain)
     Path(args.out,'run.json').write_text(json.dumps(r,indent=2))
     print(json.dumps({k:v for k,v in r.items() if k not in ['trace','sensors','events']},indent=2))

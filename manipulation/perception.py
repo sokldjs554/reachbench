@@ -2,9 +2,17 @@
 import cv2
 import numpy as np
 
-def estimate_target(rgb,depth,rotation,position,fovy):
+# Median of front/back image V percentiles (95th) at normal exposure, seeds 10–14.
+REFERENCE_VALUE_P95 = 164.0
+
+
+def estimate_target(rgb,depth,rotation,position,fovy, *, adaptive=False):
     hsv=cv2.cvtColor(np.asarray(rgb,np.uint8),cv2.COLOR_RGB2HSV)
-    mask=((hsv[:,:,0]<12)|(hsv[:,:,0]>170))&(hsv[:,:,1]>140)&(hsv[:,:,2]>60)
+    value_floor = 60
+    if adaptive:
+        scene_value = np.percentile(hsv[:, :, 2], 95)
+        value_floor = np.clip(60 * scene_value / REFERENCE_VALUE_P95, 18, 60)
+    mask=((hsv[:,:,0]<12)|(hsv[:,:,0]>170))&(hsv[:,:,1]>140)&(hsv[:,:,2]>value_floor)
     mask=cv2.morphologyEx(mask.astype('uint8'),cv2.MORPH_OPEN,np.ones((3,3),np.uint8))
     n,labels,stats,_=cv2.connectedComponentsWithStats(mask)
     if n<=1:return None
