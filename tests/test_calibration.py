@@ -32,7 +32,16 @@ def test_reproduce_held_out_pair(profile):
     assert rows[0]['input_sha256']==rows[1]['input_sha256']
     for r in rows:
         saved=json.loads(Path(f"dist/data-v2/{r['id']}.json").read_text())
-        for key in ['trace','detected','calibration','reason','endpoint_error_mm','perception_error_mm']:
+        # Recomputed poses can differ at floating-point roundoff across hosts.
+        assert len(r['trace']) == len(saved['trace'])
+        for actual, expected in zip(r['trace'], saved['trace']):
+            assert actual.keys() == expected.keys()
+            assert actual['t'] == expected['t']
+            assert actual['collision'] == expected['collision']
+            for field in ('q', 'joints'):
+                np.testing.assert_allclose(actual[field], expected[field], rtol=0, atol=1e-14)
+        assert r['endpoint_error_mm'] == pytest.approx(saved['endpoint_error_mm'], rel=0, abs=1e-11)
+        for key in ['detected','calibration','reason','perception_error_mm']:
             assert r[key]==saved[key]
     if profile=='standard':assert rows[1]['success'] and not rows[0]['success']
     if profile=='markers_missing':assert rows[1]['reason']=='calibration_unavailable' and rows[1]['duration_s']==0

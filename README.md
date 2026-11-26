@@ -2,13 +2,15 @@
 
 MuJoCo에서 Franka Panda가 RGB-D 카메라로 물체 위치를 추정해 집고 트레이에 놓는다. 목표가 가려지거나 첫 관찰 뒤 물체가 움직이는 장면에서 단일 관찰과 추가 관찰·재시도 방식을 비교한다.
 
-[브라우저에서 실행](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [첫 파지 실패·복구 비교](https://reachbench-vision-control.ykh13571.chatgpt.site/retry/) · [조건별 평가 기록](#독립-평가-결과)
+[재시도 켬·끔 비교](https://reachbench-vision-control.ykh13571.chatgpt.site/retry/?event=grasp) · [브라우저에서 직접 실행](https://reachbench-vision-control.ykh13571.chatgpt.site/) · [조건별 평가](#독립-평가-결과)
 
-**트레이 배치 성공률: 25% → 75%.** 같은 초기 배치의 4조건·80장면에서 두 방법을 각각 실행한 Python 시뮬레이션 결과다(총 160회).
+| 첫 집기 실패 · 6.31초 | 두 번째 집기 · 12.51초 | 배치 완료 · 17.56초 |
+|---|---|---|
+| ![닫힌 집게 아래 트레이 앞쪽에 남은 큐브](dist/retry/media/preview-empty-off.jpg) | ![두 손가락 사이에 들린 큐브](dist/retry/media/preview-grasp.jpg) | ![트레이 중앙에 놓인 큐브와 열린 집게](dist/retry/media/preview-placed.jpg) |
 
-[카메라 관측·관절 상태·모터 명령 기록](docs/v3/retry-study/ALIGNMENT.md) · [실험·한계](docs/v3/EXPERIMENT.md) · [18개 프로젝트 비교 조사](docs/v3/RESEARCH.md)
+**직접 수행한 재시도 비교 42회.** 윤기혁은 같은 장면에서 재시도만 끄고 켜서 실행했다. 위의 seed 107에서는 빈손으로 끝났던 로봇팔이 두 번째 집기에서 큐브를 들었다. 별도 시작 위치 20개에서는 두 설정 모두 첫 집기에 성공했다. 첫 사진은 끔 실행의 종료 자세, 둘째·셋째는 켬 실행의 기록이다. 두 번째 집기 판정 직전 자세는 12.50초다. [원본과 실행별 결과](docs/v3/retry-study/README.md)
 
-![실제 브라우저 화면](docs/v3/desktop.png)
+**기존 시뮬레이션 평가 160회.** 네 조건에 대해 단일 관찰은 20/80, 추가 관찰과 재시도를 함께 사용하면 60/80 배치에 성공했다. 이 평가와 환경·제어기·데모 구축은 Codex가 수행했다. 윤기혁이 작성한 Python 코드는 RGB와 깊이 영상의 크기를 대조하고 사용할 수 있는 깊이값을 세는 검사다. [RGB-D 검사](docs/v3/RGBD_VALIDATION.md) · [관측·모터 기록](docs/v3/retry-study/ALIGNMENT.md)
 
 첫 화면의 **실험 실행**을 누르면 브라우저에서 MuJoCo 물리를 직접 계산한다. `목표 가림 → 개선`을 실행한 다음 **같은 배치에서 기준 방법 실행**으로 비교할 수 있다. 평가 표의 기록은 별도 Python 실험을 재생하며 화면에 `PYTHON / RECORDED`로 표시한다. Chrome/Edge 최신 버전 권장; 첫 로딩은 WASM 약 11 MB와 압축 모델 약 15 MB가 필요하다.
 
@@ -34,7 +36,9 @@ Python MuJoCo 4.0.1 + Franka Panda, 두 고정 RGB-D 카메라, HSV 분할·dept
 
 재관측을 유지하고 재시도만 바꾼 후속 실험에서 seed 107은 실패에서 배치 성공으로 바뀌었다. 별도 평가 seed 200–219는 두 설정 모두 20/20 성공했고 재시도가 발동한 사례는 0건이었다. [42회 원본·재현 방법](docs/v3/retry-study/README.md). 관측 86개마다 직전 관절 상태와 다음 기록 명령을 연결했다. [시간 기준과 데이터 형식](docs/v3/retry-study/ALIGNMENT.md).
 
-학습·증강 효과 실험, VLA, ROS 2, 하드웨어 검증은 수행하지 않았다. 회사의 로봇 파운데이션 모델을 구현한 프로젝트가 아니다.
+별도로 저장된 RGB-D 사진 40장의 밝기를 바꿔 원래 검출기를 다시 실행했다. RGB를 35%로 낮추자 후면 20장 중 6장에서 좌표를 얻지 못했다. 이 비교는 센서 입력에 대한 오프라인 검사다. [밝기별 결과와 재현 명령](docs/v3/retry-study/RGB_BRIGHTNESS.md)
+
+현재 검증 범위는 고정 카메라와 로봇팔 시뮬레이션이다. 정책 학습, ROS 2 연동, 실물 로봇 평가는 향후 과제다.
 
 ## 실행과 재현
 
